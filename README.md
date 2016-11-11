@@ -16,13 +16,17 @@ Supported digests:
 - SHA512
 
 
-Example:
+### Example
 
 ```swift
-  let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
-
-  // Calculate image file checksum using MD5 digest
-  if let computedChecksum = try! imageURL.cryptoHash(algorithm: .md5) {
-      // Use computed checksum
+  if let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg") {
+    // Calculate image file checksum using MD5 digest
+    if let computedChecksum = try! imageURL.cryptoHash(algorithm: .md5) {
+        // Use computed checksum
+    }
   }
 ```
+
+### License
+
+`CryptoHash` was written by Ruben Nine ([@sonicbee9](https://twitter.com/sonicbee9)) and is licensed under the [MIT](http://opensource.org/licenses/MIT) license. See [LICENSE.md](LICENSE.md).
