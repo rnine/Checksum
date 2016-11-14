@@ -10,7 +10,7 @@ import Foundation
 import CommonCrypto
 
 public typealias CompletionHandler = (_ checksum: String?) -> Void
-public typealias ProgressHandler = (_ bytesProcessed: Int, _ bytesLeft: Int, _ totalBytes: Int) -> Void
+public typealias ProgressHandler = (_ bytesProcessed: Int, _ totalBytes: Int) -> Void
 
 public enum DigestAlgorithm {
 
@@ -155,7 +155,6 @@ public extension Data {
             let cc = CCWrapper(algorithm: algorithm)
             let totalBytes = self.count
             var bytesLeft = totalBytes
-            var copiedBytes = 0
 
             self.withUnsafeBytes { (u8Ptr: UnsafePointer<UInt8>) in
                 var uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
@@ -167,13 +166,11 @@ public extension Data {
 
                     bytesLeft -= bytesToCopy
                     uMutablePtr += bytesToCopy
-                    copiedBytes += bytesToCopy
 
                     let actualBytesLeft = bytesLeft
-                    let actualCopiedBytes = copiedBytes
 
                     DispatchQueue.main.async {
-                        progress?(actualCopiedBytes, actualBytesLeft, totalBytes)
+                        progress?(totalBytes - actualBytesLeft, totalBytes)
                     }
                 }
             }

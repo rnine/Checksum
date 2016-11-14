@@ -60,14 +60,17 @@ class ChecksumTests: XCTestCase {
         let chunkSize = 1024
         let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
         let expectation1 = expectation(description: "completion")
-        var lastBytesLeft: Int?
+        var totalBytesProcessed: Int = 0
+        var lastTotalBytesProcessed: Int = 0
 
-        let progress: ProgressHandler = { (bytesProcessed, bytesLeft) in
-            if bytesLeft != 0 {
-                lastBytesLeft = bytesLeft
-                XCTAssertEqual(bytesProcessed, chunkSize)
+        let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
+            totalBytesProcessed = bytesProcessed
+
+            if bytesProcessed < totalBytes {
+                XCTAssertEqual(totalBytesProcessed - lastTotalBytesProcessed, chunkSize)
+                lastTotalBytesProcessed = totalBytesProcessed
             } else {
-                XCTAssertEqual(bytesProcessed, lastBytesLeft)
+                XCTAssertEqual(totalBytesProcessed, totalBytes)
             }
         }
 
@@ -86,14 +89,17 @@ class ChecksumTests: XCTestCase {
         let chunkSize = 1024
         let remoteImageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg")!
         let expectation1 = expectation(description: "completion")
-        var lastBytesLeft: Int?
+        var totalBytesProcessed: Int = 0
+        var lastTotalBytesProcessed: Int = 0
 
-        let progress: ProgressHandler = { (bytesProcessed, bytesLeft) in
-            if bytesLeft != 0 {
-                lastBytesLeft = bytesLeft
-                XCTAssertEqual(bytesProcessed, chunkSize)
+        let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
+            totalBytesProcessed = bytesProcessed
+
+            if bytesProcessed < totalBytes {
+                XCTAssertEqual(totalBytesProcessed - lastTotalBytesProcessed, chunkSize)
+                lastTotalBytesProcessed = totalBytesProcessed
             } else {
-                XCTAssertEqual(bytesProcessed, lastBytesLeft)
+                XCTAssertEqual(totalBytesProcessed, totalBytes)
             }
         }
 
