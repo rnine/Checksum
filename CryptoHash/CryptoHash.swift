@@ -130,10 +130,10 @@ private class CCWrapper {
     public let algorithm: DigestAlgorithm
 
     private var digest: UnsafeMutablePointer<UInt8>?
-    private var md5Ctx: UnsafeMutablePointer<CC_MD5_CTX>?
-    private var sha1Ctx: UnsafeMutablePointer<CC_SHA1_CTX>?
-    private var sha256Ctx: UnsafeMutablePointer<CC_SHA256_CTX>?
-    private var sha512Ctx: UnsafeMutablePointer<CC_SHA512_CTX>?
+    private var md5Ctx: CC_MD5_CTX?
+    private var sha1Ctx: CC_SHA1_CTX?
+    private var sha256Ctx: CC_SHA256_CTX?
+    private var sha512Ctx: CC_SHA512_CTX?
     private var updateFun: CC_XXX_Update?
     private var finalFun: CC_XXX_Final?
 
@@ -144,56 +144,64 @@ private class CCWrapper {
 
         switch algorithm {
         case .md5:
-            md5Ctx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: algorithm.digestLength)
-            CC_MD5_Init(md5Ctx)
+            var ctx = CC_MD5_CTX()
 
-            updateFun = { (data, len) in CC_MD5_Update(self.md5Ctx, data, len) }
-            finalFun = { (digest) in CC_MD5_Final(digest, self.md5Ctx) }
+            CC_MD5_Init(&ctx)
+
+            md5Ctx = ctx
+            updateFun = { (data, len) in CC_MD5_Update(&ctx, data, len) }
+            finalFun = { (digest) in CC_MD5_Final(digest, &ctx) }
 
         case .sha1:
-            sha1Ctx = UnsafeMutablePointer<CC_SHA1_CTX>.allocate(capacity: algorithm.digestLength)
-            CC_SHA1_Init(sha1Ctx)
+            var ctx = CC_SHA1_CTX()
 
-            updateFun = { (data, len) in CC_SHA1_Update(self.sha1Ctx, data, len) }
-            finalFun = { (digest) in CC_SHA1_Final(digest, self.sha1Ctx) }
+            CC_SHA1_Init(&ctx)
+
+            sha1Ctx = ctx
+            updateFun = { (data, len) in CC_SHA1_Update(&ctx, data, len) }
+            finalFun = { (digest) in CC_SHA1_Final(digest, &ctx) }
 
         case .sha224:
-            sha256Ctx = UnsafeMutablePointer<CC_SHA256_CTX>.allocate(capacity: algorithm.digestLength)
-            CC_SHA224_Init(sha256Ctx)
+            var ctx = CC_SHA256_CTX()
 
-            updateFun = { (data, len) in CC_SHA224_Update(self.sha256Ctx, data, len) }
-            finalFun = { (digest) in CC_SHA224_Final(digest, self.sha256Ctx) }
+            CC_SHA224_Init(&ctx)
+
+            sha256Ctx = ctx
+            updateFun = { (data, len) in CC_SHA224_Update(&ctx, data, len) }
+            finalFun = { (digest) in CC_SHA224_Final(digest, &ctx) }
 
         case .sha256:
-            sha256Ctx = UnsafeMutablePointer<CC_SHA256_CTX>.allocate(capacity: algorithm.digestLength)
-            CC_SHA256_Init(sha256Ctx)
+            var ctx = CC_SHA256_CTX()
 
-            updateFun = { (data, len) in CC_SHA256_Update(self.sha256Ctx, data, len) }
-            finalFun = { (digest) in CC_SHA256_Final(digest, self.sha256Ctx) }
+            CC_SHA256_Init(&ctx)
+
+            sha256Ctx = ctx
+            updateFun = { (data, len) in CC_SHA256_Update(&ctx, data, len) }
+            finalFun = { (digest) in CC_SHA256_Final(digest, &ctx) }
 
         case .sha384:
-            sha512Ctx = UnsafeMutablePointer<CC_SHA512_CTX>.allocate(capacity: algorithm.digestLength)
-            CC_SHA384_Init(sha512Ctx)
+            var ctx = CC_SHA512_CTX()
 
-            updateFun = { (data, len) in CC_SHA384_Update(self.sha512Ctx, data, len) }
-            finalFun = { (digest) in CC_SHA384_Final(digest, self.sha512Ctx) }
+            CC_SHA384_Init(&ctx)
+
+            sha512Ctx = ctx
+            updateFun = { (data, len) in CC_SHA384_Update(&ctx, data, len) }
+            finalFun = { (digest) in CC_SHA384_Final(digest, &ctx) }
 
         case .sha512:
-            sha512Ctx = UnsafeMutablePointer<CC_SHA512_CTX>.allocate(capacity: algorithm.digestLength)
-            CC_SHA512_Init(sha512Ctx)
+            var ctx = CC_SHA512_CTX()
 
-            updateFun = { (data, len) in CC_SHA512_Update(self.sha512Ctx, data, len) }
-            finalFun = { (digest) in CC_SHA512_Final(digest, self.sha512Ctx) }
+            CC_SHA512_Init(&ctx)
+
+            sha512Ctx = ctx
+            updateFun = { (data, len) in CC_SHA512_Update(&ctx, data, len) }
+            finalFun = { (digest) in CC_SHA512_Final(digest, &ctx) }
 
         }
     }
 
     deinit {
 
-        md5Ctx?.deallocate(capacity: algorithm.digestLength)
-        sha1Ctx?.deallocate(capacity: algorithm.digestLength)
-        sha256Ctx?.deallocate(capacity: algorithm.digestLength)
-        sha512Ctx?.deallocate(capacity: algorithm.digestLength)
         digest?.deallocate(capacity: algorithm.digestLength)
     }
 
