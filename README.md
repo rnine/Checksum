@@ -62,6 +62,9 @@ Extends `String`, `Data`, and `URL` to easily and efficiently calculate large co
   }
 ```
 
+### Requirements
+
+- Xcode 8 and Swift 3
 
 ### License
 
