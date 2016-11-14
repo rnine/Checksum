@@ -63,8 +63,9 @@ public extension URL {
 
         - Parameter algorithm: The digest algorithm to use.
         - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
-        - Parameter completionHandler: The closure to call upon completion containing the checksum.
-        - Parameter progressHandler: *(optional)* The closure to call to signal progress.
+        - Parameter queue: *(optional)* The dispatch queue used for processing.
+        - Parameter progress: *(optional)* The closure to call to signal progress.
+        - Parameter completion: The closure to call upon completion containing the checksum.
      */
     func checksum(algorithm: DigestAlgorithm,
                   chunkSize: Int = defaultChunkSize,
@@ -140,8 +141,9 @@ public extension Data {
 
         - Parameter algorithm: The digest algorithm to use.
         - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
-        - Parameter completionHandler: The closure to call upon completion containing the checksum.
-        - Parameter progressHandler: *(optional)* The closure to call to signal progress.
+        - Parameter queue: *(optional)* The dispatch queue used for processing.
+        - Parameter progress: *(optional)* The closure to call to signal progress.
+        - Parameter completion: The closure to call upon completion containing the checksum.
      */
     func checksum(algorithm: DigestAlgorithm,
                   chunkSize: Int = defaultChunkSize,
