@@ -4,9 +4,23 @@
 [![GitHub tag](https://img.shields.io/github/tag/rnine/CryptoHash.svg)](https://github.com/rnine/CryptoHash)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rnine/CryptoHash/blob/develop/LICENSE.md)
 
-Extends `String`, `Data`, and `URL` to easily and efficiently calculate large content checksums.
+Extends `String`, `Data`, and `URL` to easily and efficiently calculate large content checksums. Both sync and async versions are provided for `Data` and `URL`:
 
-Supported digests:
+#### String
+
+- `checksum(algorithm:)`
+
+#### Data
+
+- `checksum(algorithm:chunkSize:)`
+- `checksum(algorithm:chunkSize:queue:progress:completion:)`
+
+#### URL
+
+- `checksum(algorithm:chunkSize:)`
+- `checksum(algorithm:chunkSize:queue:progress:completion:)`
+
+### Supported digests:
 
 - MD5
 - SHA1
@@ -16,7 +30,7 @@ Supported digests:
 - SHA512
 
 
-### Example
+### Examples
 
 #### Synchronous with local URL
 
