@@ -21,7 +21,7 @@ Supported digests:
 ```swift
   if let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg") {
     // Calculate image file checksum using MD5 digest
-    if let computedChecksum = try! imageURL.cryptoHash(algorithm: .md5) {
+    if let computedChecksum = try! imageURL.checksum(algorithm: .md5) {
         // Use computed checksum
     }
   }
