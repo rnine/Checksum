@@ -18,14 +18,36 @@ Supported digests:
 
 ### Example
 
+#### Synchronous with local URL
+
 ```swift
   if let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg") {
     // Calculate image file checksum using MD5 digest
-    if let computedChecksum = try! imageURL.checksum(algorithm: .md5) {
+    if let checksum = try! imageURL.checksum(algorithm: .md5) {
         // Use computed checksum
     }
   }
 ```
+
+#### Asynchronous with remote URL
+
+```swift
+  let remoteImageURL = URL(string: "https://github.com/rnine/CryptoHash/raw/master/CryptoHashTests/Fixtures/image.jpg")!
+
+  let progress: ProgressHandler = { (bytesProcessed, bytesLeft) in
+    print("Bytes processed: \(bytesProcessed), bytes left: \(bytesLeft)"
+  }
+
+  try! remoteImageURL.checksum(algorithm: .md5,
+                               progress: progress) { (checksum) in
+      if let checksum = checksum {
+        print("md5 checksum of \(remoteImageURL) is \(checksum)"
+      } else {
+        print("Unable to obtain checksum.")
+      }
+  }
+```
+
 
 ### License
 
