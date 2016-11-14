@@ -1,15 +1,15 @@
 //
-//  CryptoHashTests.swift
-//  CryptoHashTests
+//  ChecksumTests.swift
+//  ChecksumTests
 //
 //  Created by Ruben Nine on 11/11/2016.
 //  Copyright © 2016 9Labs. All rights reserved.
 //
 
 import XCTest
-@testable import CryptoHash
+@testable import Checksum
 
-class CryptoHashTests: XCTestCase {
+class ChecksumTests: XCTestCase {
     
     override func setUp() {
 
@@ -84,7 +84,7 @@ class CryptoHashTests: XCTestCase {
     func testMD5AsyncRemoteURL() {
 
         let chunkSize = 1024
-        let remoteImageURL = URL(string: "https://github.com/rnine/CryptoHash/raw/master/CryptoHashTests/Fixtures/image.jpg")!
+        let remoteImageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg")!
         let expectation1 = expectation(description: "completion")
         var lastBytesLeft: Int?
 

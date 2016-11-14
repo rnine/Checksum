@@ -1,6 +1,6 @@
 //
-//  CryptoHash.swift
-//  CryptoHash
+//  Checksum.swift
+//  Checksum
 //
 //  Created by Ruben Nine on 11/11/2016.
 //  Copyright © 2016 9Labs. All rights reserved.
