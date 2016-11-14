@@ -10,5 +10,4 @@
 *.xcscmblueprint
 project.xcworkspace/
 xcuserdata/
-xcshareddata/
 Pods/
