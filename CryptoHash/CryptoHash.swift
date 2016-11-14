@@ -10,6 +10,7 @@ import Foundation
 import CommonCrypto
 
 public enum DigestAlgorithm {
+
     case md5
     case sha1
     case sha224
@@ -18,6 +19,7 @@ public enum DigestAlgorithm {
     case sha512
 
     public var digestLength: Int {
+
         switch self {
         case .md5: return Int(CC_MD5_DIGEST_LENGTH)
         case .sha1: return Int(CC_SHA1_DIGEST_LENGTH)
@@ -29,54 +31,81 @@ public enum DigestAlgorithm {
     }
 }
 
-private let defaultChunkSize = 4096
+private let defaultChunkSize: Int = 4096
+
 
 // MARK: - Public Extensions
 
 public extension URL {
-    func cryptoHash(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
-        return try CCUtils.calculateHash(url: self, algorithm: algorithm, chunkSize: chunkSize)
+
+    /**
+        Returns a checksum of the file's content referenced by this URL using the specified digest algorithm.
+
+        - Parameter algorithm: The digest algorithm to use.
+        - Parameter *(optional)* chunkSize: The internal buffer's size (mostly relevant for large file computing)
+     
+        - Note: Use only with URL's pointing to local or LAN network files.
+
+        - Returns: *(optional)* A String with the computed checksum.
+     */
+    func checksum(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
+
+        let data = try Data(contentsOf: self, options: .mappedIfSafe)
+        return try data.checksum(algorithm: algorithm, chunkSize: chunkSize)
     }
+
+    /**
+        TODO: Add async checksum computation function with progress reporting.
+    
+        Useful for:
+
+        - URLs representing large files on the local filesystem (or LAN)
+        - Remote URLs (http)
+    */
 }
+
 
 public extension String {
-    func cryptoHash(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
-        return try CCUtils.calculateHash(string: self, algorithm: algorithm, chunkSize: chunkSize)
-    }
-}
 
-public extension Data {
-    func cryptoHash(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
-        return try CCUtils.calculateHash(data: self, algorithm: algorithm, chunkSize: chunkSize)
-    }
-}
+    /**
+        Returns a checksum of the String's content using the specified digest algorithm.
+     
+        - Parameter algorithm: The digest algorithm to use.
 
-// MARK: - CCUtils (for internal use)
+        - Returns: *(optional)* A String with the computed checksum.
+     */
+    func checksum(algorithm: DigestAlgorithm) throws -> String? {
 
-private class CCUtils {
-
-    static func calculateHash(url: URL, algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
-        let data = try Data(contentsOf: url, options: .mappedIfSafe)
-        return try calculateHash(data: data, algorithm: algorithm, chunkSize: chunkSize)
-    }
-
-    static func calculateHash(string: String, algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
-        if let data = string.data(using: .utf8) {
-            return try calculateHash(data: data, algorithm: algorithm, chunkSize: chunkSize)
+        if let data = data(using: .utf8) {
+            return try data.checksum(algorithm: algorithm)
         } else {
             return nil
         }
     }
+}
 
-    static func calculateHash(data: Data, algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
+
+public extension Data {
+
+    /**
+        Returns a checksum of the Data's content using the specified digest algorithm.
+
+        - Parameter algorithm: The digest algorithm to use.
+        - Parameter *(optional)* chunkSize: The internal buffer's size (mostly relevant for large file computing)
+
+        - Returns: *(optional)* A String with the computed checksum.
+     */
+    func checksum(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
+
         let cc = CCWrapper(algorithm: algorithm)
-        var bytesLeft = data.count
+        var bytesLeft = count
 
-        data.withUnsafeBytes { (u8Ptr: UnsafePointer<UInt8>) in
+        withUnsafeBytes { (u8Ptr: UnsafePointer<UInt8>) in
             var uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
 
             while bytesLeft > 0 {
-                let bytesToCopy = min(bytesLeft, chunkSize)
+                //let bytesToCopy = min(bytesLeft, chunkSize)
+                let bytesToCopy = [bytesLeft, chunkSize].min()!
 
                 cc.update(data: uMutablePtr, length: CC_LONG(bytesToCopy))
 
@@ -84,15 +113,19 @@ private class CCUtils {
                 uMutablePtr += bytesToCopy
             }
         }
-
+        
         cc.final()
         return cc.hexString()
     }
 }
 
+
 // MARK: - CCWrapper (for internal use)
 
 private class CCWrapper {
+
+    private typealias CC_XXX_Update = (UnsafeRawPointer, CC_LONG) -> Void
+    private typealias CC_XXX_Final = (UnsafeMutablePointer<UInt8>) -> Void
 
     public let algorithm: DigestAlgorithm
 
@@ -101,34 +134,62 @@ private class CCWrapper {
     private var sha1Ctx: UnsafeMutablePointer<CC_SHA1_CTX>?
     private var sha256Ctx: UnsafeMutablePointer<CC_SHA256_CTX>?
     private var sha512Ctx: UnsafeMutablePointer<CC_SHA512_CTX>?
+    private var updateFun: CC_XXX_Update?
+    private var finalFun: CC_XXX_Final?
 
 
     init(algorithm: DigestAlgorithm) {
+
         self.algorithm = algorithm
 
         switch algorithm {
         case .md5:
             md5Ctx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: algorithm.digestLength)
             CC_MD5_Init(md5Ctx)
+
+            updateFun = { (data, len) in CC_MD5_Update(self.md5Ctx, data, len) }
+            finalFun = { (digest) in CC_MD5_Final(digest, self.md5Ctx) }
+
         case .sha1:
             sha1Ctx = UnsafeMutablePointer<CC_SHA1_CTX>.allocate(capacity: algorithm.digestLength)
             CC_SHA1_Init(sha1Ctx)
+
+            updateFun = { (data, len) in CC_SHA1_Update(self.sha1Ctx, data, len) }
+            finalFun = { (digest) in CC_SHA1_Final(digest, self.sha1Ctx) }
+
         case .sha224:
             sha256Ctx = UnsafeMutablePointer<CC_SHA256_CTX>.allocate(capacity: algorithm.digestLength)
             CC_SHA224_Init(sha256Ctx)
+
+            updateFun = { (data, len) in CC_SHA224_Update(self.sha256Ctx, data, len) }
+            finalFun = { (digest) in CC_SHA224_Final(digest, self.sha256Ctx) }
+
         case .sha256:
             sha256Ctx = UnsafeMutablePointer<CC_SHA256_CTX>.allocate(capacity: algorithm.digestLength)
             CC_SHA256_Init(sha256Ctx)
+
+            updateFun = { (data, len) in CC_SHA256_Update(self.sha256Ctx, data, len) }
+            finalFun = { (digest) in CC_SHA256_Final(digest, self.sha256Ctx) }
+
         case .sha384:
             sha512Ctx = UnsafeMutablePointer<CC_SHA512_CTX>.allocate(capacity: algorithm.digestLength)
             CC_SHA384_Init(sha512Ctx)
+
+            updateFun = { (data, len) in CC_SHA384_Update(self.sha512Ctx, data, len) }
+            finalFun = { (digest) in CC_SHA384_Final(digest, self.sha512Ctx) }
+
         case .sha512:
             sha512Ctx = UnsafeMutablePointer<CC_SHA512_CTX>.allocate(capacity: algorithm.digestLength)
             CC_SHA512_Init(sha512Ctx)
+
+            updateFun = { (data, len) in CC_SHA512_Update(self.sha512Ctx, data, len) }
+            finalFun = { (digest) in CC_SHA512_Final(digest, self.sha512Ctx) }
+
         }
     }
 
     deinit {
+
         md5Ctx?.deallocate(capacity: algorithm.digestLength)
         sha1Ctx?.deallocate(capacity: algorithm.digestLength)
         sha256Ctx?.deallocate(capacity: algorithm.digestLength)
@@ -137,46 +198,25 @@ private class CCWrapper {
     }
 
     func update(data: UnsafeMutableRawPointer, length: CC_LONG) {
-        guard digest == nil else { return }
 
-        switch algorithm {
-        case .md5:
-            CC_MD5_Update(md5Ctx, data, length)
-        case .sha1:
-            CC_SHA1_Update(sha1Ctx, data, length)
-        case .sha224:
-            CC_SHA224_Update(sha256Ctx, data, length)
-        case .sha256:
-            CC_SHA256_Update(sha256Ctx, data, length)
-        case .sha384:
-            CC_SHA384_Update(sha512Ctx, data, length)
-        case .sha512:
-            CC_SHA512_Update(sha512Ctx, data, length)
-        }
+        updateFun?(data, length)
     }
 
     func final() {
+
+        // We already got a digest, return early
         guard digest == nil else { return }
 
         digest = UnsafeMutablePointer<UInt8>.allocate(capacity: algorithm.digestLength)
 
-        switch algorithm {
-        case .md5:
-            CC_MD5_Final(digest, md5Ctx)
-        case .sha1:
-            CC_SHA1_Final(digest, sha1Ctx)
-        case .sha224:
-            CC_SHA224_Final(digest, sha256Ctx)
-        case .sha256:
-            CC_SHA256_Final(digest, sha256Ctx)
-        case .sha384:
-            CC_SHA384_Final(digest, sha512Ctx)
-        case .sha512:
-            CC_SHA512_Final(digest, sha512Ctx)
+        if let digest = digest {
+            finalFun?(digest)
         }
     }
 
     func hexString() -> String? {
+
+        // We DON'T have a digest YET, return early
         guard let digest = digest else { return nil }
 
         var string = ""
