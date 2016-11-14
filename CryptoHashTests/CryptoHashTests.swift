@@ -12,18 +12,22 @@ import XCTest
 class CryptoHashTests: XCTestCase {
     
     override func setUp() {
+
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
+
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
 
     let basicString = "This is a simple string"
-    
+
+
     func testMD5() {
+
         let algorithm: DigestAlgorithm = .md5
         let data = basicString.data(using: .utf8)!
         let expectedHash = "0f13e02ea41fb763b0ad09daa72a4b6e"
@@ -38,6 +42,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testMD5URL() {
+
         let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
         let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
 
@@ -50,7 +55,60 @@ class CryptoHashTests: XCTestCase {
         }
     }
 
+    func testMD5AsyncURL() {
+
+        let chunkSize = 1024
+        let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
+        let expectation1 = expectation(description: "completion")
+        var lastBytesLeft: Int?
+
+        let progress: ProgressHandler = { (bytesProcessed, bytesLeft) in
+            if bytesLeft != 0 {
+                lastBytesLeft = bytesLeft
+                XCTAssertEqual(bytesProcessed, chunkSize)
+            } else {
+                XCTAssertEqual(bytesProcessed, lastBytesLeft)
+            }
+        }
+
+        try! imageURL.checksum(algorithm: .md5,
+                               chunkSize: chunkSize,
+                               progress: progress) { (checksum) in
+            XCTAssertEqual(checksum, "89808f4076aa649844c0de958bf08fa1")
+            expectation1.fulfill()
+        }
+
+        waitForExpectations(timeout: 10)
+    }
+
+    func testMD5AsyncRemoteURL() {
+
+        let chunkSize = 1024
+        let remoteImageURL = URL(string: "https://github.com/rnine/CryptoHash/raw/master/CryptoHashTests/Fixtures/image.jpg")!
+        let expectation1 = expectation(description: "completion")
+        var lastBytesLeft: Int?
+
+        let progress: ProgressHandler = { (bytesProcessed, bytesLeft) in
+            if bytesLeft != 0 {
+                lastBytesLeft = bytesLeft
+                XCTAssertEqual(bytesProcessed, chunkSize)
+            } else {
+                XCTAssertEqual(bytesProcessed, lastBytesLeft)
+            }
+        }
+
+        try! remoteImageURL.checksum(algorithm: .md5,
+                                     chunkSize: chunkSize,
+                                     progress: progress) { (checksum) in
+            XCTAssertEqual(checksum, "89808f4076aa649844c0de958bf08fa1")
+            expectation1.fulfill()
+        }
+
+        waitForExpectations(timeout: 10)
+    }
+
     func testSHA1() {
+
         let algorithm: DigestAlgorithm = .sha1
         let data = basicString.data(using: .utf8)!
         let expectedHash = "3d745cc2fb07a4e3cb3bc0d5666ad1e358e15101"
@@ -65,6 +123,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testSHA1URL() {
+
         let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
         let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
 
@@ -78,6 +137,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testSHA224() {
+
         let algorithm: DigestAlgorithm = .sha224
         let data = basicString.data(using: .utf8)!
 
@@ -91,6 +151,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testSHA224URL() {
+
         let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
         let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
 
@@ -104,6 +165,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testSHA256() {
+
         let algorithm: DigestAlgorithm = .sha256
         let data = basicString.data(using: .utf8)!
         let expectedHash = "99eb09d996baedd3d1603c890058e308552456bc9d11712b149fe2d5772532cf"
@@ -118,6 +180,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testSHA256URL() {
+
         let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
         let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
 
@@ -131,6 +194,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testSHA384() {
+
         let algorithm: DigestAlgorithm = .sha384
         let data = basicString.data(using: .utf8)!
         let expectedHash = "08d6af9d00df916f3e33743588c00e00f25433392bda805cfcb3582fbc3f659de5a374d41658602ae27670ba9320da58"
@@ -145,6 +209,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testSHA384URL() {
+
         let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
         let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
 
@@ -158,6 +223,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testSHA512() {
+
         let algorithm: DigestAlgorithm = .sha512
         let data = basicString.data(using: .utf8)!
         let expectedHash = "8b14d001deabe20a91b6e22cb452f27a02840f2e451ce566c54ed3fec211f06a6fb40c0002f0d23279cf58cccde909ab1aa7592e1ab5e0f2bce10d6be36f9ed1"
@@ -172,6 +238,7 @@ class CryptoHashTests: XCTestCase {
     }
 
     func testSHA512URL() {
+
         let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
         let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
 

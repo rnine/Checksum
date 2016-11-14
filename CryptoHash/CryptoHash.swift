@@ -9,6 +9,9 @@
 import Foundation
 import CommonCrypto
 
+public typealias CompletionHandler = (_ checksum: String?) -> Void
+public typealias ProgressHandler = (_ bytesProcessed: Int, _ bytesLeft: Int) -> Void
+
 public enum DigestAlgorithm {
 
     case md5
@@ -42,9 +45,10 @@ public extension URL {
         Returns a checksum of the file's content referenced by this URL using the specified digest algorithm.
 
         - Parameter algorithm: The digest algorithm to use.
-        - Parameter *(optional)* chunkSize: The internal buffer's size (mostly relevant for large file computing)
+        - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
      
-        - Note: Use only with URL's pointing to local or LAN network files.
+        - Note: For large local files or remote resources, you may want to try `checksum(algorithm:chunkSize:queue:progressHandler:completionHandler:)` instead.
+        - SeeAlso: `checksum(algorithm:chunkSize:queue:progressHandler:completionHandler:)`
 
         - Returns: *(optional)* A String with the computed checksum.
      */
@@ -55,13 +59,27 @@ public extension URL {
     }
 
     /**
-        TODO: Add async checksum computation function with progress reporting.
-    
-        Useful for:
+        Asynchronously returns a checksum of the file's content referenced by this URL using the specified digest algorithm.
 
-        - URLs representing large files on the local filesystem (or LAN)
-        - Remote URLs (http)
-    */
+        - Parameter algorithm: The digest algorithm to use.
+        - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
+        - Parameter completionHandler: The closure to call upon completion containing the checksum.
+        - Parameter progressHandler: *(optional)* The closure to call to signal progress.
+     */
+    func checksum(algorithm: DigestAlgorithm,
+                  chunkSize: Int = defaultChunkSize,
+                  queue: DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background),
+                  progress: ProgressHandler?,
+                  completion: @escaping CompletionHandler) throws {
+
+        let data = try Data(contentsOf: self, options: .mappedIfSafe)
+
+        data.checksum(algorithm: algorithm,
+                      chunkSize: chunkSize,
+                      queue: queue,
+                      progress: progress,
+                      completion: completion)
+    }
 }
 
 
@@ -104,8 +122,7 @@ public extension Data {
             var uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
 
             while bytesLeft > 0 {
-                //let bytesToCopy = min(bytesLeft, chunkSize)
-                let bytesToCopy = [bytesLeft, chunkSize].min()!
+                let bytesToCopy = Swift.min(bytesLeft, chunkSize)
 
                 cc.update(data: uMutablePtr, length: CC_LONG(bytesToCopy))
 
@@ -116,6 +133,51 @@ public extension Data {
         
         cc.final()
         return cc.hexString()
+    }
+
+    /**
+        Asynchronously returns a checksum of the Data's content using the specified digest algorithm.
+
+        - Parameter algorithm: The digest algorithm to use.
+        - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
+        - Parameter completionHandler: The closure to call upon completion containing the checksum.
+        - Parameter progressHandler: *(optional)* The closure to call to signal progress.
+     */
+    func checksum(algorithm: DigestAlgorithm,
+                  chunkSize: Int = defaultChunkSize,
+                  queue: DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background),
+                  progress: ProgressHandler?,
+                  completion: @escaping CompletionHandler) {
+
+        queue.async {
+            let cc = CCWrapper(algorithm: algorithm)
+            var bytesLeft = self.count
+
+            self.withUnsafeBytes { (u8Ptr: UnsafePointer<UInt8>) in
+                var uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
+
+                while bytesLeft > 0 {
+                    let bytesToCopy = Swift.min(bytesLeft, chunkSize)
+
+                    cc.update(data: uMutablePtr, length: CC_LONG(bytesToCopy))
+
+                    bytesLeft -= bytesToCopy
+                    uMutablePtr += bytesToCopy
+
+                    let actualBytesLeft = bytesLeft
+
+                    DispatchQueue.main.async {
+                        progress?(bytesToCopy, actualBytesLeft)
+                    }
+                }
+            }
+
+            cc.final()
+
+            DispatchQueue.main.async {
+                completion(cc.hexString())
+            }
+        }
     }
 }
 
