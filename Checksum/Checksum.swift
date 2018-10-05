@@ -52,10 +52,11 @@ public extension URL {
 
         - Returns: *(optional)* A String with the computed checksum.
      */
-    func checksum(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
+    func checksum(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) -> String? {
 
-        let data = try Data(contentsOf: self, options: .mappedIfSafe)
-        return try data.checksum(algorithm: algorithm, chunkSize: chunkSize)
+        guard let data = try? Data(contentsOf: self, options: .mappedIfSafe) else { return nil }
+
+        return data.checksum(algorithm: algorithm, chunkSize: chunkSize)
     }
 
     /**
@@ -71,9 +72,9 @@ public extension URL {
                   chunkSize: Int = defaultChunkSize,
                   queue: DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background),
                   progress: ProgressHandler?,
-                  completion: @escaping CompletionHandler) throws {
+                  completion: @escaping CompletionHandler) {
 
-        let data = try Data(contentsOf: self, options: .mappedIfSafe)
+        guard let data = try? Data(contentsOf: self, options: .mappedIfSafe) else { return }
 
         data.checksum(algorithm: algorithm,
                       chunkSize: chunkSize,
@@ -93,10 +94,10 @@ public extension String {
 
         - Returns: *(optional)* A String with the computed checksum.
      */
-    func checksum(algorithm: DigestAlgorithm) throws -> String? {
+    func checksum(algorithm: DigestAlgorithm) -> String? {
 
         if let data = data(using: .utf8) {
-            return try data.checksum(algorithm: algorithm)
+            return data.checksum(algorithm: algorithm)
         } else {
             return nil
         }
@@ -114,7 +115,7 @@ public extension Data {
 
         - Returns: *(optional)* A String with the computed checksum.
      */
-    func checksum(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) throws -> String? {
+    func checksum(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) -> String? {
 
         let cc = CCWrapper(algorithm: algorithm)
         var bytesLeft = count

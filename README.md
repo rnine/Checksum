@@ -33,39 +33,42 @@ Extends `String`, `Data`, and `URL` to easily and efficiently calculate large co
 
 ### Examples
 
-#### Synchronous with local URL
+#### Synchronous usage:
 
 ```swift
   if let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg") {
     // Calculate image file checksum using MD5 digest
-    if let checksum = try! imageURL.checksum(algorithm: .md5) {
+    if let checksum = imageURL.checksum(algorithm: .md5) {
         // Use computed checksum
     }
   }
 ```
 
-#### Asynchronous with remote URL
+#### Asynchronous usage:
 
 ```swift
-  let remoteImageURL = URL(string: "https://github.com/rnine/CryptoHash/raw/master/CryptoHashTests/Fixtures/image.jpg")!
-
   let progress: ProgressHandler = { (bytesProcessed, bytesLeft) in
     print("Bytes processed: \(bytesProcessed), bytes left: \(bytesLeft)"
   }
 
-  try! remoteImageURL.checksum(algorithm: .md5,
-                               progress: progress) { (checksum) in
-      if let checksum = checksum {
-        print("md5 checksum of \(remoteImageURL) is \(checksum)"
-      } else {
-        print("Unable to obtain checksum.")
+  if let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg") {
+      imageURL.checksum(algorithm: .md5, progress: progress) { (checksum) in
+          if let checksum = checksum {
+            print("md5 checksum of \(remoteImageURL) is \(checksum)"
+          } else {
+            print("Unable to obtain checksum.")
+          }
       }
   }
 ```
 
+### TO-DO
+
+Efficiently handle checksum calculation of large files without loading entire contents into memory or using mapped memory (which is restricted to local files only anyway.)
+
 ### Requirements
 
-- Xcode 8 and Swift 3
+- Xcode 10 and Swift 4.2
 
 ### License
 
