@@ -5,7 +5,7 @@
 [![GitHub tag](https://img.shields.io/github/tag/rnine/CryptoHash.svg)](https://github.com/rnine/CryptoHash)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rnine/CryptoHash/blob/develop/LICENSE.md)
 
-Extends `String`, `Data`, and `URL` to easily and efficiently calculate large content checksums. Both sync and async versions are provided for `Data` and `URL`:
+Extends `String`, `Data`, and `URL` to easily and efficiently calculate large file content checksums synchronously and asynchronously with optional progress reporting.
 
 #### String
 
@@ -13,7 +13,6 @@ Extends `String`, `Data`, and `URL` to easily and efficiently calculate large co
 
 #### Data
 
-- `checksum(algorithm:chunkSize:)`
 - `checksum(algorithm:chunkSize:queue:progress:completion:)`
 
 #### URL
