@@ -32,7 +32,7 @@ public enum DigestAlgorithm {
     }
 }
 
-public let defaultChunkSize: Int = 4096
+public let defaultChunkSize: Int = 262144 // 256Kb
 
 
 // MARK: - Public Extensions
