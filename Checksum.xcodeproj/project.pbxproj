@@ -12,6 +12,20 @@
 		4506A6791DD62DA5007211D2 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 4506A66B1DD62DA5007211D2 /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4506A6961DD62E11007211D2 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
 		4506A6B11DD63B14007211D2 /* basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4506A6B01DD63B14007211D2 /* basic.txt */; };
+		451D9A102167A9280093703D /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A0F2167A9280093703D /* Source.swift */; };
+		451D9A112167A9280093703D /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A0F2167A9280093703D /* Source.swift */; };
+		451D9A122167A9280093703D /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A0F2167A9280093703D /* Source.swift */; };
+		451D9A132167A9280093703D /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A0F2167A9280093703D /* Source.swift */; };
+		451D9A162167AA8E0093703D /* FileSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A152167AA8E0093703D /* FileSource.swift */; };
+		451D9A172167AA8E0093703D /* FileSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A152167AA8E0093703D /* FileSource.swift */; };
+		451D9A182167AA8E0093703D /* FileSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A152167AA8E0093703D /* FileSource.swift */; };
+		451D9A192167AA8E0093703D /* FileSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A152167AA8E0093703D /* FileSource.swift */; };
+		451D9A1B2167AEE40093703D /* FileSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A1A2167AEE40093703D /* FileSourceTests.swift */; };
+		451D9A1D2167B1200093703D /* HTTPSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A1C2167B1200093703D /* HTTPSource.swift */; };
+		451D9A1E2167B1200093703D /* HTTPSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A1C2167B1200093703D /* HTTPSource.swift */; };
+		451D9A1F2167B1200093703D /* HTTPSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A1C2167B1200093703D /* HTTPSource.swift */; };
+		451D9A202167B1200093703D /* HTTPSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A1C2167B1200093703D /* HTTPSource.swift */; };
+		451D9A222167B9F40093703D /* HTTPSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A212167B9F40093703D /* HTTPSourceTests.swift */; };
 		4529D3A61DD6406000AE9FB1 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4529D3A51DD6406000AE9FB1 /* image.jpg */; };
 		45912D3521677E96008D0E08 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
 		45912D3621677E96008D0E08 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
@@ -40,6 +54,11 @@
 		4506A6781DD62DA5007211D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4506A6951DD62E11007211D2 /* Checksum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checksum.swift; sourceTree = "<group>"; };
 		4506A6B01DD63B14007211D2 /* basic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = basic.txt; path = Fixtures/basic.txt; sourceTree = "<group>"; };
+		451D9A0F2167A9280093703D /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
+		451D9A152167AA8E0093703D /* FileSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSource.swift; sourceTree = "<group>"; };
+		451D9A1A2167AEE40093703D /* FileSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSourceTests.swift; sourceTree = "<group>"; };
+		451D9A1C2167B1200093703D /* HTTPSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSource.swift; sourceTree = "<group>"; };
+		451D9A212167B9F40093703D /* HTTPSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSourceTests.swift; sourceTree = "<group>"; };
 		4529D3A51DD6406000AE9FB1 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image.jpg; path = Fixtures/image.jpg; sourceTree = "<group>"; };
 		45912D0921677CD4008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45912D2021677DBD008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +132,8 @@
 				4506A66B1DD62DA5007211D2 /* Checksum.h */,
 				4506A66C1DD62DA5007211D2 /* Info.plist */,
 				4506A6951DD62E11007211D2 /* Checksum.swift */,
+				451D9A232167BCBC0093703D /* Protocols */,
+				451D9A142167AA5A0093703D /* Sources */,
 			);
 			path = Checksum;
 			sourceTree = "<group>";
@@ -120,9 +141,11 @@
 		4506A6751DD62DA5007211D2 /* ChecksumTests */ = {
 			isa = PBXGroup;
 			children = (
-				4506A6AF1DD63AE4007211D2 /* Fixtures */,
-				4506A6761DD62DA5007211D2 /* ChecksumTests.swift */,
 				4506A6781DD62DA5007211D2 /* Info.plist */,
+				4506A6761DD62DA5007211D2 /* ChecksumTests.swift */,
+				451D9A1A2167AEE40093703D /* FileSourceTests.swift */,
+				451D9A212167B9F40093703D /* HTTPSourceTests.swift */,
+				4506A6AF1DD63AE4007211D2 /* Fixtures */,
 			);
 			path = ChecksumTests;
 			sourceTree = "<group>";
@@ -134,6 +157,23 @@
 				4506A6B01DD63B14007211D2 /* basic.txt */,
 			);
 			name = Fixtures;
+			sourceTree = "<group>";
+		};
+		451D9A142167AA5A0093703D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				451D9A152167AA8E0093703D /* FileSource.swift */,
+				451D9A1C2167B1200093703D /* HTTPSource.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		451D9A232167BCBC0093703D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				451D9A0F2167A9280093703D /* Source.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,7 +405,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451D9A1D2167B1200093703D /* HTTPSource.swift in Sources */,
+				451D9A102167A9280093703D /* Source.swift in Sources */,
 				4506A6961DD62E11007211D2 /* Checksum.swift in Sources */,
+				451D9A162167AA8E0093703D /* FileSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +416,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451D9A1B2167AEE40093703D /* FileSourceTests.swift in Sources */,
 				4506A6771DD62DA5007211D2 /* ChecksumTests.swift in Sources */,
+				451D9A222167B9F40093703D /* HTTPSourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +426,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451D9A1E2167B1200093703D /* HTTPSource.swift in Sources */,
+				451D9A112167A9280093703D /* Source.swift in Sources */,
 				45912D3521677E96008D0E08 /* Checksum.swift in Sources */,
+				451D9A172167AA8E0093703D /* FileSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,7 +437,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451D9A1F2167B1200093703D /* HTTPSource.swift in Sources */,
+				451D9A122167A9280093703D /* Source.swift in Sources */,
 				45912D3621677E96008D0E08 /* Checksum.swift in Sources */,
+				451D9A182167AA8E0093703D /* FileSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +448,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451D9A202167B1200093703D /* HTTPSource.swift in Sources */,
+				451D9A132167A9280093703D /* Source.swift in Sources */,
 				45912D3721677E97008D0E08 /* Checksum.swift in Sources */,
+				451D9A192167AA8E0093703D /* FileSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,38 +33,76 @@ Extends `String`, `Data`, and `URL` to easily and efficiently calculate large co
 
 ### Examples
 
-#### Synchronous usage:
+#### Calculating the MD5 checksum of a string:
+
+```swift
+let string = "Just a simple string"
+
+// Calculate MD5 checksum
+if let checksum = string.checksum(algorithm: .md5) {
+    // Use computed checksum
+}
+```
+
+#### Calculating the MD5 of some data synchronously:
+
+```swift
+let data = Data(...) // some data object
+
+// Calculate MD5 checksum
+if let checksum = data.checksum(algorithm: .md5) {
+    // Use computed checksum
+}
+```
+
+#### Calculating the MD5 of some data asynchronously with progress reporting:
+
+```swift
+let data = Data(...) // some data object
+
+let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
+    print("Bytes processed: \(bytesProcessed), bytes total: \(totalBytes), bytes left: \(totalBytes - bytesProcessed)")
+}
+
+// Calculate MD5 checksum asynchronously
+data.checksum(algorithm: .md5, progress: progress) { (checksum) in
+    if let checksum = checksum {
+        print("md5 checksum of \(imageURL) is \(checksum)"
+    } else {
+        print("Unable to obtain checksum.")
+    }
+}
+```
+
+#### Calculating the SHA256 checksum of a local file synchronously:
 
 ```swift
   if let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg") {
-    // Calculate image file checksum using MD5 digest
-    if let checksum = imageURL.checksum(algorithm: .md5) {
+    // Calculate image SHA256 checksum
+    if let checksum = imageURL.checksum(algorithm: .sha256) {
         // Use computed checksum
     }
   }
 ```
 
-#### Asynchronous usage:
+#### Calculating the SHA256 checksum of a remote file asynchronously with progress reporting:
 
 ```swift
-  let progress: ProgressHandler = { (bytesProcessed, bytesLeft) in
-    print("Bytes processed: \(bytesProcessed), bytes left: \(bytesLeft)"
+  let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
+      print("Bytes processed: \(bytesProcessed), bytes total: \(totalBytes), bytes left: \(totalBytes - bytesProcessed)")
   }
 
-  if let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg") {
-      imageURL.checksum(algorithm: .md5, progress: progress) { (checksum) in
+  if let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg") {
+      // Calculate image SHA256 checksum asynchronously with progress reporting
+      imageURL.checksum(algorithm: .sha256, progress: progress) { (checksum) in
           if let checksum = checksum {
-            print("md5 checksum of \(remoteImageURL) is \(checksum)"
+            print("md5 checksum of \(imageURL) is \(checksum)"
           } else {
             print("Unable to obtain checksum.")
           }
       }
   }
 ```
-
-### TO-DO
-
-Efficiently handle checksum calculation of large files without loading entire contents into memory or using mapped memory (which is restricted to local files only anyway.)
 
 ### Requirements
 

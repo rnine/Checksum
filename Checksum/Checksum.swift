@@ -13,7 +13,6 @@ public typealias CompletionHandler = (_ checksum: String?) -> Void
 public typealias ProgressHandler = (_ bytesProcessed: Int, _ totalBytes: Int) -> Void
 
 public enum DigestAlgorithm {
-
     case md5
     case sha1
     case sha224
@@ -22,7 +21,6 @@ public enum DigestAlgorithm {
     case sha512
 
     public var digestLength: Int {
-
         switch self {
         case .md5: return Int(CC_MD5_DIGEST_LENGTH)
         case .sha1: return Int(CC_SHA1_DIGEST_LENGTH)
@@ -42,24 +40,6 @@ public let defaultChunkSize: Int = 4096
 public extension URL {
 
     /**
-        Returns a checksum of the file's content referenced by this URL using the specified digest algorithm.
-
-        - Parameter algorithm: The digest algorithm to use.
-        - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
-     
-        - Note: For large local files or remote resources, you may want to try `checksum(algorithm:chunkSize:queue:progressHandler:completionHandler:)` instead.
-        - SeeAlso: `checksum(algorithm:chunkSize:queue:progressHandler:completionHandler:)`
-
-        - Returns: *(optional)* A String with the computed checksum.
-     */
-    func checksum(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) -> String? {
-
-        guard let data = try? Data(contentsOf: self, options: .mappedIfSafe) else { return nil }
-
-        return data.checksum(algorithm: algorithm, chunkSize: chunkSize)
-    }
-
-    /**
         Asynchronously returns a checksum of the file's content referenced by this URL using the specified digest algorithm.
 
         - Parameter algorithm: The digest algorithm to use.
@@ -70,17 +50,16 @@ public extension URL {
      */
     func checksum(algorithm: DigestAlgorithm,
                   chunkSize: Int = defaultChunkSize,
-                  queue: DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background),
+                  queue: DispatchQueue = DispatchQueue.global(qos: .background),
                   progress: ProgressHandler?,
                   completion: @escaping CompletionHandler) {
+        guard let stream = URLContentStreamer(url: self) else { return }
 
-        guard let data = try? Data(contentsOf: self, options: .mappedIfSafe) else { return }
-
-        data.checksum(algorithm: algorithm,
-                      chunkSize: chunkSize,
-                      queue: queue,
-                      progress: progress,
-                      completion: completion)
+        stream.checksum(algorithm: algorithm,
+                        chunkSize: chunkSize,
+                        queue: queue,
+                        progress: progress,
+                        completion: completion)
     }
 }
 
@@ -95,7 +74,6 @@ public extension String {
         - Returns: *(optional)* A String with the computed checksum.
      */
     func checksum(algorithm: DigestAlgorithm) -> String? {
-
         if let data = data(using: .utf8) {
             return data.checksum(algorithm: algorithm)
         } else {
@@ -116,7 +94,6 @@ public extension Data {
         - Returns: *(optional)* A String with the computed checksum.
      */
     func checksum(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) -> String? {
-
         let cc = CCWrapper(algorithm: algorithm)
         var bytesLeft = count
 
@@ -151,7 +128,6 @@ public extension Data {
                   queue: DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background),
                   progress: ProgressHandler?,
                   completion: @escaping CompletionHandler) {
-
         queue.async {
             let cc = CCWrapper(algorithm: algorithm)
             let totalBytes = self.count
@@ -186,9 +162,65 @@ public extension Data {
 }
 
 
+final private class URLContentStreamer {
+
+    private let source: Source
+    private let availableSources: [Source.Type] = [FileSource.self, HTTPSource.self]
+
+
+    init?(url: URL) {
+        guard let urlScheme = url.scheme else { return nil }
+        guard let sourceType = (availableSources.first { $0.schemes.contains(urlScheme) }) else { return nil }
+
+        if let source = sourceType.init(url: url) {
+            self.source = source
+        } else {
+            return nil
+        }
+    }
+
+    func checksum(algorithm: DigestAlgorithm,
+                  chunkSize: Int = defaultChunkSize,
+                  queue: DispatchQueue = .global(qos: .background),
+                  progress: ProgressHandler?,
+                  completion: @escaping CompletionHandler) {
+        queue.async {
+            let cc = CCWrapper(algorithm: algorithm)
+            let totalBytes = self.source.size
+            var bytesLeft = totalBytes
+
+            while !self.source.eof() {
+                guard let data = self.source.read(amount: chunkSize) else { break }
+
+                data.withUnsafeBytes { (u8Ptr: UnsafePointer<UInt8>) in
+                    var uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
+
+                    cc.update(data: uMutablePtr, length: CC_LONG(data.count))
+
+                    bytesLeft -= data.count
+                    uMutablePtr += data.count
+
+                    let actualBytesLeft = bytesLeft
+
+                    DispatchQueue.main.async {
+                        progress?(totalBytes - actualBytesLeft, totalBytes)
+                    }
+                }
+            }
+
+            cc.final()
+
+            DispatchQueue.main.async {
+                completion(cc.hexString())
+            }
+        }
+    }
+}
+
+
 // MARK: - CCWrapper (for internal use)
 
-private class CCWrapper {
+final private class CCWrapper {
 
     private typealias CC_XXX_Update = (UnsafeRawPointer, CC_LONG) -> Void
     private typealias CC_XXX_Final = (UnsafeMutablePointer<UInt8>) -> Void
@@ -205,7 +237,6 @@ private class CCWrapper {
 
 
     init(algorithm: DigestAlgorithm) {
-
         self.algorithm = algorithm
 
         switch algorithm {
@@ -267,18 +298,15 @@ private class CCWrapper {
     }
 
     deinit {
-
         digest?.deinitialize(count: algorithm.digestLength)
         digest?.deallocate()
     }
 
     func update(data: UnsafeMutableRawPointer, length: CC_LONG) {
-
         updateFun?(data, length)
     }
 
     func final() {
-
         // We already got a digest, return early
         guard digest == nil else { return }
 
@@ -290,7 +318,6 @@ private class CCWrapper {
     }
 
     func hexString() -> String? {
-
         // We DON'T have a digest YET, return early
         guard let digest = digest else { return nil }
 
