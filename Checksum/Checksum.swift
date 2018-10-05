@@ -34,7 +34,7 @@ public enum DigestAlgorithm {
     }
 }
 
-private let defaultChunkSize: Int = 4096
+public let defaultChunkSize: Int = 4096
 
 
 // MARK: - Public Extensions
@@ -267,7 +267,8 @@ private class CCWrapper {
 
     deinit {
 
-        digest?.deallocate(capacity: algorithm.digestLength)
+        digest?.deinitialize(count: algorithm.digestLength)
+        digest?.deallocate()
     }
 
     func update(data: UnsafeMutableRawPointer, length: CC_LONG) {

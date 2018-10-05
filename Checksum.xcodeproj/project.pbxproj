@@ -10,7 +10,6 @@
 		4506A6721DD62DA5007211D2 /* Checksum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4506A6681DD62DA5007211D2 /* Checksum.framework */; };
 		4506A6771DD62DA5007211D2 /* ChecksumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6761DD62DA5007211D2 /* ChecksumTests.swift */; };
 		4506A6791DD62DA5007211D2 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 4506A66B1DD62DA5007211D2 /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4506A6941DD62DFB007211D2 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4506A68B1DD62DE3007211D2 /* CommonCrypto.framework */; };
 		4506A6961DD62E11007211D2 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
 		4506A6B11DD63B14007211D2 /* basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4506A6B01DD63B14007211D2 /* basic.txt */; };
 		4529D3A61DD6406000AE9FB1 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4529D3A51DD6406000AE9FB1 /* image.jpg */; };
@@ -24,41 +23,6 @@
 			remoteGlobalIDString = 4506A6671DD62DA5007211D2;
 			remoteInfo = CryptoHash;
 		};
-		4506A68A1DD62DE3007211D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4506A6831DD62DE2007211D2 /* CommonCrypto.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 211216831AE68D26004E1CE6;
-			remoteInfo = "CommonCrypto-macOS";
-		};
-		4506A68C1DD62DE3007211D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4506A6831DD62DE2007211D2 /* CommonCrypto.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 216CAE341AE6B273009A69EF;
-			remoteInfo = "CommonCrypto-iOS";
-		};
-		4506A68E1DD62DE3007211D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4506A6831DD62DE2007211D2 /* CommonCrypto.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 804503281BA209F6002A5470;
-			remoteInfo = "CommonCrypto-watchOS";
-		};
-		4506A6901DD62DE3007211D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4506A6831DD62DE2007211D2 /* CommonCrypto.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 80098A511C12E5890029C530;
-			remoteInfo = "CommonCrypto-tvOS";
-		};
-		4506A6921DD62DF2007211D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4506A6831DD62DE2007211D2 /* CommonCrypto.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 211216821AE68D26004E1CE6;
-			remoteInfo = "CommonCrypto-macOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -68,7 +32,6 @@
 		4506A6711DD62DA5007211D2 /* ChecksumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChecksumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4506A6761DD62DA5007211D2 /* ChecksumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecksumTests.swift; sourceTree = "<group>"; };
 		4506A6781DD62DA5007211D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4506A6831DD62DE2007211D2 /* CommonCrypto.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommonCrypto.xcodeproj; path = Carthage/Checkouts/CommonCrypto/CommonCrypto.xcodeproj; sourceTree = "<group>"; };
 		4506A6951DD62E11007211D2 /* Checksum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checksum.swift; sourceTree = "<group>"; };
 		4506A6B01DD63B14007211D2 /* basic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = basic.txt; path = Fixtures/basic.txt; sourceTree = "<group>"; };
 		4529D3A51DD6406000AE9FB1 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image.jpg; path = Fixtures/image.jpg; sourceTree = "<group>"; };
@@ -79,7 +42,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4506A6941DD62DFB007211D2 /* CommonCrypto.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +61,6 @@
 			children = (
 				4506A66A1DD62DA5007211D2 /* Checksum */,
 				4506A6751DD62DA5007211D2 /* ChecksumTests */,
-				4506A6821DD62DD6007211D2 /* External Dependencies */,
 				4506A6691DD62DA5007211D2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,25 +92,6 @@
 				4506A6781DD62DA5007211D2 /* Info.plist */,
 			);
 			path = ChecksumTests;
-			sourceTree = "<group>";
-		};
-		4506A6821DD62DD6007211D2 /* External Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				4506A6831DD62DE2007211D2 /* CommonCrypto.xcodeproj */,
-			);
-			name = "External Dependencies";
-			sourceTree = "<group>";
-		};
-		4506A6841DD62DE2007211D2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4506A68B1DD62DE3007211D2 /* CommonCrypto.framework */,
-				4506A68D1DD62DE3007211D2 /* CommonCrypto.framework */,
-				4506A68F1DD62DE3007211D2 /* CommonCrypto.framework */,
-				4506A6911DD62DE3007211D2 /* CommonCrypto.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		4506A6AF1DD63AE4007211D2 /* Fixtures */ = {
@@ -187,7 +129,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4506A6931DD62DF2007211D2 /* PBXTargetDependency */,
 			);
 			name = Checksum;
 			productName = CryptoHash;
@@ -219,7 +160,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = 9Labs;
 				TargetAttributes = {
 					4506A6671DD62DA5007211D2 = {
@@ -246,12 +187,6 @@
 			mainGroup = 4506A65E1DD62DA5007211D2;
 			productRefGroup = 4506A6691DD62DA5007211D2 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 4506A6841DD62DE2007211D2 /* Products */;
-					ProjectRef = 4506A6831DD62DE2007211D2 /* CommonCrypto.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				4506A6671DD62DA5007211D2 /* Checksum */,
@@ -259,37 +194,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		4506A68B1DD62DE3007211D2 /* CommonCrypto.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CommonCrypto.framework;
-			remoteRef = 4506A68A1DD62DE3007211D2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4506A68D1DD62DE3007211D2 /* CommonCrypto.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CommonCrypto.framework;
-			remoteRef = 4506A68C1DD62DE3007211D2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4506A68F1DD62DE3007211D2 /* CommonCrypto.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CommonCrypto.framework;
-			remoteRef = 4506A68E1DD62DE3007211D2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4506A6911DD62DE3007211D2 /* CommonCrypto.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CommonCrypto.framework;
-			remoteRef = 4506A6901DD62DE3007211D2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4506A6661DD62DA5007211D2 /* Resources */ = {
@@ -335,11 +239,6 @@
 			target = 4506A6671DD62DA5007211D2 /* Checksum */;
 			targetProxy = 4506A6731DD62DA5007211D2 /* PBXContainerItemProxy */;
 		};
-		4506A6931DD62DF2007211D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CommonCrypto-macOS";
-			targetProxy = 4506A6921DD62DF2007211D2 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -352,15 +251,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -391,6 +298,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -405,15 +313,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -436,6 +352,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -461,7 +378,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -484,7 +400,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -498,7 +413,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.ChecksumTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -512,7 +426,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.ChecksumTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
