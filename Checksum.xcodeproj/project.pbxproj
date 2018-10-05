@@ -117,9 +117,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4506A6671DD62DA5007211D2 /* Checksum */ = {
+		4506A6671DD62DA5007211D2 /* Checksum-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4506A67C1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum" */;
+			buildConfigurationList = 4506A67C1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum-macOS" */;
 			buildPhases = (
 				4506A6631DD62DA5007211D2 /* Sources */,
 				4506A6641DD62DA5007211D2 /* Frameworks */,
@@ -130,7 +130,7 @@
 			);
 			dependencies = (
 			);
-			name = Checksum;
+			name = "Checksum-macOS";
 			productName = CryptoHash;
 			productReference = 4506A6681DD62DA5007211D2 /* Checksum.framework */;
 			productType = "com.apple.product-type.framework";
@@ -189,7 +189,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4506A6671DD62DA5007211D2 /* Checksum */,
+				4506A6671DD62DA5007211D2 /* Checksum-macOS */,
 				4506A6701DD62DA5007211D2 /* ChecksumTests */,
 			);
 		};
@@ -236,7 +236,7 @@
 /* Begin PBXTargetDependency section */
 		4506A6741DD62DA5007211D2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4506A6671DD62DA5007211D2 /* Checksum */;
+			target = 4506A6671DD62DA5007211D2 /* Checksum-macOS */;
 			targetProxy = 4506A6731DD62DA5007211D2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -375,7 +375,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LLVM_LTO = YES_THIN;
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Checksum;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -398,7 +398,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LLVM_LTO = YES_THIN;
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Checksum;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -441,7 +441,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4506A67C1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum" */ = {
+		4506A67C1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4506A67D1DD62DA5007211D2 /* Debug */,
