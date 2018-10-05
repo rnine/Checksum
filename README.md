@@ -66,7 +66,7 @@ let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
 // Calculate MD5 checksum asynchronously
 data.checksum(algorithm: .md5, progress: progress) { (checksum) in
     if let checksum = checksum {
-        print("md5 checksum of \(imageURL) is \(checksum)"
+        print("MD5 checksum of \(imageURL) is \(checksum)"
     } else {
         print("Unable to obtain checksum.")
     }
@@ -95,7 +95,7 @@ data.checksum(algorithm: .md5, progress: progress) { (checksum) in
       // Calculate image SHA256 checksum asynchronously with progress reporting
       imageURL.checksum(algorithm: .sha256, progress: progress) { (checksum) in
           if let checksum = checksum {
-            print("md5 checksum of \(imageURL) is \(checksum)"
+            print("SHA256 checksum of \(imageURL) is \(checksum)"
           } else {
             print("Unable to obtain checksum.")
           }
