@@ -13,6 +13,12 @@
 		4506A6961DD62E11007211D2 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
 		4506A6B11DD63B14007211D2 /* basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4506A6B01DD63B14007211D2 /* basic.txt */; };
 		4529D3A61DD6406000AE9FB1 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4529D3A51DD6406000AE9FB1 /* image.jpg */; };
+		45912D3521677E96008D0E08 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
+		45912D3621677E96008D0E08 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
+		45912D3721677E97008D0E08 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
+		45912D3821677E9B008D0E08 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 4506A66B1DD62DA5007211D2 /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45912D3921677E9E008D0E08 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 4506A66B1DD62DA5007211D2 /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45912D3A21677EA0008D0E08 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 4506A66B1DD62DA5007211D2 /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +41,9 @@
 		4506A6951DD62E11007211D2 /* Checksum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checksum.swift; sourceTree = "<group>"; };
 		4506A6B01DD63B14007211D2 /* basic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = basic.txt; path = Fixtures/basic.txt; sourceTree = "<group>"; };
 		4529D3A51DD6406000AE9FB1 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image.jpg; path = Fixtures/image.jpg; sourceTree = "<group>"; };
+		45912D0921677CD4008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45912D2021677DBD008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45912D2D21677E75008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +59,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				4506A6721DD62DA5007211D2 /* Checksum.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D0621677CD4008D0E08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D1D21677DBD008D0E08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D2A21677E75008D0E08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +100,9 @@
 			children = (
 				4506A6681DD62DA5007211D2 /* Checksum.framework */,
 				4506A6711DD62DA5007211D2 /* ChecksumTests.xctest */,
+				45912D0921677CD4008D0E08 /* Checksum.framework */,
+				45912D2021677DBD008D0E08 /* Checksum.framework */,
+				45912D2D21677E75008D0E08 /* Checksum.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,6 +147,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45912D0421677CD4008D0E08 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45912D3821677E9B008D0E08 /* Checksum.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D1B21677DBD008D0E08 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45912D3921677E9E008D0E08 /* Checksum.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D2821677E75008D0E08 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45912D3A21677EA0008D0E08 /* Checksum.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -153,6 +210,60 @@
 			productReference = 4506A6711DD62DA5007211D2 /* ChecksumTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		45912D0821677CD4008D0E08 /* Checksum-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45912D0E21677CD4008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-iOS" */;
+			buildPhases = (
+				45912D0421677CD4008D0E08 /* Headers */,
+				45912D0521677CD4008D0E08 /* Sources */,
+				45912D0621677CD4008D0E08 /* Frameworks */,
+				45912D0721677CD4008D0E08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Checksum-iOS";
+			productName = "Checksum-iOS";
+			productReference = 45912D0921677CD4008D0E08 /* Checksum.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		45912D1F21677DBD008D0E08 /* Checksum-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45912D2521677DBD008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-tvOS" */;
+			buildPhases = (
+				45912D1B21677DBD008D0E08 /* Headers */,
+				45912D1C21677DBD008D0E08 /* Sources */,
+				45912D1D21677DBD008D0E08 /* Frameworks */,
+				45912D1E21677DBD008D0E08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Checksum-tvOS";
+			productName = "Checksum-tvOS";
+			productReference = 45912D2021677DBD008D0E08 /* Checksum.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		45912D2C21677E75008D0E08 /* Checksum-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45912D3221677E75008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-watchOS" */;
+			buildPhases = (
+				45912D2821677E75008D0E08 /* Headers */,
+				45912D2921677E75008D0E08 /* Sources */,
+				45912D2A21677E75008D0E08 /* Frameworks */,
+				45912D2B21677E75008D0E08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Checksum-watchOS";
+			productName = "Checksum-watchOS";
+			productReference = 45912D2D21677E75008D0E08 /* Checksum.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -174,6 +285,21 @@
 						DevelopmentTeam = ZBJR46PSPF;
 						ProvisioningStyle = Automatic;
 					};
+					45912D0821677CD4008D0E08 = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = ZBJR46PSPF;
+						ProvisioningStyle = Automatic;
+					};
+					45912D1F21677DBD008D0E08 = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = ZBJR46PSPF;
+						ProvisioningStyle = Automatic;
+					};
+					45912D2C21677E75008D0E08 = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = ZBJR46PSPF;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 4506A6621DD62DA5007211D2 /* Build configuration list for PBXProject "Checksum" */;
@@ -190,6 +316,9 @@
 			projectRoot = "";
 			targets = (
 				4506A6671DD62DA5007211D2 /* Checksum-macOS */,
+				45912D0821677CD4008D0E08 /* Checksum-iOS */,
+				45912D1F21677DBD008D0E08 /* Checksum-tvOS */,
+				45912D2C21677E75008D0E08 /* Checksum-watchOS */,
 				4506A6701DD62DA5007211D2 /* ChecksumTests */,
 			);
 		};
@@ -212,6 +341,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45912D0721677CD4008D0E08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D1E21677DBD008D0E08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D2B21677E75008D0E08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -228,6 +378,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				4506A6771DD62DA5007211D2 /* ChecksumTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D0521677CD4008D0E08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45912D3521677E96008D0E08 /* Checksum.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D1C21677DBD008D0E08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45912D3621677E96008D0E08 /* Checksum.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45912D2921677E75008D0E08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45912D3721677E97008D0E08 /* Checksum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +603,188 @@
 			};
 			name = Release;
 		};
+		45912D0F21677CD4008D0E08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZBJR46PSPF;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Checksum/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
+				PRODUCT_NAME = Checksum;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		45912D1021677CD4008D0E08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZBJR46PSPF;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Checksum/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
+				PRODUCT_NAME = Checksum;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		45912D2621677DBD008D0E08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZBJR46PSPF;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Checksum/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
+				PRODUCT_NAME = Checksum;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+			};
+			name = Debug;
+		};
+		45912D2721677DBD008D0E08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZBJR46PSPF;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Checksum/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
+				PRODUCT_NAME = Checksum;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		45912D3321677E75008D0E08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZBJR46PSPF;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Checksum/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
+				PRODUCT_NAME = Checksum;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Debug;
+		};
+		45912D3421677E75008D0E08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZBJR46PSPF;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Checksum/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
+				PRODUCT_NAME = Checksum;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -455,6 +811,33 @@
 			buildConfigurations = (
 				4506A6801DD62DA5007211D2 /* Debug */,
 				4506A6811DD62DA5007211D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45912D0E21677CD4008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45912D0F21677CD4008D0E08 /* Debug */,
+				45912D1021677CD4008D0E08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45912D2521677DBD008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45912D2621677DBD008D0E08 /* Debug */,
+				45912D2721677DBD008D0E08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45912D3221677E75008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45912D3321677E75008D0E08 /* Debug */,
+				45912D3421677E75008D0E08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

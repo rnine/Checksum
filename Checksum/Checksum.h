@@ -6,7 +6,7 @@
 //  Copyright © 2016 9Labs. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Checksum.
 FOUNDATION_EXPORT double ChecksumVersionNumber;
