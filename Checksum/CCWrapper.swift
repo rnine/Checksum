@@ -1,6 +1,6 @@
 //
 //  CCWrapper.swift
-//  Checksum-macOS
+//  Checksum
 //
 //  Created by Ruben Nine on 12/5/18.
 //  Copyright © 2018 9Labs. All rights reserved.
