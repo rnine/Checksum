@@ -7,6 +7,8 @@
 
 Extends `String`, `Data`, and `URL` to easily and efficiently calculate large file content checksums synchronously and asynchronously with optional progress reporting.
 
+Support for calculating checksums of arrays of `Data` and `URL` is also included and showcased in the examples below.
+
 #### String
 
 - `checksum(algorithm:)`
@@ -18,6 +20,10 @@ Extends `String`, `Data`, and `URL` to easily and efficiently calculate large fi
 #### URL
 
 - `checksum(algorithm:chunkSize:)`
+- `checksum(algorithm:chunkSize:queue:progress:completion:)`
+
+#### Data & URL arrays
+
 - `checksum(algorithm:chunkSize:queue:progress:completion:)`
 
 ### Supported digests:
@@ -32,7 +38,7 @@ Extends `String`, `Data`, and `URL` to easily and efficiently calculate large fi
 
 ### Examples
 
-#### Calculating the MD5 checksum of a string:
+#### Calculating the checksum of a string:
 
 ```swift
 let string = "Just a simple string"
@@ -43,7 +49,7 @@ if let checksum = string.checksum(algorithm: .md5) {
 }
 ```
 
-#### Calculating the MD5 of some data synchronously:
+#### Calculating the checksum of some data synchronously:
 
 ```swift
 let data = Data(...) // some data object
@@ -54,7 +60,7 @@ if let checksum = data.checksum(algorithm: .md5) {
 }
 ```
 
-#### Calculating the MD5 of some data asynchronously with progress reporting:
+#### Calculating the checksum of some data asynchronously with progress reporting:
 
 ```swift
 let data = Data(...) // some data object
@@ -73,7 +79,7 @@ data.checksum(algorithm: .md5, progress: progress) { (checksum) in
 }
 ```
 
-#### Calculating the SHA256 checksum of a local file synchronously:
+#### Calculating the checksum of a local file synchronously:
 
 ```swift
   if let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg") {
@@ -84,7 +90,7 @@ data.checksum(algorithm: .md5, progress: progress) { (checksum) in
   }
 ```
 
-#### Calculating the SHA256 checksum of a remote file asynchronously with progress reporting:
+#### Calculating the checksum of a remote file asynchronously with progress reporting:
 
 ```swift
   let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
@@ -100,6 +106,42 @@ data.checksum(algorithm: .md5, progress: progress) { (checksum) in
             print("Unable to obtain checksum.")
           }
       }
+  }
+```
+
+#### Calculating checksums of the contents of multiple URLs:
+
+*(Added in beta1)*
+
+```swift
+  let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
+      print("Bytes processed: \(bytesProcessed), bytes total: \(totalBytes), bytes left: \(totalBytes - bytesProcessed)")
+  }
+
+  let urls = [someURL, anotherURL, yetAnotherURL, oneFinalURL]
+  
+  urls.checksum(algorithm: .md5, progress: progress) { (checksums) in
+      // Please notice that `checksums` is returned with the checksums of the contents  of the URLs 
+      // in our `urls` array exactly in the same order.
+      // TODO: Add your handling code here.
+  }
+```
+
+#### Calculating checksums of multiple Data objects:
+
+*(Added in beta1)*
+
+```swift
+  let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
+      print("Bytes processed: \(bytesProcessed), bytes total: \(totalBytes), bytes left: \(totalBytes - bytesProcessed)")
+  }
+
+  let dataObjects = [someData, anotherData, yetAnotherData, oneFinalData]
+  
+  dataObjects.checksum(algorithm: .md5, progress: progress) { (checksums) in
+      // `checksums` is returned with the checksums of the data objects in our `dataObjects` array 
+      // exactly in the same order.
+      // TODO: Add your handling code here.
   }
 ```
 
