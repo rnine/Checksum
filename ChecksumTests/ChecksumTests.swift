@@ -33,7 +33,6 @@ class ChecksumTests: XCTestCase {
 
 
     func testMD5() {
-
         let algorithm: DigestAlgorithm = .md5
         let data = basicString.data(using: .utf8)!
         let expectedHash = "0f13e02ea41fb763b0ad09daa72a4b6e"
@@ -80,6 +79,41 @@ class ChecksumTests: XCTestCase {
 
         waitForExpectations(timeout: 20)
     }
+
+    func testMultipleAsyncLocalURLs() {
+        var expectations: [XCTestExpectation] = []
+
+        let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
+        let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
+        let textRemoteURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/basic.txt")!
+        let imageRemoteURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg")!
+        let invalidURL = URL(string: "file://invalidpath")!
+        let invalidProtocolURL = URL(string: "invalidProtocol://invalidpath")!
+        let unexistingRemoteURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/unexistingFile.txt")!
+        let urls = [textURL, imageURL, invalidProtocolURL, textRemoteURL, imageRemoteURL, invalidURL, unexistingRemoteURL]
+
+        let expect = expectation(description: "completion")
+        expectations.append(expect)
+
+        let progress: ProgressHandler = { bytesProcessed, totalBytes in
+            print("bytesProcessed = \(bytesProcessed), totalBytes = \(totalBytes)")
+        }
+
+        urls.checksum(algorithm: .md5, progress: progress) { (checksums) in
+            XCTAssertEqual(checksums[0], self.basicTextChecksums[.md5])
+            XCTAssertEqual(checksums[1], self.imageChecksums[.md5])
+            XCTAssertEqual(checksums[2], nil)
+            XCTAssertEqual(checksums[3], self.basicTextChecksums[.md5])
+            XCTAssertEqual(checksums[4], self.imageChecksums[.md5])
+            XCTAssertEqual(checksums[5], nil)
+            XCTAssertEqual(checksums[6], nil)
+
+            expect.fulfill()
+        }
+
+        waitForExpectations(timeout: 20)
+    }
+
 
     func testAsyncRemoteTextURL() {
         var expectations: [XCTestExpectation] = []

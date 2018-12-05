@@ -27,6 +27,18 @@
 		451D9A202167B1200093703D /* HTTPSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A1C2167B1200093703D /* HTTPSource.swift */; };
 		451D9A222167B9F40093703D /* HTTPSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A212167B9F40093703D /* HTTPSourceTests.swift */; };
 		4529D3A61DD6406000AE9FB1 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4529D3A51DD6406000AE9FB1 /* image.jpg */; };
+		4542561821B7D46400EA4538 /* CCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561721B7D46400EA4538 /* CCWrapper.swift */; };
+		4542561921B7D46F00EA4538 /* CCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561721B7D46400EA4538 /* CCWrapper.swift */; };
+		4542561A21B7D46F00EA4538 /* CCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561721B7D46400EA4538 /* CCWrapper.swift */; };
+		4542561B21B7D47000EA4538 /* CCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561721B7D46400EA4538 /* CCWrapper.swift */; };
+		4542561D21B7D51A00EA4538 /* URLContentStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561C21B7D51A00EA4538 /* URLContentStreamer.swift */; };
+		4542561E21B7D51A00EA4538 /* URLContentStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561C21B7D51A00EA4538 /* URLContentStreamer.swift */; };
+		4542561F21B7D51A00EA4538 /* URLContentStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561C21B7D51A00EA4538 /* URLContentStreamer.swift */; };
+		4542562021B7D51A00EA4538 /* URLContentStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561C21B7D51A00EA4538 /* URLContentStreamer.swift */; };
+		4542562321B7D54600EA4538 /* DigestAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542562221B7D54600EA4538 /* DigestAlgorithm.swift */; };
+		4542562421B7D54600EA4538 /* DigestAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542562221B7D54600EA4538 /* DigestAlgorithm.swift */; };
+		4542562521B7D54600EA4538 /* DigestAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542562221B7D54600EA4538 /* DigestAlgorithm.swift */; };
+		4542562621B7D54600EA4538 /* DigestAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542562221B7D54600EA4538 /* DigestAlgorithm.swift */; };
 		45912D3521677E96008D0E08 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
 		45912D3621677E96008D0E08 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
 		45912D3721677E97008D0E08 /* Checksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Checksum.swift */; };
@@ -60,6 +72,9 @@
 		451D9A1C2167B1200093703D /* HTTPSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSource.swift; sourceTree = "<group>"; };
 		451D9A212167B9F40093703D /* HTTPSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSourceTests.swift; sourceTree = "<group>"; };
 		4529D3A51DD6406000AE9FB1 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image.jpg; path = Fixtures/image.jpg; sourceTree = "<group>"; };
+		4542561721B7D46400EA4538 /* CCWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCWrapper.swift; sourceTree = "<group>"; };
+		4542561C21B7D51A00EA4538 /* URLContentStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLContentStreamer.swift; sourceTree = "<group>"; };
+		4542562221B7D54600EA4538 /* DigestAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigestAlgorithm.swift; sourceTree = "<group>"; };
 		45912D0921677CD4008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45912D2021677DBD008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45912D2D21677E75008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +146,10 @@
 			children = (
 				4506A66B1DD62DA5007211D2 /* Checksum.h */,
 				4506A66C1DD62DA5007211D2 /* Info.plist */,
+				4542561721B7D46400EA4538 /* CCWrapper.swift */,
 				4506A6951DD62E11007211D2 /* Checksum.swift */,
+				4542561C21B7D51A00EA4538 /* URLContentStreamer.swift */,
+				4542562121B7D54000EA4538 /* Enums */,
 				451D9A232167BCBC0093703D /* Protocols */,
 				451D9A142167AA5A0093703D /* Sources */,
 			);
@@ -174,6 +192,14 @@
 				451D9A0F2167A9280093703D /* Source.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4542562121B7D54000EA4538 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				4542562221B7D54600EA4538 /* DigestAlgorithm.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,7 +337,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = 9Labs;
 				TargetAttributes = {
 					4506A6671DD62DA5007211D2 = {
@@ -406,8 +432,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				451D9A1D2167B1200093703D /* HTTPSource.swift in Sources */,
+				4542561821B7D46400EA4538 /* CCWrapper.swift in Sources */,
+				4542562321B7D54600EA4538 /* DigestAlgorithm.swift in Sources */,
 				451D9A102167A9280093703D /* Source.swift in Sources */,
 				4506A6961DD62E11007211D2 /* Checksum.swift in Sources */,
+				4542561D21B7D51A00EA4538 /* URLContentStreamer.swift in Sources */,
 				451D9A162167AA8E0093703D /* FileSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,8 +456,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				451D9A1E2167B1200093703D /* HTTPSource.swift in Sources */,
+				4542561B21B7D47000EA4538 /* CCWrapper.swift in Sources */,
+				4542562421B7D54600EA4538 /* DigestAlgorithm.swift in Sources */,
 				451D9A112167A9280093703D /* Source.swift in Sources */,
 				45912D3521677E96008D0E08 /* Checksum.swift in Sources */,
+				4542561E21B7D51A00EA4538 /* URLContentStreamer.swift in Sources */,
 				451D9A172167AA8E0093703D /* FileSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,8 +470,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				451D9A1F2167B1200093703D /* HTTPSource.swift in Sources */,
+				4542561A21B7D46F00EA4538 /* CCWrapper.swift in Sources */,
+				4542562521B7D54600EA4538 /* DigestAlgorithm.swift in Sources */,
 				451D9A122167A9280093703D /* Source.swift in Sources */,
 				45912D3621677E96008D0E08 /* Checksum.swift in Sources */,
+				4542561F21B7D51A00EA4538 /* URLContentStreamer.swift in Sources */,
 				451D9A182167AA8E0093703D /* FileSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,8 +484,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				451D9A202167B1200093703D /* HTTPSource.swift in Sources */,
+				4542561921B7D46F00EA4538 /* CCWrapper.swift in Sources */,
+				4542562621B7D54600EA4538 /* DigestAlgorithm.swift in Sources */,
 				451D9A132167A9280093703D /* Source.swift in Sources */,
 				45912D3721677E97008D0E08 /* Checksum.swift in Sources */,
+				4542562021B7D51A00EA4538 /* URLContentStreamer.swift in Sources */,
 				451D9A192167AA8E0093703D /* FileSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,6 +748,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -738,6 +777,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -767,6 +807,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -796,6 +837,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

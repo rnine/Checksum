@@ -7,53 +7,49 @@
 //
 
 import Foundation
-import CommonCrypto
+import CommonCrypto.CommonDigest
 
 public typealias CompletionHandler = (_ checksum: String?) -> Void
+public typealias MultipleCompletionHandler = (_ checksums: [String?]) -> Void
 public typealias ProgressHandler = (_ bytesProcessed: Int, _ totalBytes: Int) -> Void
 
-public enum DigestAlgorithm {
-    case md5
-    case sha1
-    case sha224
-    case sha256
-    case sha384
-    case sha512
-
-    public var digestLength: Int {
-        switch self {
-        case .md5: return Int(CC_MD5_DIGEST_LENGTH)
-        case .sha1: return Int(CC_SHA1_DIGEST_LENGTH)
-        case .sha224: return Int(CC_SHA224_DIGEST_LENGTH)
-        case .sha256: return Int(CC_SHA256_DIGEST_LENGTH)
-        case .sha384: return Int(CC_SHA384_DIGEST_LENGTH)
-        case .sha512: return Int(CC_SHA512_DIGEST_LENGTH)
-        }
-    }
+public struct Defaults {
+    /// Default chunk size (256Kb.)
+    public static let chunkSize: Int = 262144
+    /// Default dispatch queue to use by checksum calculations (global background.)
+    public static let dispatchQueue: DispatchQueue = DispatchQueue.global(qos: .background)
 }
 
-public let defaultChunkSize: Int = 262144 // 256Kb
+internal protocol Checksumable {
 
+    var hashValue: Int { get }
 
-// MARK: - Public Extensions
+    func checksum(algorithm: DigestAlgorithm, chunkSize: Int, queue: DispatchQueue, progress: ProgressHandler?, completion: @escaping CompletionHandler)
+}
 
-public extension URL {
+//
+// MARK: - URL Extension
+//
+extension URL {
 
-    /**
-        Asynchronously returns a checksum of the file's content referenced by this URL using the specified digest algorithm.
-
-        - Parameter algorithm: The digest algorithm to use.
-        - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
-        - Parameter queue: *(optional)* The dispatch queue used for processing.
-        - Parameter progress: *(optional)* The closure to call to signal progress.
-        - Parameter completion: The closure to call upon completion containing the checksum.
-     */
-    func checksum(algorithm: DigestAlgorithm,
-                  chunkSize: Int = defaultChunkSize,
-                  queue: DispatchQueue = DispatchQueue.global(qos: .background),
-                  progress: ProgressHandler?,
-                  completion: @escaping CompletionHandler) {
-        guard let stream = URLContentStreamer(url: self) else { return }
+    ///
+    /// Asynchronously returns a checksum of the file's content referenced by this URL using the specified digest algorithm.
+    ///
+    /// - Parameter algorithm: The digest algorithm to use.
+    /// - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
+    /// - Parameter queue: *(optional)* The dispatch queue used for processing.
+    /// - Parameter progress: *(optional)* The closure to call to signal progress.
+    /// - Parameter completion: The closure to call upon completion containing the checksum.
+    ///
+    public func checksum(algorithm: DigestAlgorithm,
+                chunkSize: Int = Defaults.chunkSize,
+                queue: DispatchQueue = Defaults.dispatchQueue,
+                progress: ProgressHandler?,
+                completion: @escaping CompletionHandler) {
+        guard let stream = URLContentStreamer(url: self) else {
+            completion(nil)
+            return
+        }
 
         stream.checksum(algorithm: algorithm,
                         chunkSize: chunkSize,
@@ -63,17 +59,18 @@ public extension URL {
     }
 }
 
+//
+// MARK: - String Extension
+//
+extension String {
 
-public extension String {
-
-    /**
-        Returns a checksum of the String's content using the specified digest algorithm.
-     
-        - Parameter algorithm: The digest algorithm to use.
-
-        - Returns: *(optional)* A String with the computed checksum.
-     */
-    func checksum(algorithm: DigestAlgorithm) -> String? {
+    ///
+    /// Returns a checksum of the String's content using the specified digest algorithm.
+    ///
+    /// - Parameter algorithm: The digest algorithm to use.
+    /// - Returns: *(optional)* A String with the computed checksum.
+    ///
+    public func checksum(algorithm: DigestAlgorithm) -> String? {
         if let data = data(using: .utf8) {
             return data.checksum(algorithm: algorithm)
         } else {
@@ -83,17 +80,17 @@ public extension String {
 }
 
 
-public extension Data {
+extension Data {
 
-    /**
-        Returns a checksum of the Data's content using the specified digest algorithm.
-
-        - Parameter algorithm: The digest algorithm to use.
-        - Parameter *(optional)* chunkSize: The internal buffer's size (mostly relevant for large file computing)
-
-        - Returns: *(optional)* A String with the computed checksum.
-     */
-    func checksum(algorithm: DigestAlgorithm, chunkSize: Int = defaultChunkSize) -> String? {
+    ///
+    /// Returns a checksum of the data's content using the specified digest algorithm.
+    ///
+    /// - Parameter algorithm: The digest algorithm to use.
+    /// - Parameter chunkSize: *(optional)* The internal buffer's size (mostly relevant for large file computing.)
+    ///
+    /// - Returns: *(optional)* A string with the computed checksum.
+    ///
+    public func checksum(algorithm: DigestAlgorithm, chunkSize: Int = Defaults.chunkSize) -> String? {
         let cc = CCWrapper(algorithm: algorithm)
         var bytesLeft = count
 
@@ -114,20 +111,20 @@ public extension Data {
         return cc.hexString()
     }
 
-    /**
-        Asynchronously returns a checksum of the Data's content using the specified digest algorithm.
-
-        - Parameter algorithm: The digest algorithm to use.
-        - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
-        - Parameter queue: *(optional)* The dispatch queue used for processing.
-        - Parameter progress: *(optional)* The closure to call to signal progress.
-        - Parameter completion: The closure to call upon completion containing the checksum.
-     */
-    func checksum(algorithm: DigestAlgorithm,
-                  chunkSize: Int = defaultChunkSize,
-                  queue: DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background),
-                  progress: ProgressHandler?,
-                  completion: @escaping CompletionHandler) {
+    ///
+    /// Asynchronously returns a checksum of the data's content using the specified digest algorithm.
+    ///
+    /// - Parameter algorithm: The digest algorithm to use.
+    /// - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
+    /// - Parameter queue: *(optional)* The dispatch queue used for processing.
+    /// - Parameter progress: *(optional)* The closure to call to signal progress.
+    /// - Parameter completion: The closure to call upon completion containing the checksum.
+    ///
+    public func checksum(algorithm: DigestAlgorithm,
+                         chunkSize: Int = Defaults.chunkSize,
+                         queue: DispatchQueue = Defaults.dispatchQueue,
+                         progress: ProgressHandler?,
+                         completion: @escaping CompletionHandler) {
         queue.async {
             let cc = CCWrapper(algorithm: algorithm)
             let totalBytes = self.count
@@ -161,172 +158,101 @@ public extension Data {
     }
 }
 
+private func collectionChecksum(for collection: [Checksumable],
+                                algorithm: DigestAlgorithm,
+                                chunkSize: Int = Defaults.chunkSize,
+                                queue: DispatchQueue = Defaults.dispatchQueue,
+                                progress: ProgressHandler?,
+                                completion: @escaping MultipleCompletionHandler) {
 
-final private class URLContentStreamer {
+    var checksumDict = [Int: String?]()
+    var progressHandlers = [Int: ProgressHandler]()
+    var stats = [Int: (bytesProcessed: Int, totalBytes: Int)]()
+    let total = collection.count
+    let globalProgress = progress
 
-    private let source: Source
-    private let availableSources: [Source.Type] = [FileSource.self, HTTPSource.self]
+    for item in collection {
+        progressHandlers[item.hashValue] = { bytesProcessed, totalBytes in
+            if stats[item.hashValue] == nil {
+                stats[item.hashValue] = (Swift.max(0, bytesProcessed), Swift.max(0, totalBytes))
+            } else {
+                stats[item.hashValue]?.bytesProcessed = Swift.max(0, bytesProcessed)
+                stats[item.hashValue]?.totalBytes = Swift.max(0, totalBytes)
+            }
 
+            let sum = stats.values.reduce(into: (0, 0)) {
+                $0.0 += $1.bytesProcessed
+                $0.1 += $1.totalBytes
+            }
 
-    init?(url: URL) {
-        guard let urlScheme = url.scheme else { return nil }
-        guard let sourceType = (availableSources.first { $0.schemes.contains(urlScheme) }) else { return nil }
-
-        if let source = sourceType.init(url: url) {
-            self.source = source
-        } else {
-            return nil
+            globalProgress?(sum.0, sum.1)
         }
-    }
 
-    func checksum(algorithm: DigestAlgorithm,
-                  chunkSize: Int = defaultChunkSize,
-                  queue: DispatchQueue = .global(qos: .background),
-                  progress: ProgressHandler?,
-                  completion: @escaping CompletionHandler) {
-        queue.async {
-            let cc = CCWrapper(algorithm: algorithm)
-            let totalBytes = self.source.size
-            var bytesLeft = totalBytes
+        item.checksum(algorithm: algorithm, chunkSize: chunkSize, queue: queue, progress: progressHandlers[item.hashValue]) { checksum in
+            checksumDict[item.hashValue] = checksum
 
-            while !self.source.eof() {
-                guard let data = self.source.read(amount: chunkSize) else { break }
-
-                data.withUnsafeBytes { (u8Ptr: UnsafePointer<UInt8>) in
-                    var uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
-
-                    cc.update(data: uMutablePtr, length: CC_LONG(data.count))
-
-                    bytesLeft -= data.count
-                    uMutablePtr += data.count
-
-                    let actualBytesLeft = bytesLeft
-
-                    DispatchQueue.main.async {
-                        progress?(totalBytes - actualBytesLeft, totalBytes)
-                    }
+            if checksumDict.count == total {
+                DispatchQueue.main.async {
+                    let checksums = collection.compactMap { checksumDict[$0.hashValue] }
+                    completion(checksums)
                 }
             }
-
-            cc.final()
-
-            DispatchQueue.main.async {
-                completion(cc.hexString())
-            }
         }
     }
 }
 
+public extension Array where Element == URL {
 
-// MARK: - CCWrapper (for internal use)
+    ///
+    /// Asynchronously returns an array of checksums for the contents of every `URL` in this array using the specified digest algorithm.
+    ///
+    /// The returned checksums array is returned in the same order as this array.
+    ///
+    /// Finally, checksums that failed to calculate will be returned as `nil`.
+    ///
+    /// - Parameter algorithm: The digest algorithm to use.
+    /// - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
+    /// - Parameter queue: *(optional)* The dispatch queue used for processing.
+    /// - Parameter progress: *(optional)* The closure to call to signal progress.
+    /// - Parameter completion: The closure to call upon completion containing the checksums array.
+    ///
+    public func checksum(algorithm: DigestAlgorithm,
+                         chunkSize: Int = Defaults.chunkSize,
+                         queue: DispatchQueue = Defaults.dispatchQueue,
+                         progress: ProgressHandler?,
+                         completion: @escaping MultipleCompletionHandler) {
 
-final private class CCWrapper {
-
-    private typealias CC_XXX_Update = (UnsafeRawPointer, CC_LONG) -> Void
-    private typealias CC_XXX_Final = (UnsafeMutablePointer<UInt8>) -> Void
-
-    public let algorithm: DigestAlgorithm
-
-    private var digest: UnsafeMutablePointer<UInt8>?
-    private var md5Ctx: CC_MD5_CTX?
-    private var sha1Ctx: CC_SHA1_CTX?
-    private var sha256Ctx: CC_SHA256_CTX?
-    private var sha512Ctx: CC_SHA512_CTX?
-    private var updateFun: CC_XXX_Update?
-    private var finalFun: CC_XXX_Final?
-
-
-    init(algorithm: DigestAlgorithm) {
-        self.algorithm = algorithm
-
-        switch algorithm {
-        case .md5:
-            var ctx = CC_MD5_CTX()
-
-            CC_MD5_Init(&ctx)
-
-            md5Ctx = ctx
-            updateFun = { (data, len) in CC_MD5_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_MD5_Final(digest, &ctx) }
-
-        case .sha1:
-            var ctx = CC_SHA1_CTX()
-
-            CC_SHA1_Init(&ctx)
-
-            sha1Ctx = ctx
-            updateFun = { (data, len) in CC_SHA1_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA1_Final(digest, &ctx) }
-
-        case .sha224:
-            var ctx = CC_SHA256_CTX()
-
-            CC_SHA224_Init(&ctx)
-
-            sha256Ctx = ctx
-            updateFun = { (data, len) in CC_SHA224_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA224_Final(digest, &ctx) }
-
-        case .sha256:
-            var ctx = CC_SHA256_CTX()
-
-            CC_SHA256_Init(&ctx)
-
-            sha256Ctx = ctx
-            updateFun = { (data, len) in CC_SHA256_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA256_Final(digest, &ctx) }
-
-        case .sha384:
-            var ctx = CC_SHA512_CTX()
-
-            CC_SHA384_Init(&ctx)
-
-            sha512Ctx = ctx
-            updateFun = { (data, len) in CC_SHA384_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA384_Final(digest, &ctx) }
-
-        case .sha512:
-            var ctx = CC_SHA512_CTX()
-
-            CC_SHA512_Init(&ctx)
-
-            sha512Ctx = ctx
-            updateFun = { (data, len) in CC_SHA512_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA512_Final(digest, &ctx) }
-
-        }
-    }
-
-    deinit {
-        digest?.deinitialize(count: algorithm.digestLength)
-        digest?.deallocate()
-    }
-
-    func update(data: UnsafeMutableRawPointer, length: CC_LONG) {
-        updateFun?(data, length)
-    }
-
-    func final() {
-        // We already got a digest, return early
-        guard digest == nil else { return }
-
-        digest = UnsafeMutablePointer<UInt8>.allocate(capacity: algorithm.digestLength)
-
-        if let digest = digest {
-            finalFun?(digest)
-        }
-    }
-
-    func hexString() -> String? {
-        // We DON'T have a digest YET, return early
-        guard let digest = digest else { return nil }
-
-        var string = ""
-
-        for i in 0..<algorithm.digestLength {
-            string += String(format: "%02x", digest[i])
-        }
-        
-        return string
+        return collectionChecksum(for: self, algorithm: algorithm, chunkSize: chunkSize, progress: progress, completion: completion)
     }
 }
+
+public extension Array where Element == Data {
+
+    ///
+    /// Asynchronously returns an array of checksums for all the `Data` objects in this array using the specified digest algorithm.
+    ///
+    /// The returned checksums array is returned in the same order as this array.
+    ///
+    /// Finally, checksums that failed to calculate will be returned as `nil`.
+    ///
+    /// - Parameter algorithm: The digest algorithm to use.
+    /// - Parameter chunkSize: *(optional)* The processing buffer's size (mostly relevant for large file computing)
+    /// - Parameter queue: *(optional)* The dispatch queue used for processing.
+    /// - Parameter progress: *(optional)* The closure to call to signal progress.
+    /// - Parameter completion: The closure to call upon completion containing the checksums array.
+    ///
+    public func checksum(algorithm: DigestAlgorithm,
+                         chunkSize: Int = Defaults.chunkSize,
+                         queue: DispatchQueue = Defaults.dispatchQueue,
+                         progress: ProgressHandler?,
+                         completion: @escaping MultipleCompletionHandler) {
+
+        return collectionChecksum(for: self, algorithm: algorithm, chunkSize: chunkSize, progress: progress, completion: completion)
+    }
+}
+
+// Adding Checksumable protocol conformance to URL
+extension URL: Checksumable {}
+
+// Adding Checksumable protocol conformance to Data
+extension Data: Checksumable {}
