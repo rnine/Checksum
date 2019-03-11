@@ -216,7 +216,7 @@ public extension Array where Element == URL {
     /// - Parameter progress: *(optional)* The closure to call to signal progress.
     /// - Parameter completion: The closure to call upon completion containing the checksums array.
     ///
-    public func checksum(algorithm: DigestAlgorithm,
+    func checksum(algorithm: DigestAlgorithm,
                          chunkSize: Int = Defaults.chunkSize,
                          queue: DispatchQueue = Defaults.dispatchQueue,
                          progress: ProgressHandler?,
@@ -241,7 +241,7 @@ public extension Array where Element == Data {
     /// - Parameter progress: *(optional)* The closure to call to signal progress.
     /// - Parameter completion: The closure to call upon completion containing the checksums array.
     ///
-    public func checksum(algorithm: DigestAlgorithm,
+    func checksum(algorithm: DigestAlgorithm,
                          chunkSize: Int = Defaults.chunkSize,
                          queue: DispatchQueue = Defaults.dispatchQueue,
                          progress: ProgressHandler?,
