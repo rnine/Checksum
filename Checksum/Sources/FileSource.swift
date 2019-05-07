@@ -67,15 +67,11 @@ public class FileSource: Source {
     }
 
     func read(amount: Int) -> Data? {
-        var data = Data(repeating: 0, count: amount)
-        var actualBytesRead: Int = 0
+        var data = Data(count: amount)
 
-        data.withUnsafeMutableBytes { (u8Ptr: UnsafeMutablePointer<UInt8>) in
-            let uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
-            actualBytesRead = fread(uMutablePtr, 1, amount, fd)
+        data.count = data.withUnsafeMutableBytes {
+            fread($0.baseAddress, 1, amount, fd)
         }
-
-        data.count = actualBytesRead
 
         return data
     }

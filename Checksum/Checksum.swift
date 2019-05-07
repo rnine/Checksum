@@ -94,8 +94,8 @@ extension Data {
         let cc = CCWrapper(algorithm: algorithm)
         var bytesLeft = count
 
-        withUnsafeBytes { (u8Ptr: UnsafePointer<UInt8>) in
-            var uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
+        withUnsafeBytes { (ptr) -> Void in
+            guard var uMutablePtr = UnsafeMutableRawPointer(mutating: ptr.baseAddress) else { return }
 
             while bytesLeft > 0 {
                 let bytesToCopy = Swift.min(bytesLeft, chunkSize)
@@ -106,7 +106,7 @@ extension Data {
                 uMutablePtr += bytesToCopy
             }
         }
-        
+
         cc.final()
         return cc.hexString()
     }
@@ -130,8 +130,8 @@ extension Data {
             let totalBytes = self.count
             var bytesLeft = totalBytes
 
-            self.withUnsafeBytes { (u8Ptr: UnsafePointer<UInt8>) in
-                var uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
+            self.withUnsafeBytes { (ptr) -> Void in
+                guard var uMutablePtr = UnsafeMutableRawPointer(mutating: ptr.baseAddress) else { return }
 
                 while bytesLeft > 0 {
                     let bytesToCopy = Swift.min(bytesLeft, chunkSize)

@@ -37,8 +37,9 @@ final internal class URLContentStreamer {
             while !self.source.eof() {
                 guard let data = self.source.read(amount: chunkSize) else { break }
 
-                data.withUnsafeBytes { (u8Ptr: UnsafePointer<UInt8>) in
-                    var uMutablePtr = UnsafeMutablePointer(mutating: u8Ptr)
+                data.withUnsafeBytes { (ptr) -> Void in
+                    guard var uMutablePtr = UnsafeMutableRawPointer(mutating: ptr.baseAddress) else { return }
+
                     cc.update(data: uMutablePtr, length: CC_LONG(data.count))
                     uMutablePtr += data.count
 
