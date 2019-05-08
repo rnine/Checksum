@@ -33,19 +33,19 @@ final internal class URLContentStreamer {
                   completion: @escaping CompletionHandler) {
         queue.async {
             let cc = CCWrapper(algorithm: algorithm)
+            var processedBytes: Int = 0
 
             while !self.source.eof() {
                 guard let data = self.source.read(amount: chunkSize) else { break }
 
                 data.withUnsafeBytes { (ptr) -> Void in
-                    guard var uMutablePtr = UnsafeMutableRawPointer(mutating: ptr.baseAddress) else { return }
+                    guard let uMutablePtr = UnsafeMutableRawPointer(mutating: ptr.baseAddress) else { return }
 
                     cc.update(data: uMutablePtr, length: CC_LONG(data.count))
-                    uMutablePtr += data.count
+                    processedBytes += data.count
 
                     DispatchQueue.main.async {
-                        let totalBytes = self.source.size
-                        progress?(data.count, totalBytes)
+                        progress?(processedBytes, self.source.size)
                     }
                 }
             }
