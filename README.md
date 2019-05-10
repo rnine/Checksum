@@ -1,6 +1,6 @@
 # Checksum
 
-[![Swift](https://img.shields.io/badge/swift-4.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift](https://img.shields.io/badge/swift-5.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![GitHub tag](https://img.shields.io/github/tag/rnine/CryptoHash.svg)](https://github.com/rnine/CryptoHash)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rnine/CryptoHash/blob/develop/LICENSE.md)
@@ -147,7 +147,7 @@ data.checksum(algorithm: .md5, progress: progress) { (checksum) in
 
 ### Requirements
 
-- Xcode 10 and Swift 4.2
+- Xcode 10.2 and Swift 5.0
 
 ### License
 
