@@ -8,9 +8,7 @@
 
 import Foundation
 
-public class FileSource: Source {
-
-
+class FileSource: Source {
     // MARK: - Public Properties
 
     let url: URL
@@ -24,11 +22,9 @@ public class FileSource: Source {
         return true
     }
 
-
     // MARK: - Private Properties
 
     private var fd: UnsafeMutablePointer<FILE>!
-
 
     // MARK: - Lifecycle
 
@@ -50,7 +46,6 @@ public class FileSource: Source {
     deinit {
         close()
     }
-
 
     // MARK: - Public functions
 

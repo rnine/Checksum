@@ -9,9 +9,7 @@
 import Foundation
 import CommonCrypto
 
-
 final internal class CCWrapper {
-
     private typealias CC_XXX_Update = (UnsafeRawPointer, CC_LONG) -> Void
     private typealias CC_XXX_Final = (UnsafeMutablePointer<UInt8>) -> Void
 

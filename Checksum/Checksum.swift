@@ -9,29 +9,10 @@
 import Foundation
 import CommonCrypto.CommonDigest
 
-public typealias CompletionHandler = (_ checksum: String?) -> Void
-public typealias MultipleCompletionHandler = (_ checksums: [String?]) -> Void
-public typealias ProgressHandler = (_ bytesProcessed: Int, _ totalBytes: Int) -> Void
-
-public struct Defaults {
-    /// Default chunk size (256Kb.)
-    public static let chunkSize: Int = 262144
-    /// Default dispatch queue to use by checksum calculations (global background.)
-    public static let dispatchQueue: DispatchQueue = DispatchQueue.global(qos: .background)
-}
-
-internal protocol Checksumable {
-
-    var hashValue: Int { get }
-
-    func checksum(algorithm: DigestAlgorithm, chunkSize: Int, queue: DispatchQueue, progress: ProgressHandler?, completion: @escaping CompletionHandler)
-}
-
 //
 // MARK: - URL Extension
 //
 extension URL {
-
     ///
     /// Asynchronously returns a checksum of the file's content referenced by this URL using the specified digest algorithm.
     ///
@@ -42,7 +23,7 @@ extension URL {
     /// - Parameter completion: The closure to call upon completion containing the checksum.
     ///
     public func checksum(algorithm: DigestAlgorithm,
-                chunkSize: Int = Defaults.chunkSize,
+                chunkSize: Chunksize = .normal,
                 queue: DispatchQueue = Defaults.dispatchQueue,
                 progress: ProgressHandler?,
                 completion: @escaping CompletionHandler) {
@@ -63,7 +44,6 @@ extension URL {
 // MARK: - String Extension
 //
 extension String {
-
     ///
     /// Returns a checksum of the String's content using the specified digest algorithm.
     ///
@@ -81,7 +61,6 @@ extension String {
 
 
 extension Data {
-
     ///
     /// Returns a checksum of the data's content using the specified digest algorithm.
     ///
@@ -90,7 +69,7 @@ extension Data {
     ///
     /// - Returns: *(optional)* A string with the computed checksum.
     ///
-    public func checksum(algorithm: DigestAlgorithm, chunkSize: Int = Defaults.chunkSize) -> String? {
+    public func checksum(algorithm: DigestAlgorithm, chunkSize: Chunksize = .normal) -> String? {
         let cc = CCWrapper(algorithm: algorithm)
         var bytesLeft = count
 
@@ -98,7 +77,7 @@ extension Data {
             guard var uMutablePtr = UnsafeMutableRawPointer(mutating: ptr.baseAddress) else { return }
 
             while bytesLeft > 0 {
-                let bytesToCopy = Swift.min(bytesLeft, chunkSize)
+                let bytesToCopy = Swift.min(bytesLeft, chunkSize.bytes)
 
                 cc.update(data: uMutablePtr, length: CC_LONG(bytesToCopy))
 
@@ -121,7 +100,7 @@ extension Data {
     /// - Parameter completion: The closure to call upon completion containing the checksum.
     ///
     public func checksum(algorithm: DigestAlgorithm,
-                         chunkSize: Int = Defaults.chunkSize,
+                         chunkSize: Chunksize = .normal,
                          queue: DispatchQueue = Defaults.dispatchQueue,
                          progress: ProgressHandler?,
                          completion: @escaping CompletionHandler) {
@@ -134,7 +113,7 @@ extension Data {
                 guard var uMutablePtr = UnsafeMutableRawPointer(mutating: ptr.baseAddress) else { return }
 
                 while bytesLeft > 0 {
-                    let bytesToCopy = Swift.min(bytesLeft, chunkSize)
+                    let bytesToCopy = Swift.min(bytesLeft, chunkSize.bytes)
 
                     cc.update(data: uMutablePtr, length: CC_LONG(bytesToCopy))
 
@@ -160,11 +139,10 @@ extension Data {
 
 private func collectionChecksum(for collection: [Checksumable],
                                 algorithm: DigestAlgorithm,
-                                chunkSize: Int = Defaults.chunkSize,
+                                chunkSize: Chunksize = .normal,
                                 queue: DispatchQueue = Defaults.dispatchQueue,
                                 progress: ProgressHandler?,
                                 completion: @escaping MultipleCompletionHandler) {
-
     var checksumDict = [Int: String?]()
     var progressHandlers = [Int: ProgressHandler]()
     var stats = [Int: (bytesProcessed: Int, totalBytes: Int)]()
@@ -202,7 +180,6 @@ private func collectionChecksum(for collection: [Checksumable],
 }
 
 public extension Array where Element == URL {
-
     ///
     /// Asynchronously returns an array of checksums for the contents of every `URL` in this array using the specified digest algorithm.
     ///
@@ -217,17 +194,15 @@ public extension Array where Element == URL {
     /// - Parameter completion: The closure to call upon completion containing the checksums array.
     ///
     func checksum(algorithm: DigestAlgorithm,
-                         chunkSize: Int = Defaults.chunkSize,
+                         chunkSize: Chunksize = .normal,
                          queue: DispatchQueue = Defaults.dispatchQueue,
                          progress: ProgressHandler?,
                          completion: @escaping MultipleCompletionHandler) {
-
         return collectionChecksum(for: self, algorithm: algorithm, chunkSize: chunkSize, progress: progress, completion: completion)
     }
 }
 
 public extension Array where Element == Data {
-
     ///
     /// Asynchronously returns an array of checksums for all the `Data` objects in this array using the specified digest algorithm.
     ///
@@ -242,11 +217,10 @@ public extension Array where Element == Data {
     /// - Parameter completion: The closure to call upon completion containing the checksums array.
     ///
     func checksum(algorithm: DigestAlgorithm,
-                         chunkSize: Int = Defaults.chunkSize,
+                         chunkSize: Chunksize = .normal,
                          queue: DispatchQueue = Defaults.dispatchQueue,
                          progress: ProgressHandler?,
                          completion: @escaping MultipleCompletionHandler) {
-
         return collectionChecksum(for: self, algorithm: algorithm, chunkSize: chunkSize, progress: progress, completion: completion)
     }
 }

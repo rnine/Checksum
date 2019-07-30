@@ -9,9 +9,9 @@
 import Foundation
 
 protocol Source: class {
-    init?(url: URL)
-
     static var schemes: [String] { get }
+
+    init?(url: URL)
 
     var url: URL { get }
     var size: Int { get }

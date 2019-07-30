@@ -10,7 +10,6 @@ import Foundation
 import CommonCrypto.CommonDigest
 
 final internal class URLContentStreamer {
-
     private let source: Source
     private let availableSources: [Source.Type] = [FileSource.self, HTTPSource.self]
 
@@ -27,7 +26,7 @@ final internal class URLContentStreamer {
     }
 
     func checksum(algorithm: DigestAlgorithm,
-                  chunkSize: Int = Defaults.chunkSize,
+                  chunkSize: Chunksize = .normal,
                   queue: DispatchQueue = .global(qos: .background),
                   progress: ProgressHandler?,
                   completion: @escaping CompletionHandler) {
@@ -36,7 +35,7 @@ final internal class URLContentStreamer {
             var processedBytes: Int = 0
 
             while !self.source.eof() {
-                guard let data = self.source.read(amount: chunkSize) else { break }
+                guard let data = self.source.read(amount: chunkSize.bytes) else { break }
 
                 data.withUnsafeBytes { (ptr) -> Void in
                     guard let uMutablePtr = UnsafeMutableRawPointer(mutating: ptr.baseAddress) else { return }

@@ -9,8 +9,6 @@
 import Foundation
 
 class HTTPSource: Source {
-
-
     // MARK: - Public Properties
 
     let url: URL
@@ -25,7 +23,6 @@ class HTTPSource: Source {
         return true
     }
 
-
     // MARK: - Private Properties
 
     private var urlSession = URLSession(configuration: .ephemeral)
@@ -33,7 +30,6 @@ class HTTPSource: Source {
     private let lockQueue = DispatchQueue(label: "io.9labs.Checksum.http-source-lock")
     private let semaphore = DispatchSemaphore(value: 0)
     private let requestTimeOut: TimeInterval = 5.0
-
 
     // MARK: - Lifecycle
 
@@ -67,7 +63,6 @@ class HTTPSource: Source {
     deinit {
         close()
     }
-
 
     // MARK: - Public functions
 
