@@ -6,14 +6,12 @@
 //  Copyright © 2016 9Labs. All rights reserved.
 //
 
-import Foundation
 import CommonCrypto.CommonDigest
+import Foundation
 
-//
 // MARK: - URL Extension
-//
+
 extension URL {
-    ///
     /// Asynchronously returns a checksum of the file's content referenced by this URL using the specified digest algorithm.
     ///
     /// - Parameter algorithm: The digest algorithm to use.
@@ -21,12 +19,11 @@ extension URL {
     /// - Parameter queue: *(optional)* The dispatch queue used for processing.
     /// - Parameter progress: *(optional)* The closure to call to signal progress.
     /// - Parameter completion: The closure to call upon completion containing the checksum.
-    ///
     public func checksum(algorithm: DigestAlgorithm,
-                chunkSize: Chunksize = .normal,
-                queue: DispatchQueue = Defaults.dispatchQueue,
-                progress: ProgressHandler?,
-                completion: @escaping CompletionHandler) {
+                         chunkSize: Chunksize = .normal,
+                         queue: DispatchQueue = Defaults.dispatchQueue,
+                         progress: ProgressHandler?,
+                         completion: @escaping CompletionHandler) {
         guard let stream = URLContentStreamer(url: self) else {
             completion(nil)
             return
@@ -40,16 +37,13 @@ extension URL {
     }
 }
 
-//
 // MARK: - String Extension
-//
+
 extension String {
-    ///
     /// Returns a checksum of the String's content using the specified digest algorithm.
     ///
     /// - Parameter algorithm: The digest algorithm to use.
     /// - Returns: *(optional)* A String with the computed checksum.
-    ///
     public func checksum(algorithm: DigestAlgorithm) -> String? {
         if let data = data(using: .utf8) {
             return data.checksum(algorithm: algorithm)
@@ -59,16 +53,13 @@ extension String {
     }
 }
 
-
 extension Data {
-    ///
     /// Returns a checksum of the data's content using the specified digest algorithm.
     ///
     /// - Parameter algorithm: The digest algorithm to use.
     /// - Parameter chunkSize: *(optional)* The internal buffer's size (mostly relevant for large file computing.)
     ///
     /// - Returns: *(optional)* A string with the computed checksum.
-    ///
     public func checksum(algorithm: DigestAlgorithm, chunkSize: Chunksize = .normal) -> String? {
         let cc = CCWrapper(algorithm: algorithm)
         var bytesLeft = count
@@ -90,7 +81,6 @@ extension Data {
         return cc.hexString()
     }
 
-    ///
     /// Asynchronously returns a checksum of the data's content using the specified digest algorithm.
     ///
     /// - Parameter algorithm: The digest algorithm to use.
@@ -98,7 +88,6 @@ extension Data {
     /// - Parameter queue: *(optional)* The dispatch queue used for processing.
     /// - Parameter progress: *(optional)* The closure to call to signal progress.
     /// - Parameter completion: The closure to call upon completion containing the checksum.
-    ///
     public func checksum(algorithm: DigestAlgorithm,
                          chunkSize: Chunksize = .normal,
                          queue: DispatchQueue = Defaults.dispatchQueue,
@@ -180,7 +169,6 @@ private func collectionChecksum(for collection: [Checksumable],
 }
 
 public extension Array where Element == URL {
-    ///
     /// Asynchronously returns an array of checksums for the contents of every `URL` in this array using the specified digest algorithm.
     ///
     /// The returned checksums array is returned in the same order as this array.
@@ -192,18 +180,16 @@ public extension Array where Element == URL {
     /// - Parameter queue: *(optional)* The dispatch queue used for processing.
     /// - Parameter progress: *(optional)* The closure to call to signal progress.
     /// - Parameter completion: The closure to call upon completion containing the checksums array.
-    ///
     func checksum(algorithm: DigestAlgorithm,
-                         chunkSize: Chunksize = .normal,
-                         queue: DispatchQueue = Defaults.dispatchQueue,
-                         progress: ProgressHandler?,
-                         completion: @escaping MultipleCompletionHandler) {
+                  chunkSize: Chunksize = .normal,
+                  queue _: DispatchQueue = Defaults.dispatchQueue,
+                  progress: ProgressHandler?,
+                  completion: @escaping MultipleCompletionHandler) {
         return collectionChecksum(for: self, algorithm: algorithm, chunkSize: chunkSize, progress: progress, completion: completion)
     }
 }
 
 public extension Array where Element == Data {
-    ///
     /// Asynchronously returns an array of checksums for all the `Data` objects in this array using the specified digest algorithm.
     ///
     /// The returned checksums array is returned in the same order as this array.
@@ -215,12 +201,11 @@ public extension Array where Element == Data {
     /// - Parameter queue: *(optional)* The dispatch queue used for processing.
     /// - Parameter progress: *(optional)* The closure to call to signal progress.
     /// - Parameter completion: The closure to call upon completion containing the checksums array.
-    ///
     func checksum(algorithm: DigestAlgorithm,
-                         chunkSize: Chunksize = .normal,
-                         queue: DispatchQueue = Defaults.dispatchQueue,
-                         progress: ProgressHandler?,
-                         completion: @escaping MultipleCompletionHandler) {
+                  chunkSize: Chunksize = .normal,
+                  queue _: DispatchQueue = Defaults.dispatchQueue,
+                  progress: ProgressHandler?,
+                  completion: @escaping MultipleCompletionHandler) {
         return collectionChecksum(for: self, algorithm: algorithm, chunkSize: chunkSize, progress: progress, completion: completion)
     }
 }

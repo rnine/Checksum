@@ -6,13 +6,12 @@
 //  Copyright © 2018 9Labs. All rights reserved.
 //
 
-import Foundation
 import CommonCrypto.CommonDigest
+import Foundation
 
-final internal class URLContentStreamer {
+internal final class URLContentStreamer {
     private let source: Source
     private let availableSources: [Source.Type] = [FileSource.self, HTTPSource.self]
-
 
     init?(url: URL) {
         guard let urlScheme = url.scheme else { return nil }

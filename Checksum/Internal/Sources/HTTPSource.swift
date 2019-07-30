@@ -43,7 +43,7 @@ class HTTPSource: Source {
 
             request.httpMethod = "HEAD"
 
-            let task = urlSession.dataTask(with: request) { (data, response, error) in
+            let task = urlSession.dataTask(with: request) { _, response, error in
                 if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
                     self.size = Int(httpResponse.expectedContentLength)
                     success = true
@@ -55,7 +55,7 @@ class HTTPSource: Source {
             task.resume()
         }
 
-        let _ = semaphore.wait(timeout: .distantFuture)
+        _ = semaphore.wait(timeout: .distantFuture)
 
         guard success == true else { return nil }
     }
@@ -92,11 +92,11 @@ class HTTPSource: Source {
     }
 
     func read(amount: Int) -> Data? {
-        if size != -1 && position >= size {
+        if size != -1, position >= size {
             return nil
         }
 
-        var readData: Data? = nil
+        var readData: Data?
 
         lockQueue.sync {
             autoreleasepool {
@@ -111,7 +111,7 @@ class HTTPSource: Source {
                     urlRequest.addValue("bytes=\(range.0)-\(range.1)", forHTTPHeaderField: "Range")
                 }
 
-                let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
+                let task = urlSession.dataTask(with: urlRequest) { data, response, _ in
                     if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 206, let data = data {
                         if self.size == -1 {
                             // Use estimated size for now
@@ -134,7 +134,7 @@ class HTTPSource: Source {
             }
         }
 
-        let _ = semaphore.wait(timeout: .distantFuture)
+        _ = semaphore.wait(timeout: .distantFuture)
 
         return readData
     }

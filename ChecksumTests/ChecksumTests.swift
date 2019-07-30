@@ -10,7 +10,6 @@ import XCTest
 @testable import Checksum
 
 class ChecksumTests: XCTestCase {
-    
     let basicString = "This is a simple string"
 
     private let basicTextChecksums: [DigestAlgorithm: String] = [
@@ -30,7 +29,6 @@ class ChecksumTests: XCTestCase {
         .sha384: "d01bb40389002a9456e0a92f5888c060cdae526564a7973b686f5e97ab6643d7f91da8453150b228b7fac2c950886d91",
         .sha512: "8468be6e8f6b1e3d60504d2dded8352192a161f494250b93ab55afc8e9f7f7fcb51badb1efd0037230ee81dbddbbcd2c19338437faefadffc104f9b3d77036d7"
     ]
-
 
     func testMD5() {
         let algorithm: DigestAlgorithm = .md5
@@ -54,7 +52,7 @@ class ChecksumTests: XCTestCase {
             let expect = expectation(description: "completion")
             expectations.append(expect)
 
-            textURL.checksum(algorithm: algorithm, progress: nil) { (checksum) in
+            textURL.checksum(algorithm: algorithm, progress: nil) { checksum in
                 XCTAssertEqual(checksum, self.basicTextChecksums[algorithm])
                 expect.fulfill()
             }
@@ -71,7 +69,7 @@ class ChecksumTests: XCTestCase {
             let expect = expectation(description: "completion")
             expectations.append(expect)
 
-            imageURL.checksum(algorithm: algorithm, progress: nil) { (checksum) in
+            imageURL.checksum(algorithm: algorithm, progress: nil) { checksum in
                 XCTAssertEqual(checksum, self.imageChecksums[algorithm])
                 expect.fulfill()
             }
@@ -99,7 +97,7 @@ class ChecksumTests: XCTestCase {
             print("bytesProcessed = \(bytesProcessed), totalBytes = \(totalBytes)")
         }
 
-        urls.checksum(algorithm: .md5, progress: progress) { (checksums) in
+        urls.checksum(algorithm: .md5, progress: progress) { checksums in
             XCTAssertEqual(checksums[0], self.basicTextChecksums[.md5])
             XCTAssertEqual(checksums[1], self.imageChecksums[.md5])
             XCTAssertEqual(checksums[2], nil)
@@ -114,7 +112,6 @@ class ChecksumTests: XCTestCase {
         waitForExpectations(timeout: 20)
     }
 
-
     func testAsyncRemoteTextURL() {
         var expectations: [XCTestExpectation] = []
         let textURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/basic.txt")!
@@ -123,7 +120,7 @@ class ChecksumTests: XCTestCase {
             let expect = expectation(description: "completion")
             expectations.append(expect)
 
-            textURL.checksum(algorithm: algorithm, progress: nil) { (checksum) in
+            textURL.checksum(algorithm: algorithm, progress: nil) { checksum in
                 XCTAssertEqual(checksum, self.basicTextChecksums[algorithm])
                 expect.fulfill()
             }
@@ -140,7 +137,7 @@ class ChecksumTests: XCTestCase {
             let expect = expectation(description: "completion")
             expectations.append(expect)
 
-            imageURL.checksum(algorithm: algorithm, progress: nil) { (checksum) in
+            imageURL.checksum(algorithm: algorithm, progress: nil) { checksum in
                 XCTAssertEqual(checksum, self.imageChecksums[algorithm])
                 expect.fulfill()
             }

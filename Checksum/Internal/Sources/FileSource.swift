@@ -39,7 +39,7 @@ class FileSource: Source {
 
         let curpos = ftello(fd)
         fseeko(fd, 0, SEEK_END)
-        self.size = Int(ftello(fd))
+        size = Int(ftello(fd))
         fseeko(fd, curpos, SEEK_SET)
     }
 

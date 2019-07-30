@@ -6,10 +6,10 @@
 //  Copyright © 2018 9Labs. All rights reserved.
 //
 
-import Foundation
 import CommonCrypto
+import Foundation
 
-final internal class CCWrapper {
+internal final class CCWrapper {
     private typealias CC_XXX_Update = (UnsafeRawPointer, CC_LONG) -> Void
     private typealias CC_XXX_Final = (UnsafeMutablePointer<UInt8>) -> Void
 
@@ -23,7 +23,6 @@ final internal class CCWrapper {
     private var updateFun: CC_XXX_Update?
     private var finalFun: CC_XXX_Final?
 
-
     init(algorithm: DigestAlgorithm) {
         self.algorithm = algorithm
 
@@ -34,8 +33,8 @@ final internal class CCWrapper {
             CC_MD5_Init(&ctx)
 
             md5Ctx = ctx
-            updateFun = { (data, len) in CC_MD5_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_MD5_Final(digest, &ctx) }
+            updateFun = { data, len in CC_MD5_Update(&ctx, data, len) }
+            finalFun = { digest in CC_MD5_Final(digest, &ctx) }
 
         case .sha1:
             var ctx = CC_SHA1_CTX()
@@ -43,8 +42,8 @@ final internal class CCWrapper {
             CC_SHA1_Init(&ctx)
 
             sha1Ctx = ctx
-            updateFun = { (data, len) in CC_SHA1_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA1_Final(digest, &ctx) }
+            updateFun = { data, len in CC_SHA1_Update(&ctx, data, len) }
+            finalFun = { digest in CC_SHA1_Final(digest, &ctx) }
 
         case .sha224:
             var ctx = CC_SHA256_CTX()
@@ -52,8 +51,8 @@ final internal class CCWrapper {
             CC_SHA224_Init(&ctx)
 
             sha256Ctx = ctx
-            updateFun = { (data, len) in CC_SHA224_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA224_Final(digest, &ctx) }
+            updateFun = { data, len in CC_SHA224_Update(&ctx, data, len) }
+            finalFun = { digest in CC_SHA224_Final(digest, &ctx) }
 
         case .sha256:
             var ctx = CC_SHA256_CTX()
@@ -61,8 +60,8 @@ final internal class CCWrapper {
             CC_SHA256_Init(&ctx)
 
             sha256Ctx = ctx
-            updateFun = { (data, len) in CC_SHA256_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA256_Final(digest, &ctx) }
+            updateFun = { data, len in CC_SHA256_Update(&ctx, data, len) }
+            finalFun = { digest in CC_SHA256_Final(digest, &ctx) }
 
         case .sha384:
             var ctx = CC_SHA512_CTX()
@@ -70,8 +69,8 @@ final internal class CCWrapper {
             CC_SHA384_Init(&ctx)
 
             sha512Ctx = ctx
-            updateFun = { (data, len) in CC_SHA384_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA384_Final(digest, &ctx) }
+            updateFun = { data, len in CC_SHA384_Update(&ctx, data, len) }
+            finalFun = { digest in CC_SHA384_Final(digest, &ctx) }
 
         case .sha512:
             var ctx = CC_SHA512_CTX()
@@ -79,9 +78,8 @@ final internal class CCWrapper {
             CC_SHA512_Init(&ctx)
 
             sha512Ctx = ctx
-            updateFun = { (data, len) in CC_SHA512_Update(&ctx, data, len) }
-            finalFun = { (digest) in CC_SHA512_Final(digest, &ctx) }
-
+            updateFun = { data, len in CC_SHA512_Update(&ctx, data, len) }
+            finalFun = { digest in CC_SHA512_Final(digest, &ctx) }
         }
     }
 
@@ -111,7 +109,7 @@ final internal class CCWrapper {
 
         var string = ""
 
-        for i in 0..<algorithm.digestLength {
+        for i in 0 ..< algorithm.digestLength {
             string += String(format: "%02x", digest[i])
         }
 

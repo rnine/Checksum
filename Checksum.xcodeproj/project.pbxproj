@@ -93,6 +93,8 @@
 		45912D0921677CD4008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45912D2021677DBD008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45912D2D21677E75008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45A027F122F0D4C4001AF2D1 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		45A027F222F0D4C5001AF2D1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,8 @@
 		4506A65E1DD62DA5007211D2 = {
 			isa = PBXGroup;
 			children = (
+				45A027F122F0D4C4001AF2D1 /* LICENSE.md */,
+				45A027F222F0D4C5001AF2D1 /* README.md */,
 				4506A66A1DD62DA5007211D2 /* Checksum */,
 				4506A6751DD62DA5007211D2 /* ChecksumTests */,
 				4506A6691DD62DA5007211D2 /* Products */,

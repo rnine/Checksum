@@ -10,7 +10,6 @@ import XCTest
 @testable import Checksum
 
 class HTTPSourceTests: XCTestCase {
-
     func testImageChecksum() {
         let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg")!
 

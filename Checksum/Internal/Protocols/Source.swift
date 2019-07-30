@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Source: class {
+protocol Source: AnyObject {
     static var schemes: [String] { get }
 
     init?(url: URL)

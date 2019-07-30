@@ -6,8 +6,8 @@
 //  Copyright © 2018 9Labs. All rights reserved.
 //
 
-import Foundation
 import CommonCrypto.CommonDigest
+import Foundation
 
 public enum DigestAlgorithm {
     case md5

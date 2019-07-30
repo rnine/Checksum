@@ -10,7 +10,6 @@ import XCTest
 @testable import Checksum
 
 class FileSourceTests: XCTestCase {
-
     func testTextChecksum() {
         let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
 
