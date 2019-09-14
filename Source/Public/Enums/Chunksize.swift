@@ -8,14 +8,28 @@
 
 import Foundation
 
+/// Represents a size to be used for chunk processing.
 public enum Chunksize {
-    case tiny // 16kb
-    case small // 64kb
-    case normal // 256kb
-    case large // 1mb
-    case huge // 4mb
-    case custom(size: Int)
+    /// Tiny (16kb)
+    case tiny
 
+    /// Small (64kb)
+    case small
+
+    /// Normal (256kb)
+    case normal
+
+    /// Large (1mb)
+    case large
+
+    /// Huge (4mb)
+    case huge
+
+    /// Custom (user-settable)
+    case custom(size: Int)
+}
+
+internal extension Chunksize {
     var bytes: Int {
         switch self {
         case .tiny:

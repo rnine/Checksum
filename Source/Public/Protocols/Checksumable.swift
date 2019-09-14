@@ -8,10 +8,12 @@
 
 import Foundation
 
+/// The protocol any subject whose checksum may be calculated must conform to.
 public protocol Checksumable {
+    /// :nodoc:
     var hashValue: Int { get }
 
+    /// :nodoc:
     func checksum(algorithm: DigestAlgorithm, chunkSize: Chunksize, queue: DispatchQueue,
                   progress: ProgressHandler?, completion: @escaping CompletionHandler)
-
 }

@@ -10,7 +10,6 @@ import Foundation
 
 /// An error returned by a checksum completion handler response.
 public enum ChecksumError: Error {
-
     /// The source is unusable (typically due to an unsupported URL scheme, unreachable URL, etc.)
     case unusableSource
 

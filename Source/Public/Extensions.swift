@@ -124,10 +124,6 @@ public extension Array where Element: Checksumable {
     /// On completion, returns a `ChecksumResult` for every `Checksumable` in this array using the specified
     /// digest algorithm.
     ///
-    /// The returned checksums array is returned in the same order as this array.
-    ///
-    /// Finally, checksums that failed to calculate will be returned as `nil`.
-    ///
     /// - Parameter algorithm: The digest algorithm to use.
     /// - Parameter chunkSize: The processing buffer's size (mostly relevant for large data computing)
     /// - Parameter queue: The dispatch queue used for processing.

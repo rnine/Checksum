@@ -9,15 +9,29 @@
 import CommonCrypto.CommonDigest
 import Foundation
 
+/// Represents a type of digest algorithm.
 public enum DigestAlgorithm {
+    /// MD5 algorithm.
     case md5
-    case sha1
-    case sha224
-    case sha256
-    case sha384
-    case sha512
 
-    public var digestLength: Int {
+    /// SHA1 algorithm.
+    case sha1
+
+    /// SHA224 algorithm.
+    case sha224
+
+    /// SHA256 algorithm.
+    case sha256
+
+    /// SHA384 algorithm.
+    case sha384
+
+    /// SHA512 algorithm.
+    case sha512
+}
+
+extension DigestAlgorithm {
+    internal var digestLength: Int {
         switch self {
         case .md5: return Int(CC_MD5_DIGEST_LENGTH)
         case .sha1: return Int(CC_SHA1_DIGEST_LENGTH)
