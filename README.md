@@ -8,8 +8,10 @@
 [![GitHub tag](https://img.shields.io/github/tag/rnine/Checksum.svg)](https://github.com/rnine/Checksum)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rnine/Checksum/blob/develop/LICENSE.md)
 
-Extends `String`, `Data`, and `URL` adding the ability to easily and efficiently calculate the cryptographic checksum of their associated contents by 
-adding conformance to the `Checksumable` protocol.
+Extends `String`, `Data`, and `URL` adding the ability to easily and efficiently calculate the cryptographic checksum of its associated
+contents by adding conformance to the `Checksumable` protocol. 
+
+Under the hood, Apple's `CommonCrypto` framework is used.
 
 ### Features
 
@@ -28,8 +30,8 @@ The function signature for async processing is:
 
 #### Sync Processing
 
-In the cases where the payload is fairly small, asynchronous processing may not be required or desirable. For such cases, we made available a 
-synchronous version.
+In the cases where the payload is fairly small, asynchronous processing may not be required or desirable. For such cases, a synchronous 
+version is provided.
 
 The function signature for sync processing is:
 
@@ -57,7 +59,7 @@ data.checksum(algorithm: .md5) { result in
     }
 }
 ```
-#### Calculating the checksum of some `URL`'s contents asynchronously
+#### Calculating the checksum of the content at a given `URL` asynchronously
 
 ```swift
 remoteURL.checksum(algorithm: .sha256) { result in
@@ -69,7 +71,7 @@ remoteURL.checksum(algorithm: .sha256) { result in
     }
 }
 ```
-#### Calculating the checksum of multiple `URL`'s contents asynchronously
+#### Calculating the checksums of the contents at given `URLs` asynchronously
 
 ```swift
 [someURL, anotherURL, yetAnotherURL].checksum(algorithm: .md5) { result in
@@ -111,7 +113,7 @@ if let checksum = data.checksum(algorithm: .md5) {
 }
 ```
 
-#### Calculating the checksum of some `URL`'s contents synchronously
+#### Calculating the checksum of the content at a given `URL` synchronously
 
 ```swift
 if let checksum = localURL.checksum(algorithm: .md5) {
@@ -141,4 +143,5 @@ remoteURL.checksum(algorithm: .sha256, progress: { progress in
 
 ### License
 
-`Checksum` was written by Ruben Nine ([@sonicbee9](https://twitter.com/sonicbee9)) and is licensed under the [MIT](http://opensource.org/licenses/MIT) license. See [LICENSE.md](LICENSE.md).
+`Checksum` was written by Ruben Nine ([@sonicbee9](https://twitter.com/sonicbee9)) and is licensed under the 
+[MIT](http://opensource.org/licenses/MIT) license. See [LICENSE.md](LICENSE.md).

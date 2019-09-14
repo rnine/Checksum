@@ -172,12 +172,12 @@
 		4506A65E1DD62DA5007211D2 = {
 			isa = PBXGroup;
 			children = (
-				45370F78232D71CC00CD605F /* Package.swift */,
 				45A027F122F0D4C4001AF2D1 /* LICENSE.md */,
 				45A027F222F0D4C5001AF2D1 /* README.md */,
+				45370F78232D71CC00CD605F /* Package.swift */,
+				4506A6691DD62DA5007211D2 /* Products */,
 				4506A66A1DD62DA5007211D2 /* Source */,
 				4506A6751DD62DA5007211D2 /* Tests */,
-				4506A6691DD62DA5007211D2 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
