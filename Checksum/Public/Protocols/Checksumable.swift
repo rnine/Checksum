@@ -8,9 +8,10 @@
 
 import Foundation
 
-protocol Checksumable {
+public protocol Checksumable {
     var hashValue: Int { get }
 
     func checksum(algorithm: DigestAlgorithm, chunkSize: Chunksize, queue: DispatchQueue,
                   progress: ProgressHandler?, completion: @escaping CompletionHandler)
+
 }

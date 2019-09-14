@@ -8,19 +8,13 @@
 
 import Foundation
 
-class FileSource: Source {
+class FileSource: InstantiableSource {
+    typealias Provider = URL
+
     // MARK: - Public Properties
 
-    let url: URL
+    let provider: URL
     let size: Int
-
-    static var schemes: [String] {
-        return ["file"]
-    }
-
-    var seekable: Bool {
-        return true
-    }
 
     // MARK: - Private Properties
 
@@ -28,8 +22,8 @@ class FileSource: Source {
 
     // MARK: - Lifecycle
 
-    required init?(url: URL) {
-        self.url = url
+    required init?(provider url: URL) {
+        self.provider = url
 
         if let fd = fopen(url.path, "r") {
             self.fd = fd
@@ -49,8 +43,8 @@ class FileSource: Source {
 
     // MARK: - Public functions
 
-    func seek(position: Int, whence: Int) -> Bool {
-        return (fseeko(fd, off_t(position), Int32(whence)) == 0)
+    func seek(position: Int) -> Bool {
+        return (fseeko(fd, off_t(position), SEEK_SET) == 0)
     }
 
     func tell() -> Int {

@@ -13,11 +13,10 @@ class FileSourceTests: XCTestCase {
     func testTextChecksum() {
         let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
 
-        let source: FileSource! = FileSource(url: textURL)
+        let source: FileSource! = FileSource(provider: textURL)
 
-        XCTAssertEqual(source.url, textURL)
+        XCTAssertEqual(source.provider, textURL)
         XCTAssertEqual(source.size, 22)
-        XCTAssertEqual(source.seekable, true)
 
         XCTAssertFalse(source.eof())
         let data = source.read(amount: source.size)
@@ -31,11 +30,10 @@ class FileSourceTests: XCTestCase {
     func testImageChecksum() {
         let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
 
-        let source: FileSource! = FileSource(url: imageURL)
+        let source: FileSource! = FileSource(provider: imageURL)
 
-        XCTAssertEqual(source.url, imageURL)
+        XCTAssertEqual(source.provider, imageURL)
         XCTAssertEqual(source.size, 52226)
-        XCTAssertEqual(source.seekable, true)
 
         XCTAssertFalse(source.eof())
         let data = source.read(amount: source.size)

@@ -10,9 +10,32 @@ import XCTest
 @testable import Checksum
 
 class ChecksumTests: XCTestCase {
-    let basicString = "This is a simple string"
+    // MARK: - Configuration
 
-    private let basicTextChecksums: [DigestAlgorithm: String] = [
+    private let waitTimeout: TimeInterval = 20
+
+    // MARK: - Fixtures
+
+    private let simpleString = "This is a simple string"
+
+    private lazy var localTextURL: URL = {
+        Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
+    }()
+
+    private lazy var localImageURL: URL = {
+        Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
+    }()
+
+    private let remoteTextURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/basic.txt")!
+    private let remoteImageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg")!
+
+    private let unhandledSchemeURL = URL(string: "gopher://somewhere")!
+    private let unreachableLocalURL = URL(string: "file://SOME/RANDOM/UNEXISTING/URL/10192371")!
+    private let unreachableRemoteURL = URL(string: "https://9labs.io/SOME/RANDOM/UNEXISTING/URL/10192371")!
+
+    private let simpleStringMD5Checksum = "0f13e02ea41fb763b0ad09daa72a4b6e"
+
+    private let textChecksums: [DigestAlgorithm: String] = [
         .md5: "59769e54d93d7d5975fdefa567ac745b",
         .sha1: "d0bb2056b5bdd929097dc036746cb3089613cc6e",
         .sha224: "6558b657abc32403dd96b0b3d4502ec0fa98d2c1b8f2c0cefbd189e7",
@@ -30,119 +53,146 @@ class ChecksumTests: XCTestCase {
         .sha512: "8468be6e8f6b1e3d60504d2dded8352192a161f494250b93ab55afc8e9f7f7fcb51badb1efd0037230ee81dbddbbcd2c19338437faefadffc104f9b3d77036d7"
     ]
 
-    func testMD5() {
-        let algorithm: DigestAlgorithm = .md5
-        let data = basicString.data(using: .utf8)!
-        let expectedHash = "0f13e02ea41fb763b0ad09daa72a4b6e"
+    // MARK: - Single Checksumable Tests
 
-        if let checksum = basicString.checksum(algorithm: algorithm) {
-            XCTAssertEqual(checksum, expectedHash)
-        }
-
-        if let checksum = data.checksum(algorithm: algorithm) {
-            XCTAssertEqual(checksum, expectedHash)
-        }
+    func testMD5String() {
+        // Sync
+        XCTAssertEqual(simpleString.checksum(algorithm: .md5), simpleStringMD5Checksum)
+        // Async
+        AssertSuccessfulChecksum(using: simpleString, algorithm: .md5, expected: simpleStringMD5Checksum)
     }
 
-    func testAsyncTextURL() {
-        var expectations: [XCTestExpectation] = []
-        let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
-
-        for algorithm in basicTextChecksums.keys {
-            let expect = expectation(description: "completion")
-            expectations.append(expect)
-
-            textURL.checksum(algorithm: algorithm, progress: nil) { checksum in
-                XCTAssertEqual(checksum, self.basicTextChecksums[algorithm])
-                expect.fulfill()
-            }
-        }
-
-        waitForExpectations(timeout: 20)
+    func testMD5Data() {
+        let simpleStringData = simpleString.data(using: .utf8)!
+        // Sync
+        XCTAssertEqual(simpleStringData.checksum(algorithm: .md5), simpleStringMD5Checksum)
+        // Async
+        AssertSuccessfulChecksum(using: simpleStringData, algorithm: .md5, expected: simpleStringMD5Checksum)
     }
 
-    func testAsyncImageURL() {
-        var expectations: [XCTestExpectation] = []
-        let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
-
-        for algorithm in imageChecksums.keys {
-            let expect = expectation(description: "completion")
-            expectations.append(expect)
-
-            imageURL.checksum(algorithm: algorithm, progress: nil) { checksum in
-                XCTAssertEqual(checksum, self.imageChecksums[algorithm])
-                expect.fulfill()
-            }
-        }
-
-        waitForExpectations(timeout: 20)
+    func testLocalTextURL() {
+        AssertSuccessfulChecksum(using: localTextURL, algorithm: .md5, expected: textChecksums[.md5]!)
+        AssertSuccessfulChecksum(using: localTextURL, algorithm: .sha1, expected: textChecksums[.sha1]!)
+        AssertSuccessfulChecksum(using: localTextURL, algorithm: .sha224, expected: textChecksums[.sha224]!)
+        AssertSuccessfulChecksum(using: localTextURL, algorithm: .sha256, expected: textChecksums[.sha256]!)
+        AssertSuccessfulChecksum(using: localTextURL, algorithm: .sha384, expected: textChecksums[.sha384]!)
+        AssertSuccessfulChecksum(using: localTextURL, algorithm: .sha512, expected: textChecksums[.sha512]!)
     }
 
-    func testMultipleAsyncLocalURLs() {
-        var expectations: [XCTestExpectation] = []
+    func testLocalImageURL() {
+        AssertSuccessfulChecksum(using: localImageURL, algorithm: .md5, expected: imageChecksums[.md5]!)
+        AssertSuccessfulChecksum(using: localImageURL, algorithm: .sha1, expected: imageChecksums[.sha1]!)
+        AssertSuccessfulChecksum(using: localImageURL, algorithm: .sha224, expected: imageChecksums[.sha224]!)
+        AssertSuccessfulChecksum(using: localImageURL, algorithm: .sha256, expected: imageChecksums[.sha256]!)
+        AssertSuccessfulChecksum(using: localImageURL, algorithm: .sha384, expected: imageChecksums[.sha384]!)
+        AssertSuccessfulChecksum(using: localImageURL, algorithm: .sha512, expected: imageChecksums[.sha512]!)
+    }
 
-        let textURL = Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
-        let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
-        let textRemoteURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/basic.txt")!
-        let imageRemoteURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg")!
-        let invalidURL = URL(string: "file://invalidpath")!
-        let invalidProtocolURL = URL(string: "invalidProtocol://invalidpath")!
-        let unexistingRemoteURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/unexistingFile.txt")!
-        let urls = [textURL, imageURL, invalidProtocolURL, textRemoteURL, imageRemoteURL, invalidURL, unexistingRemoteURL]
+    func testRemoteTextURL() {
+        AssertSuccessfulChecksum(using: remoteTextURL, algorithm: .md5, expected: textChecksums[.md5]!)
+        AssertSuccessfulChecksum(using: remoteTextURL, algorithm: .sha1, expected: textChecksums[.sha1]!)
+        AssertSuccessfulChecksum(using: remoteTextURL, algorithm: .sha224, expected: textChecksums[.sha224]!)
+        AssertSuccessfulChecksum(using: remoteTextURL, algorithm: .sha256, expected: textChecksums[.sha256]!)
+        AssertSuccessfulChecksum(using: remoteTextURL, algorithm: .sha384, expected: textChecksums[.sha384]!)
+        AssertSuccessfulChecksum(using: remoteTextURL, algorithm: .sha512, expected: textChecksums[.sha512]!)
+    }
 
+    func testRemoteImageURL() {
+        AssertSuccessfulChecksum(using: remoteImageURL, algorithm: .md5, expected: imageChecksums[.md5]!)
+        AssertSuccessfulChecksum(using: remoteImageURL, algorithm: .sha1, expected: imageChecksums[.sha1]!)
+        AssertSuccessfulChecksum(using: remoteImageURL, algorithm: .sha224, expected: imageChecksums[.sha224]!)
+        AssertSuccessfulChecksum(using: remoteImageURL, algorithm: .sha256, expected: imageChecksums[.sha256]!)
+        AssertSuccessfulChecksum(using: remoteImageURL, algorithm: .sha384, expected: imageChecksums[.sha384]!)
+        AssertSuccessfulChecksum(using: remoteImageURL, algorithm: .sha512, expected: imageChecksums[.sha512]!)
+    }
+
+    func testUnhandledURLScheme() {
+        AssertFailedChecksum(using: unhandledSchemeURL, algorithm: .md5, expectedError: .unusableSource)
+    }
+
+    func testUnreachableLocalURL() {
+        AssertFailedChecksum(using: unreachableLocalURL, algorithm: .md5, expectedError: .unusableSource)
+    }
+
+    func testUnreachableRemoteURL() {
+        AssertFailedChecksum(using: unreachableRemoteURL, algorithm: .md5, expectedError: .unusableSource)
+    }
+
+    // MARK: - Multiple Checksumable Tests
+
+    func testMultipleURLs() {
         let expect = expectation(description: "completion")
-        expectations.append(expect)
 
-        let progress: ProgressHandler = { bytesProcessed, totalBytes in
-            print("bytesProcessed = \(bytesProcessed), totalBytes = \(totalBytes)")
-        }
+        let expectedResults: [URL: String?] = [
+            localTextURL: textChecksums[.md5],
+            localImageURL: imageChecksums[.md5],
+            unhandledSchemeURL: nil,
+            remoteTextURL: textChecksums[.md5],
+            remoteImageURL: imageChecksums[.md5],
+            unreachableLocalURL: nil,
+            unreachableRemoteURL: nil
+        ]
 
-        urls.checksum(algorithm: .md5, progress: progress) { checksums in
-            XCTAssertEqual(checksums[0], self.basicTextChecksums[.md5])
-            XCTAssertEqual(checksums[1], self.imageChecksums[.md5])
-            XCTAssertEqual(checksums[2], nil)
-            XCTAssertEqual(checksums[3], self.basicTextChecksums[.md5])
-            XCTAssertEqual(checksums[4], self.imageChecksums[.md5])
-            XCTAssertEqual(checksums[5], nil)
-            XCTAssertEqual(checksums[6], nil)
+        Array(expectedResults.keys).checksum(algorithm: .md5) { result in
+            switch result {
+            case .success(let results):
+                XCTAssertEqual(results.count, expectedResults.count)
+
+                for result in results {
+                    guard let url = result.checksumable as? URL else {
+                        XCTFail("Expected checksumable to be of type URL.")
+                        return
+                    }
+
+                    XCTAssertEqual(expectedResults[url], result.checksum, "using \(url)")
+                }
+            case .failure(let error):
+                XCTFail("Failed with error: \(error)")
+            }
 
             expect.fulfill()
         }
 
-        waitForExpectations(timeout: 20)
+        waitForExpectations(timeout: waitTimeout)
     }
 
-    func testAsyncRemoteTextURL() {
-        var expectations: [XCTestExpectation] = []
-        let textURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/basic.txt")!
+    // MARK: - Private Functions
 
-        for algorithm in basicTextChecksums.keys {
-            let expect = expectation(description: "completion")
-            expectations.append(expect)
+    private func AssertSuccessfulChecksum(using checksumable: Checksumable,
+                                          algorithm: DigestAlgorithm,
+                                          expected: String,
+                                          file: StaticString = #file,
+                                          line: UInt = #line) {
+        let expect = expectation(description: "completion")
 
-            textURL.checksum(algorithm: algorithm, progress: nil) { checksum in
-                XCTAssertEqual(checksum, self.basicTextChecksums[algorithm])
-                expect.fulfill()
-            }
+        checksumable.checksum(algorithm: algorithm, chunkSize: .normal, queue: .main, progress: nil) { result in
+            let returned = try? result.get()
+            XCTAssertEqual(returned, expected, "using \(checksumable)", file: file, line: line)
+
+            expect.fulfill()
         }
 
-        waitForExpectations(timeout: 20)
+        waitForExpectations(timeout: waitTimeout)
     }
 
-    func testAsyncRemoteImageURL() {
-        var expectations: [XCTestExpectation] = []
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg")!
+    private func AssertFailedChecksum(using checksumable: Checksumable,
+                                      algorithm: DigestAlgorithm,
+                                      expectedError: ChecksumError,
+                                      file: StaticString = #file,
+                                      line: UInt = #line) {
+        let expect = expectation(description: "completion")
 
-        for algorithm in imageChecksums.keys {
-            let expect = expectation(description: "completion")
-            expectations.append(expect)
-
-            imageURL.checksum(algorithm: algorithm, progress: nil) { checksum in
-                XCTAssertEqual(checksum, self.imageChecksums[algorithm])
-                expect.fulfill()
+        checksumable.checksum(algorithm: algorithm, chunkSize: .normal, queue: .main, progress: nil) { result in
+            switch result {
+            case .success(_):
+                XCTFail("Should not succeed.", file: file, line: line)
+            case .failure(let error):
+                XCTAssertEqual(error, expectedError, file: file, line: line)
             }
+
+            expect.fulfill()
         }
 
-        waitForExpectations(timeout: 20)
+        waitForExpectations(timeout: waitTimeout)
     }
 }

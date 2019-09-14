@@ -8,39 +8,33 @@
 
 import Foundation
 
-class HTTPSource: Source {
+class HTTPSource: InstantiableSource {
+    typealias Provider = URL
+
     // MARK: - Public Properties
 
-    let url: URL
-
+    let provider: URL
     private(set) var size: Int = 0
-
-    static var schemes: [String] {
-        return ["http", "https"]
-    }
-
-    var seekable: Bool {
-        return true
-    }
 
     // MARK: - Private Properties
 
     private var urlSession = URLSession(configuration: .ephemeral)
     private var position: Int = 0
-    private let lockQueue = DispatchQueue(label: "io.9labs.Checksum.http-source-lock")
+    private let processQueue = DispatchQueue(label: "io.9labs.Checksum.http-source-process")
     private let semaphore = DispatchSemaphore(value: 0)
     private let requestTimeOut: TimeInterval = 5.0
 
     // MARK: - Lifecycle
 
-    required init?(url: URL) {
+    required init?(provider url: URL) {
         var success = false
 
-        self.url = url
+        self.provider = url
 
-        lockQueue.sync {
-            var request = URLRequest(url: self.url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
+        processQueue.sync {
+            var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
 
+            request.httpShouldUsePipelining = true
             request.httpMethod = "HEAD"
 
             let task = urlSession.dataTask(with: request) { _, response, error in
@@ -66,19 +60,8 @@ class HTTPSource: Source {
 
     // MARK: - Public functions
 
-    func seek(position: Int, whence: Int) -> Bool {
-        switch Int32(whence) {
-        case SEEK_SET:
-            self.position = position
-        case SEEK_CUR:
-            self.position += position
-        case SEEK_END:
-            if size != -1 {
-                self.position = size + position
-            }
-        default:
-            break
-        }
+    func seek(position: Int) -> Bool {
+        self.position = position
 
         return true
     }
@@ -98,9 +81,11 @@ class HTTPSource: Source {
 
         var readData: Data?
 
-        lockQueue.sync {
+        processQueue.sync {
             autoreleasepool {
-                var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
+                var urlRequest = URLRequest(url: provider, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
+
+                urlRequest.httpShouldUsePipelining = true
 
                 if size == -1 {
                     // Size is unknown

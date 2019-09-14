@@ -8,18 +8,19 @@
 
 import Foundation
 
-protocol Source: AnyObject {
-    static var schemes: [String] { get }
-
-    init?(url: URL)
-
-    var url: URL { get }
+protocol Source {
     var size: Int { get }
-    var seekable: Bool { get }
 
-    func seek(position: Int, whence: Int) -> Bool
+    func seek(position: Int) -> Bool
     func tell() -> Int
     func read(amount: Int) -> Data?
-    func close()
     func eof() -> Bool
+}
+
+protocol InstantiableSource: Source {
+    associatedtype Provider
+
+    var provider: Provider { get }
+
+    init?(provider: Provider)
 }

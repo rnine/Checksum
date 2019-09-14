@@ -5,144 +5,131 @@
 [![GitHub tag](https://img.shields.io/github/tag/rnine/CryptoHash.svg)](https://github.com/rnine/CryptoHash)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rnine/CryptoHash/blob/develop/LICENSE.md)
 
-Extends `String`, `Data`, and `URL` to easily and efficiently calculate large file content checksums synchronously and asynchronously with optional progress reporting.
+Extends `String`, `Data`, and `URL` adding the ability to easily and efficiently calculate the cryptographic checksum of their associated contents by 
+adding conformance to the `Checksumable` protocol.
 
-Support for calculating checksums of arrays of `Data` and `URL` is also included and showcased in the examples below.
+### Features
 
-#### String
+#### Supported Digests
 
-- `checksum(algorithm:)`
+`MD5`, `SHA1`, `SHA224`, `SHA256`, `SHA384`, `SHA512`
 
-#### Data
+#### Async Processing
+
+Processing and progress monitoring are performed asynchronously on a background dispatch queue. Progress and completion 
+closures are, by default, called on the `.main` dispatch queue. However, a different `DispatchQueue` may be specified.
+
+The function signature for async processing is: 
 
 - `checksum(algorithm:chunkSize:queue:progress:completion:)`
 
-#### URL
+#### Sync Processing
+
+In the cases where the payload is fairly small, asynchronous processing may not be required or desirable. For such cases, we made available a 
+synchronous version.
+
+The function signature for sync processing is:
 
 - `checksum(algorithm:chunkSize:)`
-- `checksum(algorithm:chunkSize:queue:progress:completion:)`
 
-#### Data & URL arrays
+#### Process Local or Remote URLs
 
-- `checksum(algorithm:chunkSize:queue:progress:completion:)`
+Any URLs with schemes `file`, `http`, or `https` may be used as input.
 
-### Supported digests:
+#### Batch Processing
 
-- MD5
-- SHA1
-- SHA224
-- SHA256
-- SHA384
-- SHA512
-
+Support for processing arrays of  `Checksumable` items is also included and showcased in the examples below.
 
 ### Examples
 
-#### Calculating the checksum of a string:
+#### Calculating the checksum of some `Data` asynchronously
 
 ```swift
-let string = "Just a simple string"
+data.checksum(algorithm: .md5) { result in
+    switch result {
+    case .success(let checksum):
+        // Use checksum
+    case .failure(let error):
+        // Unable to obtain checksum
+    }
+}
+```
+#### Calculating the checksum of some `URL`'s contents asynchronously
 
-// Calculate MD5 checksum
+```swift
+remoteURL.checksum(algorithm: .sha256) { result in
+    switch result {
+    case .success(let checksum):
+        // Use checksum
+    case .failure(let error):
+        // Unable to obtain checksum
+    }
+}
+```
+#### Calculating the checksum of multiple `URL`'s contents asynchronously
+
+```swift
+[someURL, anotherURL, yetAnotherURL].checksum(algorithm: .md5) { result in
+    switch result {
+    case .success(let checksumResults):
+        // Use results object
+        
+        for checksumResult in checksumResults {
+            guard let url = checksumResult.checksumable as? URL else {
+                fail("Expected checksumable to be of type URL.")
+                return
+            }
+            
+            if let checksum = checksumResult.checksum {
+                print("Checksum of \(result.checksumable) is \(checksumResult.checksum)")
+            } else {
+                print("Unable to obtain checksum for \(checksumResult.checksumable)")
+            }
+        }
+    case .failure(let error):
+        // Unable to obtain checksums
+    }
+}
+```
+
+#### Calculating the checksum of some `String` synchronously
+
+```swift
 if let checksum = string.checksum(algorithm: .md5) {
-    // Use computed checksum
+    // Use checksum
 }
 ```
 
-#### Calculating the checksum of some data synchronously:
+#### Calculating the checksum of some `Data` synchronously
 
 ```swift
-let data = Data(...) // some data object
-
-// Calculate MD5 checksum
 if let checksum = data.checksum(algorithm: .md5) {
-    // Use computed checksum
+    // Use checksum
 }
 ```
 
-#### Calculating the checksum of some data asynchronously with progress reporting:
+#### Calculating the checksum of some `URL`'s contents synchronously
 
 ```swift
-let data = Data(...) // some data object
-
-let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
-    print("Bytes processed: \(bytesProcessed), bytes total: \(totalBytes), bytes left: \(totalBytes - bytesProcessed)")
-}
-
-// Calculate MD5 checksum asynchronously
-data.checksum(algorithm: .md5, progress: progress) { (checksum) in
-    if let checksum = checksum {
-        print("MD5 checksum of \(imageURL) is \(checksum)"
-    } else {
-        print("Unable to obtain checksum.")
-    }
+if let checksum = localURL.checksum(algorithm: .md5) {
+    // Use checksum
 }
 ```
 
-#### Calculating the checksum of a local file synchronously:
+### Progress Reporting
+
+You may monitor progress by passing a `ProgressHandler` closure to the `progress` argument in 
+`checksum(algorithm:chunkSize:queue:progress:completion:)`.
+
+#### Example
 
 ```swift
-  if let imageURL = Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg") {
-    // Calculate image SHA256 checksum
-    if let checksum = imageURL.checksum(algorithm: .sha256) {
-        // Use computed checksum
-    }
-  }
-```
-
-#### Calculating the checksum of a remote file asynchronously with progress reporting:
-
-```swift
-  let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
-      print("Bytes processed: \(bytesProcessed), bytes total: \(totalBytes), bytes left: \(totalBytes - bytesProcessed)")
-  }
-
-  if let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg") {
-      // Calculate image SHA256 checksum asynchronously with progress reporting
-      imageURL.checksum(algorithm: .sha256, progress: progress) { (checksum) in
-          if let checksum = checksum {
-            print("SHA256 checksum of \(imageURL) is \(checksum)"
-          } else {
-            print("Unable to obtain checksum.")
-          }
-      }
-  }
-```
-
-#### Calculating checksums of the contents of multiple URLs:
-
-*(Added in beta1)*
-
-```swift
-  let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
-      print("Bytes processed: \(bytesProcessed), bytes total: \(totalBytes), bytes left: \(totalBytes - bytesProcessed)")
-  }
-
-  let urls = [someURL, anotherURL, yetAnotherURL, oneFinalURL]
-  
-  urls.checksum(algorithm: .md5, progress: progress) { (checksums) in
-      // Please notice that `checksums` is returned with the checksums of the contents  of the URLs 
-      // in our `urls` array exactly in the same order.
-      // TODO: Add your handling code here.
-  }
-```
-
-#### Calculating checksums of multiple Data objects:
-
-*(Added in beta1)*
-
-```swift
-  let progress: ProgressHandler = { (bytesProcessed, totalBytes) in
-      print("Bytes processed: \(bytesProcessed), bytes total: \(totalBytes), bytes left: \(totalBytes - bytesProcessed)")
-  }
-
-  let dataObjects = [someData, anotherData, yetAnotherData, oneFinalData]
-  
-  dataObjects.checksum(algorithm: .md5, progress: progress) { (checksums) in
-      // `checksums` is returned with the checksums of the data objects in our `dataObjects` array 
-      // exactly in the same order.
-      // TODO: Add your handling code here.
-  }
+remoteURL.checksum(algorithm: .sha256, progress: { progress in
+    // Add your progress handling code here.
+    print("Fraction completed: \(progress.fractionCompleted)")
+}) { result in 
+    /// Result handling ommited.
+}
 ```
 
 ### Requirements

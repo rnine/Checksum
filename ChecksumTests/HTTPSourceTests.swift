@@ -13,11 +13,10 @@ class HTTPSourceTests: XCTestCase {
     func testImageChecksum() {
         let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/ChecksumTests/Fixtures/image.jpg")!
 
-        let source: HTTPSource! = HTTPSource(url: imageURL)
+        let source: HTTPSource! = HTTPSource(provider: imageURL)
 
-        XCTAssertEqual(source.url, imageURL)
+        XCTAssertEqual(source.provider, imageURL)
         XCTAssertEqual(source.size, 52226)
-        XCTAssertEqual(source.seekable, true)
 
         XCTAssertFalse(source.eof())
         let data = source.read(amount: source.size)
