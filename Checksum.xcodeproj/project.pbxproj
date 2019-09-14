@@ -13,7 +13,6 @@
 		4504283C22E4DEE300452843 /* Chunksize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504283822E4DEE300452843 /* Chunksize.swift */; };
 		4506A6721DD62DA5007211D2 /* Checksum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4506A6681DD62DA5007211D2 /* Checksum.framework */; };
 		4506A6771DD62DA5007211D2 /* ChecksumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6761DD62DA5007211D2 /* ChecksumTests.swift */; };
-		4506A6791DD62DA5007211D2 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 4506A66B1DD62DA5007211D2 /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4506A6961DD62E11007211D2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
 		4506A6B11DD63B14007211D2 /* basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4506A6B01DD63B14007211D2 /* basic.txt */; };
 		450A9B1A22F085A500D44558 /* Checksumable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450A9B1922F085A500D44558 /* Checksumable.swift */; };
@@ -35,6 +34,10 @@
 		451D9A202167B1200093703D /* HTTPSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A1C2167B1200093703D /* HTTPSource.swift */; };
 		451D9A222167B9F40093703D /* HTTPSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A212167B9F40093703D /* HTTPSourceTests.swift */; };
 		4529D3A61DD6406000AE9FB1 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4529D3A51DD6406000AE9FB1 /* image.jpg */; };
+		45370F6F232D70F200CD605F /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 45370F6E232D70F200CD605F /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45370F70232D70F200CD605F /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 45370F6E232D70F200CD605F /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45370F71232D70F200CD605F /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 45370F6E232D70F200CD605F /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45370F72232D70F200CD605F /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 45370F6E232D70F200CD605F /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4542561821B7D46400EA4538 /* CCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561721B7D46400EA4538 /* CCWrapper.swift */; };
 		4542561921B7D46F00EA4538 /* CCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561721B7D46400EA4538 /* CCWrapper.swift */; };
 		4542561A21B7D46F00EA4538 /* CCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4542561721B7D46400EA4538 /* CCWrapper.swift */; };
@@ -70,9 +73,6 @@
 		45912D3521677E96008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
 		45912D3621677E96008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
 		45912D3721677E97008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
-		45912D3821677E9B008D0E08 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 4506A66B1DD62DA5007211D2 /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45912D3921677E9E008D0E08 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 4506A66B1DD62DA5007211D2 /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45912D3A21677EA0008D0E08 /* Checksum.h in Headers */ = {isa = PBXBuildFile; fileRef = 4506A66B1DD62DA5007211D2 /* Checksum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +88,6 @@
 /* Begin PBXFileReference section */
 		4504283822E4DEE300452843 /* Chunksize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunksize.swift; sourceTree = "<group>"; };
 		4506A6681DD62DA5007211D2 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4506A66B1DD62DA5007211D2 /* Checksum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Checksum.h; sourceTree = "<group>"; };
 		4506A66C1DD62DA5007211D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4506A6711DD62DA5007211D2 /* ChecksumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChecksumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4506A6761DD62DA5007211D2 /* ChecksumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecksumTests.swift; sourceTree = "<group>"; };
@@ -102,6 +101,8 @@
 		451D9A1C2167B1200093703D /* HTTPSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSource.swift; sourceTree = "<group>"; };
 		451D9A212167B9F40093703D /* HTTPSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSourceTests.swift; sourceTree = "<group>"; };
 		4529D3A51DD6406000AE9FB1 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image.jpg; path = Fixtures/image.jpg; sourceTree = "<group>"; };
+		45370F6E232D70F200CD605F /* Checksum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checksum.h; sourceTree = "<group>"; };
+		45370F78232D71CC00CD605F /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		4542561721B7D46400EA4538 /* CCWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCWrapper.swift; sourceTree = "<group>"; };
 		4542562221B7D54600EA4538 /* DigestAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigestAlgorithm.swift; sourceTree = "<group>"; };
 		4565D223232CFFF700CFB860 /* URL+Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Source.swift"; sourceTree = "<group>"; };
@@ -171,10 +172,11 @@
 		4506A65E1DD62DA5007211D2 = {
 			isa = PBXGroup;
 			children = (
+				45370F78232D71CC00CD605F /* Package.swift */,
 				45A027F122F0D4C4001AF2D1 /* LICENSE.md */,
 				45A027F222F0D4C5001AF2D1 /* README.md */,
-				4506A66A1DD62DA5007211D2 /* Checksum */,
-				4506A6751DD62DA5007211D2 /* ChecksumTests */,
+				4506A66A1DD62DA5007211D2 /* Source */,
+				4506A6751DD62DA5007211D2 /* Tests */,
 				4506A6691DD62DA5007211D2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -191,27 +193,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4506A66A1DD62DA5007211D2 /* Checksum */ = {
+		4506A66A1DD62DA5007211D2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				4506A66B1DD62DA5007211D2 /* Checksum.h */,
-				4506A66C1DD62DA5007211D2 /* Info.plist */,
 				4504283D22E4DF3100452843 /* Internal */,
 				4580871C232CEC6A005FB114 /* Public */,
+				45370F6D232D70DE00CD605F /* Supporting Files */,
 			);
-			path = Checksum;
+			path = Source;
 			sourceTree = "<group>";
 		};
-		4506A6751DD62DA5007211D2 /* ChecksumTests */ = {
+		4506A6751DD62DA5007211D2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4506A6781DD62DA5007211D2 /* Info.plist */,
 				4506A6761DD62DA5007211D2 /* ChecksumTests.swift */,
 				451D9A1A2167AEE40093703D /* FileSourceTests.swift */,
 				451D9A212167B9F40093703D /* HTTPSourceTests.swift */,
 				4506A6AF1DD63AE4007211D2 /* Fixtures */,
+				45370F77232D719A00CD605F /* Supporting Files */,
 			);
-			path = ChecksumTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		4506A6AF1DD63AE4007211D2 /* Fixtures */ = {
@@ -240,6 +241,23 @@
 				4565D23D232D435200CFB860 /* Sourceable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		45370F6D232D70DE00CD605F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				45370F6E232D70F200CD605F /* Checksum.h */,
+				4506A66C1DD62DA5007211D2 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		45370F77232D719A00CD605F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4506A6781DD62DA5007211D2 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		4542562121B7D54000EA4538 /* Enums */ = {
@@ -287,7 +305,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4506A6791DD62DA5007211D2 /* Checksum.h in Headers */,
+				45370F6F232D70F200CD605F /* Checksum.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +313,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45912D3821677E9B008D0E08 /* Checksum.h in Headers */,
+				45370F70232D70F200CD605F /* Checksum.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +321,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45912D3921677E9E008D0E08 /* Checksum.h in Headers */,
+				45370F71232D70F200CD605F /* Checksum.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +329,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45912D3A21677EA0008D0E08 /* Checksum.h in Headers */,
+				45370F72232D70F200CD605F /* Checksum.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,10 +759,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Checksum/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LLVM_LTO = YES_THIN;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
 				PRODUCT_NAME = Checksum;
 				SKIP_INSTALL = YES;
@@ -763,10 +782,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Checksum/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LLVM_LTO = YES_THIN;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
 				PRODUCT_NAME = Checksum;
 				SKIP_INSTALL = YES;
@@ -778,7 +798,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = ChecksumTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.ChecksumTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -790,7 +810,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = ChecksumTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.ChecksumTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -810,9 +830,9 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Checksum/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -837,9 +857,9 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Checksum/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.Checksum;
@@ -865,7 +885,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Checksum/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -875,7 +895,7 @@
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -893,7 +913,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Checksum/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_FAST_MATH = YES;
@@ -902,7 +922,7 @@
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -922,7 +942,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Checksum/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -932,7 +952,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -951,7 +971,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = Checksum/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_FAST_MATH = YES;
@@ -961,7 +981,7 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
