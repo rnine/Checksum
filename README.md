@@ -1,7 +1,10 @@
 # Checksum
 
-[![Swift](https://img.shields.io/badge/swift-5.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS%20-4E4E4E.svg?colorA=28a745)](https://github.com/rnine/Checksum)
+[![Swift support](https://img.shields.io/badge/Swift-5.0%20%7C%205.1%20-lightgrey.svg?colorA=28a745&colorB=4E4E4E)](https://github.com/rnine/Checksum)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat&colorA=28a745&&colorB=4E4E4E)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager compatible](https://img.shields.io/badge/SPM-compatible-brightgreen.svg?style=flat&colorA=28a745&&colorB=4E4E4E)](https://github.com/apple/swift-package-manager)
+
 [![GitHub tag](https://img.shields.io/github/tag/rnine/Checksum.svg)](https://github.com/rnine/Checksum)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rnine/Checksum/blob/develop/LICENSE.md)
 
