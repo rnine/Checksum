@@ -14,12 +14,18 @@ class HTTPSource: InstantiableSource {
     // MARK: - Public Properties
 
     let provider: URL
-    private(set) var size: Int = 0
+
+    private(set) var size: Int = 0 {
+        didSet {
+            sizeKnown = size == -1 ? false : true
+        }
+    }
 
     // MARK: - Private Properties
 
     private var urlSession = URLSession(configuration: .ephemeral)
     private var position: Int = 0
+    private var sizeKnown: Bool = false
     private let processQueue = DispatchQueue(label: "io.9labs.Checksum.http-source-process")
     private let semaphore = DispatchSemaphore(value: 0)
     private let requestTimeOut: TimeInterval = 5.0
@@ -27,31 +33,13 @@ class HTTPSource: InstantiableSource {
     // MARK: - Lifecycle
 
     required init?(provider url: URL) {
-        var success = false
-
         self.provider = url
 
-        processQueue.sync {
-            var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
-
-            request.httpShouldUsePipelining = true
-            request.httpMethod = "HEAD"
-
-            let task = urlSession.dataTask(with: request) { _, response, error in
-                if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                    self.size = Int(httpResponse.expectedContentLength)
-                    success = true
-                }
-
-                self.semaphore.signal()
-            }
-
-            task.resume()
+        if let size = getContentLength(for: url) {
+            self.size = size
+        } else {
+            return nil
         }
-
-        _ = semaphore.wait(timeout: .distantFuture)
-
-        guard success == true else { return nil }
     }
 
     deinit {
@@ -75,48 +63,46 @@ class HTTPSource: InstantiableSource {
     }
 
     func read(amount: Int) -> Data? {
-        if size != -1, position >= size {
+        if sizeKnown, position >= size {
             return nil
         }
 
         var readData: Data?
 
         processQueue.sync {
-            autoreleasepool {
-                var urlRequest = URLRequest(url: provider, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
+            var request = URLRequest(url: provider, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
 
-                urlRequest.httpShouldUsePipelining = true
+            request.httpShouldUsePipelining = true
 
-                if size == -1 {
-                    // Size is unknown
-                    urlRequest.addValue("bytes=\(position)-", forHTTPHeaderField: "Range")
-                } else {
-                    let bytesToRead = Swift.min(amount, size - position)
-                    let range: (Int, Int) = (position, position + bytesToRead - 1)
-                    urlRequest.addValue("bytes=\(range.0)-\(range.1)", forHTTPHeaderField: "Range")
-                }
+            if !sizeKnown {
+                // Size is unknown
+                request.addValue("bytes=\(position)-", forHTTPHeaderField: "Range")
+            } else {
+                let bytesToRead = Swift.min(amount, size - position)
+                let range: (Int, Int) = (position, position + bytesToRead - 1)
+                request.addValue("bytes=\(range.0)-\(range.1)", forHTTPHeaderField: "Range")
+            }
 
-                let task = urlSession.dataTask(with: urlRequest) { data, response, _ in
-                    if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 206, let data = data {
-                        if self.size == -1 {
-                            // Use estimated size for now
-                            self.size = Int(httpResponse.expectedContentLength)
-                        }
-
-                        readData = data
-                        self.position += data.count
-
-                        if data.count < amount {
-                            // EOF reached, adjust size.
-                            self.size = self.position
-                        }
+            let task = urlSession.dataTask(with: request) { data, response, _ in
+                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 206, let data = data {
+                    if !self.sizeKnown {
+                        // Use expected response's content length for now
+                        self.size = Int(httpResponse.expectedContentLength)
                     }
 
-                    self.semaphore.signal()
+                    readData = data
+                    self.position += data.count
+
+                    if data.count < amount {
+                        // EOF reached, adjust size.
+                        self.size = self.position
+                    }
                 }
 
-                task.resume()
+                self.semaphore.signal()
             }
+
+            task.resume()
         }
 
         _ = semaphore.wait(timeout: .distantFuture)
@@ -126,5 +112,33 @@ class HTTPSource: InstantiableSource {
 
     func close() {
         urlSession.invalidateAndCancel()
+    }
+
+    // MARK: - Private Functions
+
+    /// Tries to obtain the `URL`'s content length by performing a `HEAD` request. Returns `nil` if it fails.
+    private func getContentLength(for url: URL) -> Int? {
+        var size: Int?
+
+        processQueue.sync {
+            var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
+
+            request.httpShouldUsePipelining = true
+            request.httpMethod = "HEAD"
+
+            let task = urlSession.dataTask(with: request) { _, response, error in
+                if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                    size = Int(httpResponse.expectedContentLength)
+                }
+
+                self.semaphore.signal()
+            }
+
+            task.resume()
+        }
+
+        _ = semaphore.wait(timeout: .distantFuture)
+
+        return size
     }
 }

@@ -39,7 +39,10 @@ The function signature for sync processing is:
 
 #### Process Local or Remote URLs
 
-Any URLs with schemes `file`, `http`, or `https` may be used as input.
+Any URLs with schemes `file`, `http`, or `https` may be used as input. However, `http` and `https` support is currently ***experimental*** and has the following requirements: 
+
+1. The HTTP server must be able to respond to `HEAD` requests in order to determine whether the `URL` is reachable.
+2. The HTTP server must be able to serve [206 Partial Content](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206) responses.
 
 #### Batch Processing
 
