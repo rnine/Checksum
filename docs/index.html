@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Checksum  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="Checksum  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          Checksum Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/rnine/Checksum">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">Checksum Reference</a>
+      <img class="carat" src="img/carat.png" />
+      Checksum  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/ChecksumError.html">ChecksumError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/Chunksize.html">Chunksize</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/DigestAlgorithm.html">DigestAlgorithm</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Array.html">Array</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Checksumable.html">Checksumable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:8Checksum0A6Resulta">ChecksumResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:8Checksum17CompletionHandlera">CompletionHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:8Checksum25MultipleCompletionHandlera">MultipleCompletionHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:8Checksum15ProgressHandlera">ProgressHandler</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            
+            <h1 id='checksum' class='heading'>Checksum</h1>
+
+<p><a href="https://github.com/rnine/Checksum"><img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS%20-4E4E4E.svg?colorA=28a745" alt="Platform"></a>
+<a href="https://github.com/rnine/Checksum"><img src="https://img.shields.io/badge/Swift-5.0%20%7C%205.1%20-lightgrey.svg?colorA=28a745&colorB=4E4E4E" alt="Swift support"></a>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat&colorA=28a745&&colorB=4E4E4E" alt="Carthage compatible"></a>
+<a href="https://github.com/apple/swift-package-manager"><img src="https://img.shields.io/badge/SPM-compatible-brightgreen.svg?style=flat&colorA=28a745&&colorB=4E4E4E" alt="Swift Package Manager compatible"></a></p>
+
+<p><a href="https://github.com/rnine/Checksum"><img src="https://img.shields.io/github/tag/rnine/Checksum.svg" alt="GitHub tag"></a>
+<a href="https://github.com/rnine/Checksum/blob/develop/LICENSE.md"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="License"></a></p>
+
+<p>Extends <code>String</code>, <code>Data</code>, and <code>URL</code> adding the ability to easily and efficiently calculate the cryptographic checksum of its associated
+contents by adding conformance to the <code><a href="Protocols/Checksumable.html">Checksumable</a></code> protocol. </p>
+
+<p>Under the hood, Apple&rsquo;s <code>CommonCrypto</code> framework is used.</p>
+<h3 id='features' class='heading'>Features</h3>
+<h4 id='supported-digests' class='heading'>Supported Digests</h4>
+
+<p><code>MD5</code>, <code>SHA1</code>, <code>SHA224</code>, <code>SHA256</code>, <code>SHA384</code>, <code>SHA512</code></p>
+<h4 id='async-processing' class='heading'>Async Processing</h4>
+
+<p>Processing and progress monitoring are performed asynchronously on a background dispatch queue. Progress and completion 
+closures are, by default, called on the <code>.main</code> dispatch queue. However, a different <code>DispatchQueue</code> may be specified.</p>
+
+<p>The function signature for async processing is: </p>
+
+<ul>
+<li><code>checksum(algorithm:chunkSize:queue:progress:completion:)</code></li>
+</ul>
+<h4 id='sync-processing' class='heading'>Sync Processing</h4>
+
+<p>In the cases where the payload is fairly small, asynchronous processing may not be required or desirable. For such cases, a synchronous 
+version is provided.</p>
+
+<p>The function signature for sync processing is:</p>
+
+<ul>
+<li><code>checksum(algorithm:chunkSize:)</code></li>
+</ul>
+<h4 id='process-local-or-remote-urls' class='heading'>Process Local or Remote URLs</h4>
+
+<p>Any URLs with schemes <code>file</code>, <code>http</code>, or <code>https</code> may be used as input. However, <code>http</code> and <code>https</code> support is currently <strong><em>experimental</em></strong> and has the following requirements: </p>
+
+<ol>
+<li>The HTTP server must be able to respond to <code>HEAD</code> requests in order to determine whether the <code>URL</code> is reachable.</li>
+<li>The HTTP server must be able to serve <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206">206 Partial Content</a> responses.</li>
+</ol>
+<h4 id='batch-processing' class='heading'>Batch Processing</h4>
+
+<p>Support for processing arrays of  <code><a href="Protocols/Checksumable.html">Checksumable</a></code> items is also included and showcased in the examples below.</p>
+<h3 id='examples' class='heading'>Examples</h3>
+<h4 id='calculating-the-checksum-of-some-code-data-code-asynchronously' class='heading'>Calculating the checksum of some <code>Data</code> asynchronously</h4>
+<pre class="highlight swift"><code><span class="n">data</span><span class="o">.</span><span class="nf">checksum</span><span class="p">(</span><span class="nv">algorithm</span><span class="p">:</span> <span class="o">.</span><span class="n">md5</span><span class="p">)</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">checksum</span><span class="p">):</span>
+        <span class="c1">// Use checksum</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+        <span class="c1">// Unable to obtain checksum</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='calculating-the-checksum-of-the-content-at-a-given-code-url-code-asynchronously' class='heading'>Calculating the checksum of the content at a given <code>URL</code> asynchronously</h4>
+<pre class="highlight swift"><code><span class="n">remoteURL</span><span class="o">.</span><span class="nf">checksum</span><span class="p">(</span><span class="nv">algorithm</span><span class="p">:</span> <span class="o">.</span><span class="n">sha256</span><span class="p">)</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">checksum</span><span class="p">):</span>
+        <span class="c1">// Use checksum</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+        <span class="c1">// Unable to obtain checksum</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='calculating-the-checksums-of-the-contents-at-given-code-urls-code-asynchronously' class='heading'>Calculating the checksums of the contents at given <code>URLs</code> asynchronously</h4>
+<pre class="highlight swift"><code><span class="p">[</span><span class="n">someURL</span><span class="p">,</span> <span class="n">anotherURL</span><span class="p">,</span> <span class="n">yetAnotherURL</span><span class="p">]</span><span class="o">.</span><span class="nf">checksum</span><span class="p">(</span><span class="nv">algorithm</span><span class="p">:</span> <span class="o">.</span><span class="n">md5</span><span class="p">)</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">checksumResults</span><span class="p">):</span>
+        <span class="c1">// Use results object</span>
+
+        <span class="k">for</span> <span class="n">checksumResult</span> <span class="k">in</span> <span class="n">checksumResults</span> <span class="p">{</span>
+            <span class="k">guard</span> <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="n">checksumResult</span><span class="o">.</span><span class="n">checksumable</span> <span class="k">as?</span> <span class="kt">URL</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nf">fail</span><span class="p">(</span><span class="s">"Expected checksumable to be of type URL."</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="k">let</span> <span class="nv">checksum</span> <span class="o">=</span> <span class="n">checksumResult</span><span class="o">.</span><span class="n">checksum</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"Checksum of </span><span class="se">\(</span><span class="n">result</span><span class="o">.</span><span class="n">checksumable</span><span class="se">)</span><span class="s"> is </span><span class="se">\(</span><span class="n">checksumResult</span><span class="o">.</span><span class="n">checksum</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"Unable to obtain checksum for </span><span class="se">\(</span><span class="n">checksumResult</span><span class="o">.</span><span class="n">checksumable</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+        <span class="c1">// Unable to obtain checksums</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='calculating-the-checksum-of-some-code-string-code-synchronously' class='heading'>Calculating the checksum of some <code>String</code> synchronously</h4>
+<pre class="highlight swift"><code><span class="k">if</span> <span class="k">let</span> <span class="nv">checksum</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="nf">checksum</span><span class="p">(</span><span class="nv">algorithm</span><span class="p">:</span> <span class="o">.</span><span class="n">md5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Use checksum</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='calculating-the-checksum-of-some-code-data-code-synchronously' class='heading'>Calculating the checksum of some <code>Data</code> synchronously</h4>
+<pre class="highlight swift"><code><span class="k">if</span> <span class="k">let</span> <span class="nv">checksum</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="nf">checksum</span><span class="p">(</span><span class="nv">algorithm</span><span class="p">:</span> <span class="o">.</span><span class="n">md5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Use checksum</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='calculating-the-checksum-of-the-content-at-a-given-code-url-code-synchronously' class='heading'>Calculating the checksum of the content at a given <code>URL</code> synchronously</h4>
+<pre class="highlight swift"><code><span class="k">if</span> <span class="k">let</span> <span class="nv">checksum</span> <span class="o">=</span> <span class="n">localURL</span><span class="o">.</span><span class="nf">checksum</span><span class="p">(</span><span class="nv">algorithm</span><span class="p">:</span> <span class="o">.</span><span class="n">md5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Use checksum</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='progress-reporting' class='heading'>Progress Reporting</h3>
+
+<p>You may monitor progress by passing a <code><a href="Typealiases.html#/s:8Checksum15ProgressHandlera">ProgressHandler</a></code> closure to the <code>progress</code> argument in 
+<code>checksum(algorithm:chunkSize:queue:progress:completion:)</code>.</p>
+<h4 id='example' class='heading'>Example</h4>
+<pre class="highlight swift"><code><span class="n">remoteURL</span><span class="o">.</span><span class="nf">checksum</span><span class="p">(</span><span class="nv">algorithm</span><span class="p">:</span> <span class="o">.</span><span class="n">sha256</span><span class="p">,</span> <span class="nv">progress</span><span class="p">:</span> <span class="p">{</span> <span class="n">progress</span> <span class="k">in</span>
+    <span class="c1">// Add your progress handling code here.</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Fraction completed: </span><span class="se">\(</span><span class="n">progress</span><span class="o">.</span><span class="n">fractionCompleted</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">})</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span> 
+    <span class="c1">/// Result handling ommited.</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='requirements' class='heading'>Requirements</h3>
+
+<ul>
+<li>Xcode 10.2 and Swift 5.0</li>
+</ul>
+<h3 id='license' class='heading'>License</h3>
+
+<p><code>Checksum</code> was written by Ruben Nine (<a href="https://twitter.com/sonicbee9">@sonicbee9</a>) and is licensed under the 
+<a href="http://opensource.org/licenses/MIT">MIT</a> license. See <a href="LICENSE.md">LICENSE.md</a>.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">9Labs</a>. All rights reserved. (Last updated: 2019-09-15)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
