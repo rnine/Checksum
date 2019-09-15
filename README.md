@@ -13,6 +13,14 @@ contents by adding conformance to the `Checksumable` protocol.
 
 Under the hood, Apple's `CommonCrypto` framework is used.
 
+### Requirements
+
+- Xcode 10.2 and Swift 5.0
+
+### Documentation
+
+- [API Documentation](https://rnine.github.io/Checksum/)
+
 ### Features
 
 #### Supported Digests
@@ -139,10 +147,6 @@ remoteURL.checksum(algorithm: .sha256, progress: { progress in
     /// Result handling ommited.
 }
 ```
-
-### Requirements
-
-- Xcode 10.2 and Swift 5.0
 
 ### License
 
