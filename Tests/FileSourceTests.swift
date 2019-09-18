@@ -13,57 +13,53 @@ class FileSourceTests: XCTestCase {
     private let textURL: URL = Bundle(for: FileSourceTests.self).url(forResource: "basic", withExtension: "txt")!
     private let imageURL: URL = Bundle(for: FileSourceTests.self).url(forResource: "image", withExtension: "jpg")!
 
-    func testTextChecksum() {
-        let source: FileSource! = FileSource(provider: textURL)
+    func testTextChecksum() throws {
+        let source = try XCTUnwrap(FileSource(provider: textURL))
 
         XCTAssertEqual(source.provider, textURL)
         XCTAssertEqual(source.size, 22)
 
         XCTAssertFalse(source.eof())
-        let data = source.read(amount: source.size)
-        XCTAssertNotNil(data)
-        XCTAssertEqual(data!.count, 22)
+        let data = try XCTUnwrap(source.read(amount: source.size))
+        XCTAssertEqual(data.count, 22)
         XCTAssertTrue(source.eof())
 
         XCTAssertTrue(source.seek(position: 11))
         XCTAssertFalse(source.eof())
 
-        let data2 = source.read(amount: source.size)
-        XCTAssertNotNil(data2)
-        XCTAssertEqual(data2!.count, 11)
+        let data2 = try XCTUnwrap(source.read(amount: source.size))
+        XCTAssertEqual(data2.count, 11)
         XCTAssertTrue(source.eof())
 
-        XCTAssertEqual(data!.subdata(in: (11..<22)), data2!)
+        XCTAssertEqual(data.subdata(in: (11..<22)), data2)
 
-        XCTAssertEqual(data!.count, source.size)
-        XCTAssertEqual(data!.checksum(algorithm: .md5), "59769e54d93d7d5975fdefa567ac745b")
+        XCTAssertEqual(data.count, source.size)
+        XCTAssertEqual(data.checksum(algorithm: .md5), "59769e54d93d7d5975fdefa567ac745b")
     }
 
-    func testImageChecksum() {
-        let source: FileSource! = FileSource(provider: imageURL)
+    func testImageChecksum() throws {
+        let source = try XCTUnwrap(FileSource(provider: imageURL))
 
         XCTAssertEqual(source.provider, imageURL)
         XCTAssertEqual(source.size, 52226)
 
         XCTAssertFalse(source.eof())
-        let data = source.read(amount: source.size)
-        XCTAssertNotNil(data)
+        let data = try XCTUnwrap(source.read(amount: source.size))
         XCTAssertTrue(source.eof())
 
-        XCTAssertEqual(data!.count, source.size)
-        XCTAssertEqual(data!.checksum(algorithm: .md5), "89808f4076aa649844c0de958bf08fa1")
+        XCTAssertEqual(data.count, source.size)
+        XCTAssertEqual(data.checksum(algorithm: .md5), "89808f4076aa649844c0de958bf08fa1")
     }
 
-    func testSeekAndRead() {
-        let source: FileSource! = FileSource(provider: textURL)
+    func testSeekAndRead() throws {
+        let source = try XCTUnwrap(FileSource(provider: textURL))
         XCTAssertEqual(source.provider, textURL)
         XCTAssertEqual(source.size, 22)
 
         // Read whole file
         XCTAssertFalse(source.eof())
-        let data = source.read(amount: source.size)
-        XCTAssertNotNil(data)
-        XCTAssertEqual(data!.count, 22)
+        let data = try XCTUnwrap(source.read(amount: source.size))
+        XCTAssertEqual(data.count, 22)
         XCTAssertTrue(source.eof())
 
         // Seek to 11
@@ -71,20 +67,18 @@ class FileSourceTests: XCTestCase {
         XCTAssertFalse(source.eof())
 
         // Read last half
-        let data2 = source.read(amount: source.size)
-        XCTAssertNotNil(data2)
-        XCTAssertEqual(data2!.count, 11)
-        XCTAssertEqual(data!.subdata(in: (11..<22)), data2!)
+        let data2 = try XCTUnwrap(source.read(amount: source.size))
+        XCTAssertEqual(data2.count, 11)
+        XCTAssertEqual(data.subdata(in: (11..<22)), data2)
         XCTAssertTrue(source.eof())
 
         // Seek to 0
         XCTAssertTrue(source.seek(position: 0))
 
         // Read first half
-        let data3 = source.read(amount: 11)
-        XCTAssertNotNil(data3)
-        XCTAssertEqual(data3!.count, 11)
-        XCTAssertEqual(data!.subdata(in: (0..<11)), data3!)
+        let data3 = try XCTUnwrap(source.read(amount: 11))
+        XCTAssertEqual(data3.count, 11)
+        XCTAssertEqual(data.subdata(in: (0..<11)), data3)
         XCTAssertFalse(source.eof())
 
         // Seek to 0
