@@ -27,6 +27,10 @@ class DataSource: InstantiableSource {
         self.size = data.count
     }
 
+    deinit {
+        close()
+    }
+
     // MARK: - Public functions
 
     func seek(position: Int) -> Bool {
@@ -55,7 +59,5 @@ class DataSource: InstantiableSource {
         return dataChunk
     }
 
-    func close() {
-        // NO-OP
-    }
+    func close() { /* NO-OP */ }
 }

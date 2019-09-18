@@ -44,6 +44,8 @@ class FileSource: InstantiableSource {
     // MARK: - Public functions
 
     func seek(position: Int) -> Bool {
+        guard position < size else { return false }
+        
         return (fseeko(fd, off_t(position), SEEK_SET) == 0)
     }
 

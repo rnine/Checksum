@@ -70,6 +70,7 @@
 		4565D250232D47A300CFB860 /* String+Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4565D24E232D47A300CFB860 /* String+Source.swift */; };
 		4565D251232D47A300CFB860 /* String+Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4565D24E232D47A300CFB860 /* String+Source.swift */; };
 		4565D252232D47A300CFB860 /* String+Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4565D24E232D47A300CFB860 /* String+Source.swift */; };
+		4572C09B2332D3610085BBBC /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572C09A2332D3610085BBBC /* DataSourceTests.swift */; };
 		45912D3521677E96008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
 		45912D3621677E96008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
 		45912D3721677E97008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
@@ -111,6 +112,7 @@
 		4565D23D232D435200CFB860 /* Sourceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sourceable.swift; sourceTree = "<group>"; };
 		4565D244232D46A800CFB860 /* ChecksumError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecksumError.swift; sourceTree = "<group>"; };
 		4565D24E232D47A300CFB860 /* String+Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Source.swift"; sourceTree = "<group>"; };
+		4572C09A2332D3610085BBBC /* DataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		45912D0921677CD4008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45912D2021677DBD008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45912D2D21677E75008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				4506A6761DD62DA5007211D2 /* ChecksumTests.swift */,
+				4572C09A2332D3610085BBBC /* DataSourceTests.swift */,
 				451D9A1A2167AEE40093703D /* FileSourceTests.swift */,
 				451D9A212167B9F40093703D /* HTTPSourceTests.swift */,
 				4506A6AF1DD63AE4007211D2 /* Fixtures */,
@@ -554,6 +557,7 @@
 			files = (
 				451D9A1B2167AEE40093703D /* FileSourceTests.swift in Sources */,
 				4506A6771DD62DA5007211D2 /* ChecksumTests.swift in Sources */,
+				4572C09B2332D3610085BBBC /* DataSourceTests.swift in Sources */,
 				451D9A222167B9F40093703D /* HTTPSourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

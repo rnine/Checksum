@@ -1,22 +1,23 @@
 //
-//  FileSourceTests.swift
+//  DataSourceTests.swift
 //  ChecksumTests
 //
-//  Created by Ruben Nine on 10/5/18.
-//  Copyright © 2018 9Labs. All rights reserved.
+//  Created by Ruben Nine on 18/09/2019.
+//  Copyright © 2019 9Labs. All rights reserved.
 //
 
 import XCTest
 @testable import Checksum
 
-class FileSourceTests: XCTestCase {
+class DataSourceTests: XCTestCase {
     private let textURL: URL = Bundle(for: FileSourceTests.self).url(forResource: "basic", withExtension: "txt")!
     private let imageURL: URL = Bundle(for: FileSourceTests.self).url(forResource: "image", withExtension: "jpg")!
 
     func testTextChecksum() {
-        let source: FileSource! = FileSource(provider: textURL)
+        let textData = try! Data(contentsOf: textURL)
+        let source: DataSource! = DataSource(provider: textData)
 
-        XCTAssertEqual(source.provider, textURL)
+        XCTAssertEqual(source.provider, textData)
         XCTAssertEqual(source.size, 22)
 
         XCTAssertFalse(source.eof())
@@ -40,9 +41,10 @@ class FileSourceTests: XCTestCase {
     }
 
     func testImageChecksum() {
-        let source: FileSource! = FileSource(provider: imageURL)
+        let imageData = try! Data(contentsOf: imageURL)
+        let source: DataSource! = DataSource(provider: imageData)
 
-        XCTAssertEqual(source.provider, imageURL)
+        XCTAssertEqual(source.provider, imageData)
         XCTAssertEqual(source.size, 52226)
 
         XCTAssertFalse(source.eof())
@@ -55,8 +57,10 @@ class FileSourceTests: XCTestCase {
     }
 
     func testSeekAndRead() {
-        let source: FileSource! = FileSource(provider: textURL)
-        XCTAssertEqual(source.provider, textURL)
+        let textData = try! Data(contentsOf: textURL)
+        let source: DataSource! = DataSource(provider: textData)
+
+        XCTAssertEqual(source.provider, textData)
         XCTAssertEqual(source.size, 22)
 
         // Read whole file
