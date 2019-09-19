@@ -39,7 +39,7 @@ extension URL: Checksumable {}
 // MARK: - Checksumable Extension
 
 extension Checksumable {
-    /// On completion, returns a checksum of this `Data` using the specified digest algorithm.
+    /// On completion, returns a checksum of this `Checksumable` using the specified digest algorithm.
     ///
     /// - Parameter algorithm: The digest algorithm to use.
     /// - Parameter chunkSize: The processing buffer's size (mostly relevant for large data computing)
