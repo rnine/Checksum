@@ -11,8 +11,15 @@ import XCTest
 
 class HTTPSourceTests: XCTestCase {
 
-    func testImageChecksum() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+    func testReadZero() throws {
+        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
+        let source = try XCTUnwrap(HTTPSource(provider: imageURL))
+
+        XCTAssertNil(source.read(amount: 0))
+    }
+
+    func testReadAllAtOnce() throws {
+        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertEqual(source.provider, imageURL)
@@ -26,8 +33,32 @@ class HTTPSourceTests: XCTestCase {
         XCTAssertEqual(data.checksum(algorithm: .md5), "89808f4076aa649844c0de958bf08fa1")
     }
 
+    func testReadInChunks() throws {
+        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/large-image.jpg")!
+        let source = try XCTUnwrap(HTTPSource(provider: imageURL))
+
+        XCTAssertEqual(source.provider, imageURL)
+        XCTAssertEqual(source.size, 2_928_426)
+
+        var dataChunks = [Data]()
+
+        XCTAssertFalse(source.eof())
+
+        while !source.eof() {
+            let data = try XCTUnwrap(source.read(amount: 262_144))
+            dataChunks.append(data)
+        }
+
+        let data = Data(dataChunks.joined())
+
+        XCTAssertTrue(source.eof())
+
+        XCTAssertEqual(data.count, source.size)
+        XCTAssertEqual(data.checksum(algorithm: .md5), "a02b4da2f3769bc6a6fead81c490daad")
+    }
+
     func testSeekAndRead() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertTrue(source.seek(position: 1024))
@@ -38,7 +69,7 @@ class HTTPSourceTests: XCTestCase {
     }
 
     func testSeekAndReadBeyondBounds() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertTrue(source.seek(position: 52226))
@@ -47,7 +78,7 @@ class HTTPSourceTests: XCTestCase {
     }
 
     func testSeekAndReadWithinBounds() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertTrue(source.seek(position: 52225))

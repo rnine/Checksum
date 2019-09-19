@@ -63,6 +63,8 @@ class HTTPSource: InstantiableSource {
     }
 
     func read(amount: Int) -> Data? {
+        guard amount > 0 else { return nil }
+
         var readData: Data?
 
         processQueue.sync {
@@ -70,14 +72,8 @@ class HTTPSource: InstantiableSource {
 
             request.httpShouldUsePipelining = true
 
-            if !sizeKnown {
-                // Size is unknown
-                request.addValue("bytes=\(position)-", forHTTPHeaderField: "Range")
-            } else {
-                let bytesToRead = Swift.min(amount, size - position)
-                let range: (Int, Int) = (position, position + bytesToRead - 1)
-                request.addValue("bytes=\(range.0)-\(range.1)", forHTTPHeaderField: "Range")
-            }
+            let range = (position...position + amount - 1)
+            request.addValue("bytes=\(range.lowerBound)-\(range.upperBound)", forHTTPHeaderField: "Range")
 
             let task = urlSession.dataTask(with: request) { data, response, _ in
                 defer { self.semaphore.signal() }
@@ -87,19 +83,13 @@ class HTTPSource: InstantiableSource {
                     let contentRange = httpResponse.contentRange,
                     let data = data else { return }
 
-                if !self.sizeKnown {
-                    // Use expected response's content length for now
-                    self.size = Int(httpResponse.expectedContentLength)
-                }
-
                 readData = data
 
-                self.position = contentRange.range.lowerBound + data.count
-
-                if data.count < amount {
-                    // EOF reached, adjust size.
-                    self.size = self.position
+                if let size = contentRange.size {
+                    self.size = size
                 }
+
+                self.position = contentRange.range.lowerBound + data.count
             }
 
             task.resume()

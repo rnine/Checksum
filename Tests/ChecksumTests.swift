@@ -26,8 +26,8 @@ class ChecksumTests: XCTestCase {
         Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
     }()
 
-    private let remoteTextURL = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/basic.txt")!
-    private let remoteImageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+    private let remoteTextURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/basic.txt")!
+    private let remoteImageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
 
     private let unhandledSchemeURL = URL(string: "gopher://somewhere")!
     private let unreachableLocalURL = URL(string: "file://SOME/RANDOM/UNEXISTING/URL/10192371")!

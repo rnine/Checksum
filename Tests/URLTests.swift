@@ -12,13 +12,13 @@ import XCTest
 class URLTests: XCTestCase {
 
     func testHTTPSource() {
-        let url = URL(string: "http://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+        let url = URL(string: "http://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
 
         XCTAssert(url.source is HTTPSource, String(describing: url.source))
     }
 
     func testHTTPSSource() {
-        let url = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+        let url = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
 
         XCTAssert(url.source is HTTPSource, String(describing: url.source))
     }
