@@ -1,5 +1,9 @@
 name: "Checksum CI"
-on: push
+
+on: 
+  push:
+    branches:
+      - develop
 
 jobs:
   macOS:
@@ -8,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1    
       - name: macOS
-        run: xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum-macOS" -destination "platform=macOS" clean test
+        run: xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum" -destination "platform=macOS" clean test
   iOS:
     name: Test iOS 
     runs-on: macOS-latest
