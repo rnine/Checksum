@@ -11,9 +11,10 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v1    
-      - name: macOS
+      - name: Install and run Jazzy and commit changes.
         run: |
+          cd $HOME
           gem install jazzy --no-document
           jazzy
-          git add -A
+          git add docs
           git commit -m "Updating documentation."
