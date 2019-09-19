@@ -10,7 +10,7 @@ jobs:
     name: Display Xcode version
     runs-on: macOS-latest
     steps:
-        - run: xcodebuild -version
+        - run: ls -lFGA /Applications/Xcode*; xcodebuild -version
   # macOS:
   #   name: Test macOS 
   #   runs-on: macOS-latest
