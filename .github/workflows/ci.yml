@@ -1,9 +1,5 @@
 name: "Checksum CI"
-
-on: 
-  push:
-    branches:
-      - develop
+on: push
 
 jobs:
   macOS:
