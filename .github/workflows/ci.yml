@@ -43,4 +43,3 @@ jobs:
       - uses: actions/checkout@v1
       - name: watchOS - ${{ matrix.destination }}
         run: xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum-watchOS" -destination "${{ matrix.destination }}" clean build
-  
