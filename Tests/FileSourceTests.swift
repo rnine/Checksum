@@ -10,8 +10,8 @@ import XCTest
 @testable import Checksum
 
 class FileSourceTests: XCTestCase {
-    private let textURL: URL = Bundle(for: FileSourceTests.self).url(forResource: "basic", withExtension: "txt")!
-    private let imageURL: URL = Bundle(for: FileSourceTests.self).url(forResource: "image", withExtension: "jpg")!
+    private let textURL: URL = LocalFixturesBaseURL.appendingPathComponent("basic.txt")
+    private let imageURL: URL = LocalFixturesBaseURL.appendingPathComponent("image.jpg")
 
     func testTextChecksum() throws {
         let source = try XCTUnwrap(FileSource(provider: textURL))

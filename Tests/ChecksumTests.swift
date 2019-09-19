@@ -18,16 +18,11 @@ class ChecksumTests: XCTestCase {
 
     private let simpleString = "This is a simple string"
 
-    private lazy var localTextURL: URL = {
-        Bundle(for: type(of: self)).url(forResource: "basic", withExtension: "txt")!
-    }()
+    private let localTextURL = LocalFixturesBaseURL.appendingPathComponent("basic.txt")
+    private let localImageURL = LocalFixturesBaseURL.appendingPathComponent("image.jpg")
 
-    private lazy var localImageURL: URL = {
-        Bundle(for: type(of: self)).url(forResource: "image", withExtension: "jpg")!
-    }()
-
-    private let remoteTextURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/basic.txt")!
-    private let remoteImageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
+    private let remoteTextURL = HTTPSFixturesBaseURL.appendingPathComponent("basic.txt")
+    private let remoteImageURL = HTTPSFixturesBaseURL.appendingPathComponent("image.jpg")
 
     private let unhandledSchemeURL = URL(string: "gopher://somewhere")!
     private let unreachableLocalURL = URL(string: "file://SOME/RANDOM/UNEXISTING/URL/10192371")!

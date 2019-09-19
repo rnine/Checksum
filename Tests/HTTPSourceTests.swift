@@ -10,16 +10,15 @@ import XCTest
 @testable import Checksum
 
 class HTTPSourceTests: XCTestCase {
-
     func testReadZero() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
+        let imageURL = HTTPSFixturesBaseURL.appendingPathComponent("image.jpg")
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertNil(source.read(amount: 0))
     }
 
     func testReadAllAtOnce() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
+        let imageURL = HTTPSFixturesBaseURL.appendingPathComponent("image.jpg")
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertEqual(source.provider, imageURL)
@@ -34,7 +33,7 @@ class HTTPSourceTests: XCTestCase {
     }
 
     func testReadInChunks() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/large-image.jpg")!
+        let imageURL = HTTPSFixturesBaseURL.appendingPathComponent("large-image.jpg")
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertEqual(source.provider, imageURL)
@@ -58,7 +57,7 @@ class HTTPSourceTests: XCTestCase {
     }
 
     func testSeekAndRead() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
+        let imageURL = HTTPSFixturesBaseURL.appendingPathComponent("image.jpg")
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertTrue(source.seek(position: 1024))
@@ -69,7 +68,7 @@ class HTTPSourceTests: XCTestCase {
     }
 
     func testSeekAndReadBeyondBounds() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
+        let imageURL = HTTPSFixturesBaseURL.appendingPathComponent("image.jpg")
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertTrue(source.seek(position: 52226))
@@ -78,7 +77,7 @@ class HTTPSourceTests: XCTestCase {
     }
 
     func testSeekAndReadWithinBounds() throws {
-        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
+        let imageURL = HTTPSFixturesBaseURL.appendingPathComponent("image.jpg")
         let source = try XCTUnwrap(HTTPSource(provider: imageURL))
 
         XCTAssertTrue(source.seek(position: 52225))
