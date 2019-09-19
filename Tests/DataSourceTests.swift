@@ -54,7 +54,7 @@ class DataSourceTests: XCTestCase {
     }
 
     func testSeekAndRead() throws {
-        let textData = try! Data(contentsOf: textURL)
+        let textData = try XCTUnwrap(Data(contentsOf: textURL))
         let source = try XCTUnwrap(DataSource(provider: textData))
 
         XCTAssertEqual(source.provider, textData)

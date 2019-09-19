@@ -98,7 +98,7 @@ class HTTPSource: InstantiableSource {
 
                 readData = data
 
-                self.position = contentRange.startIndex + data.count
+                self.position = contentRange.range.lowerBound + data.count
 
                 if data.count < amount {
                     // EOF reached, adjust size.
