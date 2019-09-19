@@ -7,9 +7,10 @@ on:
 
 jobs:
   environment:
+    name: Display Xcode version
+    runs-on: macOS-latest
     steps:
-      - name: Display Xcode version
-        run: xcodebuild -version
+        - run: xcodebuild -version
   # macOS:
   #   name: Test macOS 
   #   runs-on: macOS-latest
