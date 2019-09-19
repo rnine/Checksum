@@ -63,10 +63,6 @@ class HTTPSource: InstantiableSource {
     }
 
     func read(amount: Int) -> Data? {
-        if sizeKnown, position >= size {
-            return nil
-        }
-
         var readData: Data?
 
         processQueue.sync {
