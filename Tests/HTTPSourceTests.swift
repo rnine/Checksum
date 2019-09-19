@@ -25,4 +25,35 @@ class HTTPSourceTests: XCTestCase {
         XCTAssertEqual(data.count, source.size)
         XCTAssertEqual(data.checksum(algorithm: .md5), "89808f4076aa649844c0de958bf08fa1")
     }
+
+    func testSeekAndRead() throws {
+        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+        let source = try XCTUnwrap(HTTPSource(provider: imageURL))
+
+        XCTAssertTrue(source.seek(position: 1024))
+        let data = try XCTUnwrap(source.read(amount: source.size))
+        XCTAssertTrue(source.eof())
+
+        XCTAssertEqual(data.count, 52226 - 1024)
+    }
+
+    func testSeekAndReadBeyondBounds() throws {
+        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+        let source = try XCTUnwrap(HTTPSource(provider: imageURL))
+
+        XCTAssertTrue(source.seek(position: 52226))
+        XCTAssertNil(source.read(amount: source.size))
+        XCTAssertTrue(source.eof())
+    }
+
+    func testSeekAndReadWithinBounds() throws {
+        let imageURL = URL(string: "https://github.com/rnine/Checksum/raw/master/Tests/Fixtures/image.jpg")!
+        let source = try XCTUnwrap(HTTPSource(provider: imageURL))
+
+        XCTAssertTrue(source.seek(position: 52225))
+        let data = try XCTUnwrap(source.read(amount: source.size))
+        XCTAssertTrue(source.eof())
+
+        XCTAssertEqual(data.count, 1)
+    }
 }

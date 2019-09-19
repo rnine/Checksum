@@ -84,22 +84,26 @@ class HTTPSource: InstantiableSource {
             }
 
             let task = urlSession.dataTask(with: request) { data, response, _ in
-                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 206, let data = data {
-                    if !self.sizeKnown {
-                        // Use expected response's content length for now
-                        self.size = Int(httpResponse.expectedContentLength)
-                    }
+                defer { self.semaphore.signal() }
 
-                    readData = data
-                    self.position += data.count
+                guard let httpResponse = response as? HTTPURLResponse,
+                    httpResponse.statusCode == 206,
+                    let contentRange = httpResponse.contentRange,
+                    let data = data else { return }
 
-                    if data.count < amount {
-                        // EOF reached, adjust size.
-                        self.size = self.position
-                    }
+                if !self.sizeKnown {
+                    // Use expected response's content length for now
+                    self.size = Int(httpResponse.expectedContentLength)
                 }
 
-                self.semaphore.signal()
+                readData = data
+
+                self.position = contentRange.startIndex + data.count
+
+                if data.count < amount {
+                    // EOF reached, adjust size.
+                    self.size = self.position
+                }
             }
 
             task.resume()

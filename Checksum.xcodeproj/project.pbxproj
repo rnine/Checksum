@@ -97,6 +97,12 @@
 		45E7F7CB2333AF0600C2D22E /* ChunkSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */; };
 		45E7F7CC2333AF0700C2D22E /* ChunkSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */; };
 		45E7F7CD2333AF0700C2D22E /* ChunkSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */; };
+		45E7F8252333C72D00C2D22E /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F8242333C72D00C2D22E /* HTTPResponse.swift */; };
+		45E7F8262333C72D00C2D22E /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F8242333C72D00C2D22E /* HTTPResponse.swift */; };
+		45E7F8272333C72D00C2D22E /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F8242333C72D00C2D22E /* HTTPResponse.swift */; };
+		45E7F8282333C72D00C2D22E /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F8242333C72D00C2D22E /* HTTPResponse.swift */; };
+		45E7F8292333C72D00C2D22E /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F8242333C72D00C2D22E /* HTTPResponse.swift */; };
+		45E7F82A2333C72D00C2D22E /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F8242333C72D00C2D22E /* HTTPResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +166,7 @@
 		45E7F78A233380A500C2D22E /* Checksum iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checksum iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E7F7A02333817400C2D22E /* Checksum tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checksum tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkSizeTests.swift; sourceTree = "<group>"; };
+		45E7F8242333C72D00C2D22E /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +350,7 @@
 				4565D238232D41E100CFB860 /* Data+Source.swift */,
 				4565D24E232D47A300CFB860 /* String+Source.swift */,
 				4565D223232CFFF700CFB860 /* URL+Source.swift */,
+				45E7F8242333C72D00C2D22E /* HTTPResponse.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -673,6 +681,7 @@
 				451D9A162167AA8E0093703D /* FileSource.swift in Sources */,
 				4565D22F232D3EE100CFB860 /* DataSource.swift in Sources */,
 				4565D239232D41E100CFB860 /* Data+Source.swift in Sources */,
+				45E7F8252333C72D00C2D22E /* HTTPResponse.swift in Sources */,
 				4565D23E232D435200CFB860 /* Sourceable.swift in Sources */,
 				4565D245232D46A800CFB860 /* ChecksumError.swift in Sources */,
 			);
@@ -708,6 +717,7 @@
 				451D9A172167AA8E0093703D /* FileSource.swift in Sources */,
 				4565D22E232D3EE100CFB860 /* DataSource.swift in Sources */,
 				4565D23A232D41E100CFB860 /* Data+Source.swift in Sources */,
+				45E7F8262333C72D00C2D22E /* HTTPResponse.swift in Sources */,
 				4565D23F232D435200CFB860 /* Sourceable.swift in Sources */,
 				4565D246232D46A800CFB860 /* ChecksumError.swift in Sources */,
 			);
@@ -729,6 +739,7 @@
 				451D9A182167AA8E0093703D /* FileSource.swift in Sources */,
 				4565D22D232D3EE000CFB860 /* DataSource.swift in Sources */,
 				4565D23B232D41E100CFB860 /* Data+Source.swift in Sources */,
+				45E7F8272333C72D00C2D22E /* HTTPResponse.swift in Sources */,
 				4565D240232D435200CFB860 /* Sourceable.swift in Sources */,
 				4565D247232D46A800CFB860 /* ChecksumError.swift in Sources */,
 			);
@@ -750,6 +761,7 @@
 				451D9A192167AA8E0093703D /* FileSource.swift in Sources */,
 				4565D22C232D3EE000CFB860 /* DataSource.swift in Sources */,
 				4565D23C232D41E100CFB860 /* Data+Source.swift in Sources */,
+				45E7F8282333C72D00C2D22E /* HTTPResponse.swift in Sources */,
 				4565D241232D435200CFB860 /* Sourceable.swift in Sources */,
 				4565D248232D46A800CFB860 /* ChecksumError.swift in Sources */,
 			);
@@ -763,6 +775,7 @@
 				45E7F77D233380A500C2D22E /* DataTests.swift in Sources */,
 				45E7F77E233380A500C2D22E /* FileSourceTests.swift in Sources */,
 				45E7F77F233380A500C2D22E /* ChecksumTests.swift in Sources */,
+				45E7F8292333C72D00C2D22E /* HTTPResponse.swift in Sources */,
 				45E7F780233380A500C2D22E /* DataSourceTests.swift in Sources */,
 				45E7F781233380A500C2D22E /* HTTPSourceTests.swift in Sources */,
 				45E7F7CC2333AF0700C2D22E /* ChunkSizeTests.swift in Sources */,
@@ -777,6 +790,7 @@
 				45E7F7932333817400C2D22E /* DataTests.swift in Sources */,
 				45E7F7942333817400C2D22E /* FileSourceTests.swift in Sources */,
 				45E7F7952333817400C2D22E /* ChecksumTests.swift in Sources */,
+				45E7F82A2333C72D00C2D22E /* HTTPResponse.swift in Sources */,
 				45E7F7962333817400C2D22E /* DataSourceTests.swift in Sources */,
 				45E7F7972333817400C2D22E /* HTTPSourceTests.swift in Sources */,
 				45E7F7CD2333AF0700C2D22E /* ChunkSizeTests.swift in Sources */,
