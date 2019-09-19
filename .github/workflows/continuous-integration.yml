@@ -21,7 +21,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        destination: ["OS=13.0,name=iPhone 11 Pro Max"]
+        destination: ["OS=13.0,name=iPhone Xs Max", "OS=10.2,name=iPhone 7", "OS=10.0,name=iPhone 6"]
     steps:
       - uses: actions/checkout@v1            
       - name: iOS - ${{ matrix.destination }}
@@ -47,7 +47,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        destination: ["OS=6.0,name=Apple Watch Series 5 - 44mm"]
+        destination: ["OS=6.0,name=Apple Watch Series 4 - 44mm"]
     steps:
       - uses: actions/checkout@v1
       - name: watchOS - ${{ matrix.destination }}
