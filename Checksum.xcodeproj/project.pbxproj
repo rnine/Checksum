@@ -106,6 +106,9 @@
 		45E7F82C2333CDD500C2D22E /* HTTPURLResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F82B2333CDD500C2D22E /* HTTPURLResponseTests.swift */; };
 		45E7F82D2333CDD500C2D22E /* HTTPURLResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F82B2333CDD500C2D22E /* HTTPURLResponseTests.swift */; };
 		45E7F82E2333CDD500C2D22E /* HTTPURLResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F82B2333CDD500C2D22E /* HTTPURLResponseTests.swift */; };
+		45F648CB2333D80200DDD8D8 /* large-image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45F648CA2333D80100DDD8D8 /* large-image.jpg */; };
+		45F648CC2333D80200DDD8D8 /* large-image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45F648CA2333D80100DDD8D8 /* large-image.jpg */; };
+		45F648CD2333D80200DDD8D8 /* large-image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45F648CA2333D80100DDD8D8 /* large-image.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +174,7 @@
 		45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkSizeTests.swift; sourceTree = "<group>"; };
 		45E7F8242333C72D00C2D22E /* HTTPResponse+ContentRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPResponse+ContentRange.swift"; sourceTree = "<group>"; };
 		45E7F82B2333CDD500C2D22E /* HTTPURLResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLResponseTests.swift; sourceTree = "<group>"; };
+		45F648CA2333D80100DDD8D8 /* large-image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "large-image.jpg"; path = "Fixtures/large-image.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				4529D3A51DD6406000AE9FB1 /* image.jpg */,
+				45F648CA2333D80100DDD8D8 /* large-image.jpg */,
 				4506A6B01DD63B14007211D2 /* basic.txt */,
 			);
 			name = Fixtures;
@@ -623,6 +628,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F648CB2333D80200DDD8D8 /* large-image.jpg in Resources */,
 				4506A6B11DD63B14007211D2 /* basic.txt in Resources */,
 				4529D3A61DD6406000AE9FB1 /* image.jpg in Resources */,
 			);
@@ -653,6 +659,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F648CC2333D80200DDD8D8 /* large-image.jpg in Resources */,
 				45E7F785233380A500C2D22E /* basic.txt in Resources */,
 				45E7F786233380A500C2D22E /* image.jpg in Resources */,
 			);
@@ -662,6 +669,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F648CD2333D80200DDD8D8 /* large-image.jpg in Resources */,
 				45E7F79B2333817400C2D22E /* basic.txt in Resources */,
 				45E7F79C2333817400C2D22E /* image.jpg in Resources */,
 			);
