@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4506A6671DD62DA5007211D2"
+               BlueprintIdentifier = "45912D2C21677E75008D0E08"
                BuildableName = "Checksum.framework"
-               BlueprintName = "Checksum-macOS"
+               BlueprintName = "Checksum watchOS"
                ReferencedContainer = "container:Checksum.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,23 +28,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4506A6671DD62DA5007211D2"
-            BuildableName = "Checksum.framework"
-            BlueprintName = "Checksum-macOS"
-            ReferencedContainer = "container:Checksum.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4506A6701DD62DA5007211D2"
-               BuildableName = "ChecksumTests.xctest"
-               BlueprintName = "ChecksumTests"
+               BlueprintIdentifier = "45E7F7B62333834900C2D22E"
+               BuildableName = "Checksum watchOS Tests.xctest"
+               BlueprintName = "Checksum watchOS Tests"
                ReferencedContainer = "container:Checksum.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -63,9 +54,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4506A6671DD62DA5007211D2"
+            BlueprintIdentifier = "45912D2C21677E75008D0E08"
             BuildableName = "Checksum.framework"
-            BlueprintName = "Checksum-macOS"
+            BlueprintName = "Checksum watchOS"
             ReferencedContainer = "container:Checksum.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,9 +70,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4506A6671DD62DA5007211D2"
+            BlueprintIdentifier = "45912D2C21677E75008D0E08"
             BuildableName = "Checksum.framework"
-            BlueprintName = "Checksum-macOS"
+            BlueprintName = "Checksum watchOS"
             ReferencedContainer = "container:Checksum.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

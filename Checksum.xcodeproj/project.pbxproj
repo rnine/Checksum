@@ -76,10 +76,42 @@
 		45912D3521677E96008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
 		45912D3621677E96008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
 		45912D3721677E97008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
+		45E7F77C233380A500C2D22E /* URLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4503F50E23336FA3009563EF /* URLTests.swift */; };
+		45E7F77D233380A500C2D22E /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4503F51223337567009563EF /* DataTests.swift */; };
+		45E7F77E233380A500C2D22E /* FileSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A1A2167AEE40093703D /* FileSourceTests.swift */; };
+		45E7F77F233380A500C2D22E /* ChecksumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6761DD62DA5007211D2 /* ChecksumTests.swift */; };
+		45E7F780233380A500C2D22E /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572C09A2332D3610085BBBC /* DataSourceTests.swift */; };
+		45E7F781233380A500C2D22E /* HTTPSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A212167B9F40093703D /* HTTPSourceTests.swift */; };
+		45E7F785233380A500C2D22E /* basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4506A6B01DD63B14007211D2 /* basic.txt */; };
+		45E7F786233380A500C2D22E /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4529D3A51DD6406000AE9FB1 /* image.jpg */; };
+		45E7F78D233380B200C2D22E /* Checksum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45912D0921677CD4008D0E08 /* Checksum.framework */; };
+		45E7F7922333817400C2D22E /* URLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4503F50E23336FA3009563EF /* URLTests.swift */; };
+		45E7F7932333817400C2D22E /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4503F51223337567009563EF /* DataTests.swift */; };
+		45E7F7942333817400C2D22E /* FileSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A1A2167AEE40093703D /* FileSourceTests.swift */; };
+		45E7F7952333817400C2D22E /* ChecksumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6761DD62DA5007211D2 /* ChecksumTests.swift */; };
+		45E7F7962333817400C2D22E /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572C09A2332D3610085BBBC /* DataSourceTests.swift */; };
+		45E7F7972333817400C2D22E /* HTTPSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D9A212167B9F40093703D /* HTTPSourceTests.swift */; };
+		45E7F7992333817400C2D22E /* Checksum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45912D0921677CD4008D0E08 /* Checksum.framework */; };
+		45E7F79B2333817400C2D22E /* basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4506A6B01DD63B14007211D2 /* basic.txt */; };
+		45E7F79C2333817400C2D22E /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4529D3A51DD6406000AE9FB1 /* image.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		4506A6731DD62DA5007211D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4506A65F1DD62DA5007211D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4506A6671DD62DA5007211D2;
+			remoteInfo = CryptoHash;
+		};
+		45E7F77A233380A500C2D22E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4506A65F1DD62DA5007211D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4506A6671DD62DA5007211D2;
+			remoteInfo = CryptoHash;
+		};
+		45E7F7902333817400C2D22E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4506A65F1DD62DA5007211D2 /* Project object */;
 			proxyType = 1;
@@ -94,7 +126,7 @@
 		4504283822E4DEE300452843 /* Chunksize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunksize.swift; sourceTree = "<group>"; };
 		4506A6681DD62DA5007211D2 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4506A66C1DD62DA5007211D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4506A6711DD62DA5007211D2 /* ChecksumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChecksumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4506A6711DD62DA5007211D2 /* Checksum macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checksum macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4506A6761DD62DA5007211D2 /* ChecksumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecksumTests.swift; sourceTree = "<group>"; };
 		4506A6781DD62DA5007211D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4506A6951DD62E11007211D2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -122,6 +154,8 @@
 		45912D2D21677E75008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45A027F122F0D4C4001AF2D1 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		45A027F222F0D4C5001AF2D1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		45E7F78A233380A500C2D22E /* Checksum iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checksum iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45E7F7A02333817400C2D22E /* Checksum tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checksum tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +195,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45E7F782233380A500C2D22E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45E7F78D233380B200C2D22E /* Checksum.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45E7F7982333817400C2D22E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45E7F7992333817400C2D22E /* Checksum.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -184,6 +234,7 @@
 				4506A6691DD62DA5007211D2 /* Products */,
 				4506A66A1DD62DA5007211D2 /* Source */,
 				4506A6751DD62DA5007211D2 /* Tests */,
+				45E7F78C233380B200C2D22E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,10 +242,12 @@
 			isa = PBXGroup;
 			children = (
 				4506A6681DD62DA5007211D2 /* Checksum.framework */,
-				4506A6711DD62DA5007211D2 /* ChecksumTests.xctest */,
+				4506A6711DD62DA5007211D2 /* Checksum macOS Tests.xctest */,
 				45912D0921677CD4008D0E08 /* Checksum.framework */,
 				45912D2021677DBD008D0E08 /* Checksum.framework */,
 				45912D2D21677E75008D0E08 /* Checksum.framework */,
+				45E7F78A233380A500C2D22E /* Checksum iOS Tests.xctest */,
+				45E7F7A02333817400C2D22E /* Checksum tvOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -307,6 +360,13 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
+		45E7F78C233380B200C2D22E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -345,9 +405,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4506A6671DD62DA5007211D2 /* Checksum-macOS */ = {
+		4506A6671DD62DA5007211D2 /* Checksum macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4506A67C1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum-macOS" */;
+			buildConfigurationList = 4506A67C1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum macOS" */;
 			buildPhases = (
 				4506A6631DD62DA5007211D2 /* Sources */,
 				4506A6641DD62DA5007211D2 /* Frameworks */,
@@ -358,14 +418,14 @@
 			);
 			dependencies = (
 			);
-			name = "Checksum-macOS";
+			name = "Checksum macOS";
 			productName = CryptoHash;
 			productReference = 4506A6681DD62DA5007211D2 /* Checksum.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4506A6701DD62DA5007211D2 /* ChecksumTests */ = {
+		4506A6701DD62DA5007211D2 /* Checksum macOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4506A67F1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "ChecksumTests" */;
+			buildConfigurationList = 4506A67F1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum macOS Tests" */;
 			buildPhases = (
 				4506A66D1DD62DA5007211D2 /* Sources */,
 				4506A66E1DD62DA5007211D2 /* Frameworks */,
@@ -376,14 +436,14 @@
 			dependencies = (
 				4506A6741DD62DA5007211D2 /* PBXTargetDependency */,
 			);
-			name = ChecksumTests;
+			name = "Checksum macOS Tests";
 			productName = CryptoHashTests;
-			productReference = 4506A6711DD62DA5007211D2 /* ChecksumTests.xctest */;
+			productReference = 4506A6711DD62DA5007211D2 /* Checksum macOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		45912D0821677CD4008D0E08 /* Checksum-iOS */ = {
+		45912D0821677CD4008D0E08 /* Checksum iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45912D0E21677CD4008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-iOS" */;
+			buildConfigurationList = 45912D0E21677CD4008D0E08 /* Build configuration list for PBXNativeTarget "Checksum iOS" */;
 			buildPhases = (
 				45912D0421677CD4008D0E08 /* Headers */,
 				45912D0521677CD4008D0E08 /* Sources */,
@@ -394,14 +454,14 @@
 			);
 			dependencies = (
 			);
-			name = "Checksum-iOS";
+			name = "Checksum iOS";
 			productName = "Checksum-iOS";
 			productReference = 45912D0921677CD4008D0E08 /* Checksum.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		45912D1F21677DBD008D0E08 /* Checksum-tvOS */ = {
+		45912D1F21677DBD008D0E08 /* Checksum tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45912D2521677DBD008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-tvOS" */;
+			buildConfigurationList = 45912D2521677DBD008D0E08 /* Build configuration list for PBXNativeTarget "Checksum tvOS" */;
 			buildPhases = (
 				45912D1B21677DBD008D0E08 /* Headers */,
 				45912D1C21677DBD008D0E08 /* Sources */,
@@ -412,14 +472,14 @@
 			);
 			dependencies = (
 			);
-			name = "Checksum-tvOS";
+			name = "Checksum tvOS";
 			productName = "Checksum-tvOS";
 			productReference = 45912D2021677DBD008D0E08 /* Checksum.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		45912D2C21677E75008D0E08 /* Checksum-watchOS */ = {
+		45912D2C21677E75008D0E08 /* Checksum watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45912D3221677E75008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-watchOS" */;
+			buildConfigurationList = 45912D3221677E75008D0E08 /* Build configuration list for PBXNativeTarget "Checksum watchOS" */;
 			buildPhases = (
 				45912D2821677E75008D0E08 /* Headers */,
 				45912D2921677E75008D0E08 /* Sources */,
@@ -430,10 +490,46 @@
 			);
 			dependencies = (
 			);
-			name = "Checksum-watchOS";
+			name = "Checksum watchOS";
 			productName = "Checksum-watchOS";
 			productReference = 45912D2D21677E75008D0E08 /* Checksum.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		45E7F778233380A500C2D22E /* Checksum iOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45E7F787233380A500C2D22E /* Build configuration list for PBXNativeTarget "Checksum iOS Tests" */;
+			buildPhases = (
+				45E7F77B233380A500C2D22E /* Sources */,
+				45E7F782233380A500C2D22E /* Frameworks */,
+				45E7F784233380A500C2D22E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45E7F779233380A500C2D22E /* PBXTargetDependency */,
+			);
+			name = "Checksum iOS Tests";
+			productName = CryptoHashTests;
+			productReference = 45E7F78A233380A500C2D22E /* Checksum iOS Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		45E7F78E2333817400C2D22E /* Checksum tvOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45E7F79D2333817400C2D22E /* Build configuration list for PBXNativeTarget "Checksum tvOS Tests" */;
+			buildPhases = (
+				45E7F7912333817400C2D22E /* Sources */,
+				45E7F7982333817400C2D22E /* Frameworks */,
+				45E7F79A2333817400C2D22E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45E7F78F2333817400C2D22E /* PBXTargetDependency */,
+			);
+			name = "Checksum tvOS Tests";
+			productName = CryptoHashTests;
+			productReference = 45E7F7A02333817400C2D22E /* Checksum tvOS Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -486,11 +582,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4506A6671DD62DA5007211D2 /* Checksum-macOS */,
-				45912D0821677CD4008D0E08 /* Checksum-iOS */,
-				45912D1F21677DBD008D0E08 /* Checksum-tvOS */,
-				45912D2C21677E75008D0E08 /* Checksum-watchOS */,
-				4506A6701DD62DA5007211D2 /* ChecksumTests */,
+				4506A6671DD62DA5007211D2 /* Checksum macOS */,
+				45912D0821677CD4008D0E08 /* Checksum iOS */,
+				45912D1F21677DBD008D0E08 /* Checksum tvOS */,
+				45912D2C21677E75008D0E08 /* Checksum watchOS */,
+				4506A6701DD62DA5007211D2 /* Checksum macOS Tests */,
+				45E7F778233380A500C2D22E /* Checksum iOS Tests */,
+				45E7F78E2333817400C2D22E /* Checksum tvOS Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -530,6 +628,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45E7F784233380A500C2D22E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45E7F785233380A500C2D22E /* basic.txt in Resources */,
+				45E7F786233380A500C2D22E /* image.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45E7F79A2333817400C2D22E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45E7F79B2333817400C2D22E /* basic.txt in Resources */,
+				45E7F79C2333817400C2D22E /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,13 +749,49 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45E7F77B233380A500C2D22E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45E7F77C233380A500C2D22E /* URLTests.swift in Sources */,
+				45E7F77D233380A500C2D22E /* DataTests.swift in Sources */,
+				45E7F77E233380A500C2D22E /* FileSourceTests.swift in Sources */,
+				45E7F77F233380A500C2D22E /* ChecksumTests.swift in Sources */,
+				45E7F780233380A500C2D22E /* DataSourceTests.swift in Sources */,
+				45E7F781233380A500C2D22E /* HTTPSourceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45E7F7912333817400C2D22E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45E7F7922333817400C2D22E /* URLTests.swift in Sources */,
+				45E7F7932333817400C2D22E /* DataTests.swift in Sources */,
+				45E7F7942333817400C2D22E /* FileSourceTests.swift in Sources */,
+				45E7F7952333817400C2D22E /* ChecksumTests.swift in Sources */,
+				45E7F7962333817400C2D22E /* DataSourceTests.swift in Sources */,
+				45E7F7972333817400C2D22E /* HTTPSourceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		4506A6741DD62DA5007211D2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4506A6671DD62DA5007211D2 /* Checksum-macOS */;
+			target = 4506A6671DD62DA5007211D2 /* Checksum macOS */;
 			targetProxy = 4506A6731DD62DA5007211D2 /* PBXContainerItemProxy */;
+		};
+		45E7F779233380A500C2D22E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4506A6671DD62DA5007211D2 /* Checksum macOS */;
+			targetProxy = 45E7F77A233380A500C2D22E /* PBXContainerItemProxy */;
+		};
+		45E7F78F2333817400C2D22E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4506A6671DD62DA5007211D2 /* Checksum macOS */;
+			targetProxy = 45E7F7902333817400C2D22E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -997,6 +1149,58 @@
 			};
 			name = Release;
 		};
+		45E7F788233380A500C2D22E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.ChecksumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		45E7F789233380A500C2D22E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.ChecksumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		45E7F79E2333817400C2D22E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.ChecksumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+			};
+			name = Debug;
+		};
+		45E7F79F2333817400C2D22E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.9labs.ChecksumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1009,7 +1213,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4506A67C1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum-macOS" */ = {
+		4506A67C1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4506A67D1DD62DA5007211D2 /* Debug */,
@@ -1018,7 +1222,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4506A67F1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "ChecksumTests" */ = {
+		4506A67F1DD62DA5007211D2 /* Build configuration list for PBXNativeTarget "Checksum macOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4506A6801DD62DA5007211D2 /* Debug */,
@@ -1027,7 +1231,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45912D0E21677CD4008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-iOS" */ = {
+		45912D0E21677CD4008D0E08 /* Build configuration list for PBXNativeTarget "Checksum iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45912D0F21677CD4008D0E08 /* Debug */,
@@ -1036,7 +1240,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45912D2521677DBD008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-tvOS" */ = {
+		45912D2521677DBD008D0E08 /* Build configuration list for PBXNativeTarget "Checksum tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45912D2621677DBD008D0E08 /* Debug */,
@@ -1045,11 +1249,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45912D3221677E75008D0E08 /* Build configuration list for PBXNativeTarget "Checksum-watchOS" */ = {
+		45912D3221677E75008D0E08 /* Build configuration list for PBXNativeTarget "Checksum watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45912D3321677E75008D0E08 /* Debug */,
 				45912D3421677E75008D0E08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45E7F787233380A500C2D22E /* Build configuration list for PBXNativeTarget "Checksum iOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45E7F788233380A500C2D22E /* Debug */,
+				45E7F789233380A500C2D22E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45E7F79D2333817400C2D22E /* Build configuration list for PBXNativeTarget "Checksum tvOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45E7F79E2333817400C2D22E /* Debug */,
+				45E7F79F2333817400C2D22E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

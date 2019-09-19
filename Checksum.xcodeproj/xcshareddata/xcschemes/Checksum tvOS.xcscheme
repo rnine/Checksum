@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "45912D1F21677DBD008D0E08"
                BuildableName = "Checksum.framework"
-               BlueprintName = "Checksum-tvOS"
+               BlueprintName = "Checksum tvOS"
                ReferencedContainer = "container:Checksum.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,11 +26,20 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45E7F78E2333817400C2D22E"
+               BuildableName = "Checksum tvOS Tests.xctest"
+               BlueprintName = "Checksum tvOS Tests"
+               ReferencedContainer = "container:Checksum.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -47,12 +56,10 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45912D1F21677DBD008D0E08"
             BuildableName = "Checksum.framework"
-            BlueprintName = "Checksum-tvOS"
+            BlueprintName = "Checksum tvOS"
             ReferencedContainer = "container:Checksum.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -65,7 +72,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45912D1F21677DBD008D0E08"
             BuildableName = "Checksum.framework"
-            BlueprintName = "Checksum-tvOS"
+            BlueprintName = "Checksum tvOS"
             ReferencedContainer = "container:Checksum.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
