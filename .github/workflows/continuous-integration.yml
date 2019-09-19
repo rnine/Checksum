@@ -14,7 +14,6 @@ jobs:
       - name: macOS
         run: |
           sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer; xcodebuild -version
-          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum macOS" -showdestinations
           xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum macOS" -destination "platform=macOS" clean test
   iOS:
     name: Test iOS 
@@ -27,7 +26,6 @@ jobs:
       - name: iOS - ${{ matrix.destination }}
         run: |
           sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer; xcodebuild -version
-          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum iOS" -showdestinations
           xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum iOS" -destination "${{ matrix.destination }}" clean test
   tvOS:
     name: Test tvOS 
@@ -40,7 +38,6 @@ jobs:
       - name: tvOS - ${{ matrix.destination }}
         run: |
           sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer; xcodebuild -version
-          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum tvOS" -showdestinations
           xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum tvOS" -destination "${{ matrix.destination }}" clean test
   watchOS:
     name: Build watchOS
@@ -53,5 +50,4 @@ jobs:
       - name: watchOS - ${{ matrix.destination }}
         run: |
           sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer; xcodebuild -version
-          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum watchOS" -showdestinations
           xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum watchOS" -destination "${{ matrix.destination }}" clean build
