@@ -1,0 +1,20 @@
+name: "Documentation"
+
+on: 
+  push:
+    branches:
+      - develop
+
+jobs:
+  macOS:
+    name: Update API Documentation
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1    
+      - name: Install and run Jazzy and commit changes.
+        run: |
+          cd $HOME
+          gem install jazzy --no-document
+          jazzy --swift-version 5.1
+          git add docs
+          git commit -m "Updating documentation."
