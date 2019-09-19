@@ -1,7 +1,7 @@
 # Checksum
 
-[![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS%20-4E4E4E.svg?colorA=28a745)](https://github.com/rnine/Checksum)
-[![Swift support](https://img.shields.io/badge/Swift-5.0%20%7C%205.1%20-lightgrey.svg?colorA=28a745&colorB=4E4E4E)](https://github.com/rnine/Checksum)
+[![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20-4E4E4E.svg?colorA=28a745)](https://github.com/rnine/Checksum)
+[![Swift support](https://img.shields.io/badge/Swift-4.0%20%7C%204.2%20%7C%205.0%20%7C%205.1%20-lightgrey.svg?colorA=28a745&colorB=4E4E4E)](https://github.com/rnine/Checksum)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat&colorA=28a745&&colorB=4E4E4E)](https://github.com/Carthage/Carthage)
 [![Swift Package Manager compatible](https://img.shields.io/badge/SPM-compatible-brightgreen.svg?style=flat&colorA=28a745&&colorB=4E4E4E)](https://github.com/apple/swift-package-manager)
 
@@ -15,7 +15,9 @@ Under the hood, Apple's `CommonCrypto` framework is used.
 
 ### Requirements
 
-- Xcode 10.2 and Swift 5.0
+- iOS 9 / macOS 10.11 / tvOS 9 / watchOS 2
+- Xcode 10.2
+- Swift 4.0 / 4.2 / 5.0 / 5.1
 
 ### Documentation
 

@@ -1,0 +1,19 @@
+name: "Documentation"
+
+on: 
+  push:
+    branches:
+      - develop
+
+jobs:
+  macOS:
+    name: Update API Documentation
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1    
+      - name: macOS
+        run: |
+          gem install jazzy --no-document
+          jazzy
+          git add -A
+          git commit -m "Updating documentation."
