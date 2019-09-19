@@ -73,6 +73,9 @@
 		4565D251232D47A300CFB860 /* String+Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4565D24E232D47A300CFB860 /* String+Source.swift */; };
 		4565D252232D47A300CFB860 /* String+Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4565D24E232D47A300CFB860 /* String+Source.swift */; };
 		4572C09B2332D3610085BBBC /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572C09A2332D3610085BBBC /* DataSourceTests.swift */; };
+		458B2C442333FBF30093F61E /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458B2C432333FBF30093F61E /* Shared.swift */; };
+		458B2C452333FBF30093F61E /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458B2C432333FBF30093F61E /* Shared.swift */; };
+		458B2C462333FBF30093F61E /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458B2C432333FBF30093F61E /* Shared.swift */; };
 		45912D3521677E96008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
 		45912D3621677E96008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
 		45912D3721677E97008D0E08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506A6951DD62E11007211D2 /* Extensions.swift */; };
@@ -164,6 +167,7 @@
 		4565D244232D46A800CFB860 /* ChecksumError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecksumError.swift; sourceTree = "<group>"; };
 		4565D24E232D47A300CFB860 /* String+Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Source.swift"; sourceTree = "<group>"; };
 		4572C09A2332D3610085BBBC /* DataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
+		458B2C432333FBF30093F61E /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		45912D0921677CD4008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45912D2021677DBD008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45912D2D21677E75008D0E08 /* Checksum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Checksum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -285,15 +289,16 @@
 			isa = PBXGroup;
 			children = (
 				4506A6761DD62DA5007211D2 /* ChecksumTests.swift */,
+				45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */,
 				4572C09A2332D3610085BBBC /* DataSourceTests.swift */,
 				4503F51223337567009563EF /* DataTests.swift */,
 				451D9A1A2167AEE40093703D /* FileSourceTests.swift */,
 				451D9A212167B9F40093703D /* HTTPSourceTests.swift */,
+				45E7F82B2333CDD500C2D22E /* HTTPURLResponseTests.swift */,
+				458B2C432333FBF30093F61E /* Shared.swift */,
 				4503F50E23336FA3009563EF /* URLTests.swift */,
 				4506A6AF1DD63AE4007211D2 /* Fixtures */,
 				45370F77232D719A00CD605F /* Supporting Files */,
-				45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */,
-				45E7F82B2333CDD500C2D22E /* HTTPURLResponseTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -710,6 +715,7 @@
 				451D9A1B2167AEE40093703D /* FileSourceTests.swift in Sources */,
 				4506A6771DD62DA5007211D2 /* ChecksumTests.swift in Sources */,
 				4572C09B2332D3610085BBBC /* DataSourceTests.swift in Sources */,
+				458B2C442333FBF30093F61E /* Shared.swift in Sources */,
 				451D9A222167B9F40093703D /* HTTPSourceTests.swift in Sources */,
 				45E7F7CB2333AF0600C2D22E /* ChunkSizeTests.swift in Sources */,
 			);
@@ -785,6 +791,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				458B2C452333FBF30093F61E /* Shared.swift in Sources */,
 				45E7F77C233380A500C2D22E /* URLTests.swift in Sources */,
 				45E7F77D233380A500C2D22E /* DataTests.swift in Sources */,
 				45E7F77E233380A500C2D22E /* FileSourceTests.swift in Sources */,
@@ -801,6 +808,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				458B2C462333FBF30093F61E /* Shared.swift in Sources */,
 				45E7F7922333817400C2D22E /* URLTests.swift in Sources */,
 				45E7F7932333817400C2D22E /* DataTests.swift in Sources */,
 				45E7F7942333817400C2D22E /* FileSourceTests.swift in Sources */,

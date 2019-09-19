@@ -12,19 +12,19 @@ import XCTest
 class URLTests: XCTestCase {
 
     func testHTTPSource() {
-        let url = URL(string: "http://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
+        let url = HTTPFixturesBaseURL.appendingPathComponent("image.jpg")
 
         XCTAssert(url.source is HTTPSource, String(describing: url.source))
     }
 
     func testHTTPSSource() {
-        let url = URL(string: "https://github.com/rnine/Checksum/raw/develop/Tests/Fixtures/image.jpg")!
+        let url = HTTPSFixturesBaseURL.appendingPathComponent("image.jpg")
 
         XCTAssert(url.source is HTTPSource, String(describing: url.source))
     }
 
     func testFileSource() {
-        let url = Bundle(for: FileSourceTests.self).url(forResource: "basic", withExtension: "txt")!
+        let url = LocalFixturesBaseURL.appendingPathComponent("basic.txt")
 
         XCTAssert(url.source is FileSource, String(describing: url.source))
     }
