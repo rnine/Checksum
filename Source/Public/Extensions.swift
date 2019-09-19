@@ -51,15 +51,15 @@ extension Checksumable {
                          queue: DispatchQueue = .main,
                          progress: ProgressHandler? = nil,
                          completion: @escaping CompletionHandler) {
-        guard let source = (self as? Sourceable)?.source else {
-            queue.async {
-                completion(.failure(.unusableSource))
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let source = (self as? Sourceable)?.source else {
+                queue.async {
+                    completion(.failure(.unusableSource))
+                }
+
+                return
             }
 
-            return
-        }
-
-        DispatchQueue.global(qos: .background).async {
             let cc = CCWrapper(algorithm: algorithm)
             let overallProgress = Progress()
 

@@ -26,7 +26,6 @@ class HTTPSource: InstantiableSource {
     private var urlSession = URLSession(configuration: .ephemeral)
     private var position: Int = 0
     private var sizeKnown: Bool = false
-    private let processQueue = DispatchQueue(label: "io.9labs.Checksum.http-source-process")
     private let semaphore = DispatchSemaphore(value: 0)
     private let requestTimeOut: TimeInterval = 5.0
 
@@ -66,34 +65,31 @@ class HTTPSource: InstantiableSource {
         guard amount > 0 else { return nil }
 
         var readData: Data?
+        var request = URLRequest(url: provider, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
 
-        processQueue.sync {
-            var request = URLRequest(url: provider, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
+        request.httpShouldUsePipelining = true
 
-            request.httpShouldUsePipelining = true
+        let range = (position...position + amount - 1)
+        request.addValue("bytes=\(range.lowerBound)-\(range.upperBound)", forHTTPHeaderField: "Range")
 
-            let range = (position...position + amount - 1)
-            request.addValue("bytes=\(range.lowerBound)-\(range.upperBound)", forHTTPHeaderField: "Range")
+        let task = urlSession.dataTask(with: request) { data, response, _ in
+            defer { self.semaphore.signal() }
 
-            let task = urlSession.dataTask(with: request) { data, response, _ in
-                defer { self.semaphore.signal() }
+            guard let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 206,
+                let contentRange = httpResponse.contentRange,
+                let data = data else { return }
 
-                guard let httpResponse = response as? HTTPURLResponse,
-                    httpResponse.statusCode == 206,
-                    let contentRange = httpResponse.contentRange,
-                    let data = data else { return }
+            readData = data
 
-                readData = data
-
-                if let size = contentRange.size {
-                    self.size = size
-                }
-
-                self.position = contentRange.range.lowerBound + data.count
+            if let size = contentRange.size {
+                self.size = size
             }
 
-            task.resume()
+            self.position = contentRange.range.lowerBound + data.count
         }
+
+        task.resume()
 
         _ = semaphore.wait(timeout: .distantFuture)
 
@@ -110,22 +106,20 @@ class HTTPSource: InstantiableSource {
     private func getContentLength(for url: URL) -> Int? {
         var size: Int?
 
-        processQueue.sync {
-            var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: requestTimeOut)
 
-            request.httpShouldUsePipelining = true
-            request.httpMethod = "HEAD"
+        request.httpShouldUsePipelining = true
+        request.httpMethod = "HEAD"
 
-            let task = urlSession.dataTask(with: request) { _, response, error in
-                if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                    size = Int(httpResponse.expectedContentLength)
-                }
-
-                self.semaphore.signal()
+        let task = urlSession.dataTask(with: request) { _, response, error in
+            if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                size = Int(httpResponse.expectedContentLength)
             }
 
-            task.resume()
+            self.semaphore.signal()
         }
+
+        task.resume()
 
         _ = semaphore.wait(timeout: .distantFuture)
 
