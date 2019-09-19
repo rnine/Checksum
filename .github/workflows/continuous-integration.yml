@@ -1,44 +1,47 @@
 name: "Checksum CI"
 
-on: 
+on:
   push:
     branches:
       - develop
 
 jobs:
   macOS:
-    name: Test macOS 
+    name: Test macOS
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v1    
+      - uses: actions/checkout@v1
       - name: macOS
         run: |
           sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer; xcodebuild -version
-          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum macOS" -destination "platform=macOS" clean test
+          gem install xcpretty --no-document
+          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum macOS" -destination "platform=macOS" clean test | xcpretty
   iOS:
-    name: Test iOS 
+    name: Test iOS
     runs-on: macOS-latest
     strategy:
       matrix:
         destination: ["OS=13.0,name=iPhone Xs Max"]
     steps:
-      - uses: actions/checkout@v1            
+      - uses: actions/checkout@v1
       - name: iOS - ${{ matrix.destination }}
         run: |
           sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer; xcodebuild -version
-          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum iOS" -destination "${{ matrix.destination }}" clean test
+          gem install xcpretty --no-document
+          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum iOS" -destination "${{ matrix.destination }}" clean test | xcpretty
   tvOS:
-    name: Test tvOS 
+    name: Test tvOS
     runs-on: macOS-latest
     strategy:
       matrix:
         destination: ["OS=13.0,name=Apple TV 4K"]
     steps:
-      - uses: actions/checkout@v1            
+      - uses: actions/checkout@v1
       - name: tvOS - ${{ matrix.destination }}
         run: |
           sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer; xcodebuild -version
-          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum tvOS" -destination "${{ matrix.destination }}" clean test
+          gem install xcpretty --no-document
+          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum tvOS" -destination "${{ matrix.destination }}" clean test | xcpretty
   watchOS:
     name: Build watchOS
     runs-on: macOS-latest
@@ -50,4 +53,5 @@ jobs:
       - name: watchOS - ${{ matrix.destination }}
         run: |
           sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer; xcodebuild -version
-          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum watchOS" -destination "${{ matrix.destination }}" clean build
+          gem install xcpretty --no-document
+          xcodebuild -project "Checksum.xcodeproj" -scheme "Checksum watchOS" -destination "${{ matrix.destination }}" clean build | xcpretty
