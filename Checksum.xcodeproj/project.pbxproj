@@ -94,6 +94,9 @@
 		45E7F7992333817400C2D22E /* Checksum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45912D0921677CD4008D0E08 /* Checksum.framework */; };
 		45E7F79B2333817400C2D22E /* basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4506A6B01DD63B14007211D2 /* basic.txt */; };
 		45E7F79C2333817400C2D22E /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4529D3A51DD6406000AE9FB1 /* image.jpg */; };
+		45E7F7CB2333AF0600C2D22E /* ChunkSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */; };
+		45E7F7CC2333AF0700C2D22E /* ChunkSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */; };
+		45E7F7CD2333AF0700C2D22E /* ChunkSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +159,7 @@
 		45A027F222F0D4C5001AF2D1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45E7F78A233380A500C2D22E /* Checksum iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checksum iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E7F7A02333817400C2D22E /* Checksum tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Checksum tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkSizeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +277,7 @@
 				4503F50E23336FA3009563EF /* URLTests.swift */,
 				4506A6AF1DD63AE4007211D2 /* Fixtures */,
 				45370F77232D719A00CD605F /* Supporting Files */,
+				45E7F7CA2333AF0600C2D22E /* ChunkSizeTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 				4506A6771DD62DA5007211D2 /* ChecksumTests.swift in Sources */,
 				4572C09B2332D3610085BBBC /* DataSourceTests.swift in Sources */,
 				451D9A222167B9F40093703D /* HTTPSourceTests.swift in Sources */,
+				45E7F7CB2333AF0600C2D22E /* ChunkSizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +765,7 @@
 				45E7F77F233380A500C2D22E /* ChecksumTests.swift in Sources */,
 				45E7F780233380A500C2D22E /* DataSourceTests.swift in Sources */,
 				45E7F781233380A500C2D22E /* HTTPSourceTests.swift in Sources */,
+				45E7F7CC2333AF0700C2D22E /* ChunkSizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,6 +779,7 @@
 				45E7F7952333817400C2D22E /* ChecksumTests.swift in Sources */,
 				45E7F7962333817400C2D22E /* DataSourceTests.swift in Sources */,
 				45E7F7972333817400C2D22E /* HTTPSourceTests.swift in Sources */,
+				45E7F7CD2333AF0700C2D22E /* ChunkSizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
