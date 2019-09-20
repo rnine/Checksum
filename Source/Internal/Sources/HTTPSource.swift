@@ -45,7 +45,7 @@ class HTTPSource: InstantiableSource {
         close()
     }
 
-    // MARK: - Public functions
+    // MARK: - Internal functions
 
     func seek(position: Int) -> Bool {
         self.position = position

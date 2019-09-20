@@ -41,7 +41,7 @@ class FileSource: InstantiableSource {
         close()
     }
 
-    // MARK: - Public functions
+    // MARK: - Internal functions
 
     func seek(position: Int) -> Bool {
         guard position < size else { return false }
